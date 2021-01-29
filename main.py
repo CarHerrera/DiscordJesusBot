@@ -9,8 +9,9 @@ from datetime import datetime
 seed(1)
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
-client = discord.Client()
-counter = 1757
+intents = discord.Intents.all()
+client = discord.Client(intents = intents)
+counter = 2117
 emoteTimer = datetime.utcnow()
 booingTimer = datetime.utcnow()
 fuckOffTimer = datetime.utcnow()
@@ -122,6 +123,41 @@ async def on_ready():
   guild = client.get_guild(751678259657441339)
   print('We have logged in as {0.user}'.format(client))
 
+@client.event
+async def on_member_update(before, after):
+    # print("Status change? {}".format(before.status != after.status))
+    # print("Nickname change? {}".format(before.nick != after.nick))
+    # print("Activity change? {}".format(before.activity != after.activity))
+    # print("Email Verified change? {}".format(before.pending != after.pending))
+    # print("Role change? {}".format(before.roles != after.roles))
+    if before.bot == True or after.bot == True:
+        return
+    elif before.status != after.status:
+        return
+    elif before.nick != after.nick:
+        return
+    elif before.activity != after.activity:
+        return
+    elif before.pending != after.pending:
+        return
+    elif before.roles != after.roles:
+        jesusId = 213090776001937409
+        carlosDiscordID = 263054069885566977
+        guild = before.guild
+        carlosMember = await guild.fetch_member(carlosDiscordID)
+        print(guild.roles)
+        for roles in guild.roles:
+            if "fish fucker" in roles.name.casefold():
+                print("fish fucker" in roles.name.casefold())
+                dmChannel = await carlosMember.create_dm()
+                # await dmChannel.send('Fish fucker role exist')
+                # break
+        else:
+            dmChannel = await carlosMember.create_dm()
+            await dmChannel.send('Fish fucker role does not exist')
+    # if after.id == jesusId:
+    #     print( "fish fucker" in after.roles.name.casefold())
+    # print(after.activity)
 # payload has channel_id, emoji, event_type, guild_id, member, message_id, user_id
 # as attributes
 @client.event
