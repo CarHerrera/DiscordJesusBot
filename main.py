@@ -11,7 +11,7 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 intents = discord.Intents.all()
 client = discord.Client(intents = intents)
-counter = 2117
+counter = 2450
 emoteTimer = datetime.utcnow()
 booingTimer = datetime.utcnow()
 fuckOffTimer = datetime.utcnow()
@@ -141,20 +141,24 @@ async def on_member_update(before, after):
     elif before.pending != after.pending:
         return
     elif before.roles != after.roles:
-        jesusId = 213090776001937409
-        carlosDiscordID = 263054069885566977
-        guild = before.guild
-        carlosMember = await guild.fetch_member(carlosDiscordID)
-        print(guild.roles)
-        for roles in guild.roles:
-            if "fish fucker" in roles.name.casefold():
-                print("fish fucker" in roles.name.casefold())
-                dmChannel = await carlosMember.create_dm()
-                # await dmChannel.send('Fish fucker role exist')
-                # break
-        else:
-            dmChannel = await carlosMember.create_dm()
-            await dmChannel.send('Fish fucker role does not exist')
+        pass
+        # carlosDiscordID = 263054069885566977
+        # jesusMemberId= 213090776001937409
+        # guild = before.guild
+        # jesusMember = await guild.fetch_member(jesusMemberId)
+        # carlosMember = await guild.fetch_member(carlosDiscordID)
+        # hasFishFucker = False
+        # if after == jesusMember:
+        #   for role in after.roles:
+        #     if role.name.casefold() == "fish fucker":
+        #       print("Has fish fucker role")
+        #       hasFishFucker = True
+        #   if hasFishFucker == False:
+        #     dmChannel = await carlosMember.create_dm()
+        #     await dmChannel.send('Fish fucker role does not exist')
+            # fish_fucker_role = await before.guild.create_role(name = "fish fucker")
+            # await jesusMember.add_roles(fish_fucker_role)
+        # print(guild.roles)
     # if after.id == jesusId:
     #     print( "fish fucker" in after.roles.name.casefold())
     # print(after.activity)
@@ -175,7 +179,6 @@ async def on_raw_reaction_add(payload):
     # print('Checks if message is older than 45: {0}'.format(timeChecker(currentTime, messageTime, 45)))
     # print('Booing timer should fire: {0} '.format(timeChecker(currentTime,booingTimer, 10)))
     # print('Emote timer should fire: {0}'.format(timeChecker(currentTime,emoteTimer,10)))
-    
     if lastMessage.author == client.user:
         return
     elif timeChecker(currentTime, messageTime, 45) is True:
@@ -187,24 +190,40 @@ async def on_raw_reaction_add(payload):
         elif timeChecker(datetime.utcnow(),emoteTimer,10) is True:
             await channel.send('Yoooooooooo, how do I emote')
             emoteTimer = datetime.utcnow()
+
+@client.event 
+async def on_guild_role_update(before, after):
+  oldRole = before
+  newRole = after
+  print(oldRole.name)
+  print(newRole.name)
+  # if oldRole.name.casefold() == 'fish fucker':
+  #   await after.edit(name = "fish fucker", colour = discord.Colour.default())
 @client.event
 async def on_message(message):
-    if message.author == client.user:
-        return
     global counter
+    counter += 1
+    if message.author == client.user:
+      return
+    elif message.author.bot == True:
+      return 
+    elif message.channel.name == 'politics':
+      return
     user = message.author.mention
     userId = message.author.id
-    counter += 1
-    carlosDiscordID = 263054069885566977
-    fryMakerRoleID = 783852650314596362
-    jayNatDiscordID = 412385688332402689
-    alexDiscordID = 113820933013110788
-    patrickDiscordID = 251770515432275968
-    bonkEmoji = '<:Bonk:797305732063297536>'
-    jesusMember = await guild.fetch_member(213090776001937409)
-    jesusAt = jesusMember.mention
-    yoIndicator = randint(65, 99)
-    niceIndicator = randint(50, 70)
+    try:
+      carlosDiscordID = 263054069885566977
+      fryMakerRoleID = 783852650314596362
+      jayNatDiscordID = 412385688332402689
+      alexDiscordID = 113820933013110788
+      patrickDiscordID = 251770515432275968
+      bonkEmoji = '<:Bonk:797305732063297536>'
+      jesusMember = await message.guild.fetch_member(213090776001937409)
+      jesusAt = jesusMember.mention
+    except:
+      print('One of these people are not in the server')
+    yoIndicator = randint(75, 150)
+    niceIndicator = randint(90, 140 )
     # if len(message.mentions) > 0 and message.author.id == jayNatDiscordID:
     #           await message.channel.send(user)
     #           await message.add_reaction(bonkEmoji)
@@ -261,6 +280,63 @@ async def on_message(message):
           await message.channel.send(embed = attempt)
       elif message.content.startswith('$father'):
           await message.channel.send(jesusAt + ' father :pleading_face:')
+      elif message.content.startswith('$rps'):
+          quitMessage = "yes"
+          await message.channel.send('Hey {0}, wanna play rock paper scissors?'.format(user))
+          channel = message.channel
+          author = message.author
+          agreement_words = ['yes', 'y', 'sure', 'mhmm', 'okay']
+          quit = ['nope', 'no', 'stop', 'quit', 'n', 'exit', 'leave']
+          options = ['rock', 'paper','scissors']
+          def check(m):
+            return m.content.casefold() in agreement_words and m.channel == channel and m.author == author
+          try:      
+            msg = await client.wait_for('message', check=check, timeout = 30)
+          except:
+            await channel.send('You took too long cunt')
+            return
+          while quitMessage == "yes" or quitMessage == 'y':
+            await channel.send('Alright, on 3 {0}'.format(user))
+            currentTimeInSeconds = datetime.utcnow().second
+            localCounter = 1
+            while datetime.utcnow().second - currentTimeInSeconds <= 3:
+              if datetime.utcnow().second - currentTimeInSeconds < 0:
+                # timeElapsed = (datetime.utcnow().second + 60) - currentTimeInSeconds
+                # print("2: Seconds gone by {0}".format((datetime.utcnow().second + 60)- currentTimeInSeconds))
+                if ((datetime.utcnow().second + 60) - currentTimeInSeconds) == localCounter and localCounter != 4:
+                  localCounter+= 1
+                  await channel.send("{0}".format(datetime.utcnow().second + 60) - currentTimeInSeconds)
+              else:
+                if datetime.utcnow().second - currentTimeInSeconds == localCounter and localCounter != 4:
+                  await channel.send("{0}".format(datetime.utcnow().second - currentTimeInSeconds))
+                  localCounter+= 1
+                # print("1: Seconds gone by {0}".format(datetime.utcnow().second - currentTimeInSeconds))
+            def check(m):
+              return m.content.casefold() in options and m.channel == channel and m.author == author
+            try:
+              msg = await client.wait_for('message', check = check)
+            except:
+              await channel.send('You took too long idiot')
+              break
+            await channel.send('rock')
+            if msg.content == 'rock':
+              await channel.send('Nice, again?')
+              await channel.send('Say yes to go again no to fuck off')
+            elif msg.content == 'scissors':
+              await channel.send('Get fucked. Wanna play again?')
+              await channel.send('Say yes to go again no to fuck off')
+            else: 
+              await channel.send('Alright, you got it, you got it. Again?')
+              await channel.send('Say yes to go again no to fuck off')
+            def check(m):
+              return m.content.casefold() in quit and m.channel == channel and m.author == author
+            try:
+              msg = await client.wait_for('message', check = check, timeout = 45)
+              quitMessage = msg.content.casefold()
+            except:
+              await message.channel.send('You took too long to respond cunt')
+              return
+          await message.channel.send('Alright fuck off now.')
     print('Messages sent: ', counter)
     print('Current random Int: ', yoIndicator)
     print('Current random Int: ', niceIndicator)
