@@ -11,10 +11,11 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 intents = discord.Intents.all()
 client = discord.Client(intents = intents)
-counter = 2450
+counter = 2541
 emoteTimer = datetime.utcnow()
 booingTimer = datetime.utcnow()
 fuckOffTimer = datetime.utcnow()
+rps_bool = False
 #Checks whether or not the given time is larger than the one the bot currently has, also checks if the difference is large enough to return a True statement
 def timeChecker(currentTime, originalTime, difference):
     #Checks if the day is the same or not
@@ -201,7 +202,7 @@ async def on_guild_role_update(before, after):
   #   await after.edit(name = "fish fucker", colour = discord.Colour.default())
 @client.event
 async def on_message(message):
-    global counter
+    global counter, rps_bool
     counter += 1
     if message.author == client.user:
       return
@@ -211,6 +212,9 @@ async def on_message(message):
       return
     user = message.author.mention
     userId = message.author.id
+    agreement_words = ['yes', 'y', 'sure', 'mhmm', 'okay', 'yup', 'ofc', 'ok','okey dokey',]
+    quit = ['nope', 'no', 'stop', 'quit', 'n', 'exit', 'leave', 'fuck off', 'die']
+    options = ['rock', 'paper','scissors']
     try:
       carlosDiscordID = 263054069885566977
       fryMakerRoleID = 783852650314596362
@@ -227,35 +231,36 @@ async def on_message(message):
     # if len(message.mentions) > 0 and message.author.id == jayNatDiscordID:
     #           await message.channel.send(user)
     #           await message.add_reaction(bonkEmoji)
-    if len(message.mentions) > 0:
-        for mention in message.mentions:
-          # print(mention)
-          # print(client.user)
-          if mention == client.user and timeChecker(datetime.utcnow(),fuckOffTimer, 10) is True:
-            await message.channel.send("Fuck off you daft cunt ")
-    if counter % yoIndicator == 0:
-        await message.channel.send('Yoooooooooooooooo')
-    elif counter % niceIndicator == 0:
-        await message.channel.send('nice')
-    else:
-      if message.author.bot is False:
-        for roles in message.author.roles:
-            if roles.id == fryMakerRoleID:
-                if counter % 6 == 0:
-                    await message.channel.send('Yoooooooooo ' + user + ', can you make me some fries.')
-      if message.author.id == carlosDiscordID:
-          counter += 1
-          if counter % 13 == 0:
-              await message.channel.send(user + ' Just fuck off already')
-      elif message.author.id == jayNatDiscordID:
-          if counter % 12 == 0:
-              await message.channel.send(user + ' cringe')
-      elif message.author.id == alexDiscordID:
-          if counter % 9 == 0:
-              await message.channel.send(bonkEmoji)
-      elif message.author.id == patrickDiscordID:
-          if counter% 19 == 0:
-            await message.channel.send(user + ' Haha, small pee pee')
+    if rps_bool == False:
+      if len(message.mentions) > 0:
+          for mention in message.mentions:
+            # print(mention)
+            # print(client.user)
+            if mention == client.user and timeChecker(datetime.utcnow(),fuckOffTimer, 10) is True:
+              await message.channel.send("Fuck off you daft cunt ")
+      if counter % yoIndicator == 0:
+          await message.channel.send('Yoooooooooooooooo')
+      elif counter % niceIndicator == 0:
+          await message.channel.send('nice')
+      else:
+        if message.author.bot is False:
+          for roles in message.author.roles:
+              if roles.id == fryMakerRoleID:
+                  if counter % 6 == 0:
+                      await message.channel.send('Yoooooooooo ' + user + ', can you make me some fries.')
+        if message.author.id == carlosDiscordID:
+            counter += 1
+            if counter % 13 == 0:
+                await message.channel.send(user + ' Just fuck off already')
+        elif message.author.id == jayNatDiscordID:
+            if counter % 12 == 0:
+                await message.channel.send(user + ' cringe')
+        elif message.author.id == alexDiscordID:
+            if counter % 9 == 0:
+                await message.channel.send(bonkEmoji)
+        elif message.author.id == patrickDiscordID:
+            if counter% 19 == 0:
+              await message.channel.send(user + ' Haha, small pee pee')
       if 'can you buy me this' in message.content.casefold():
           await message.channel.send('Sure.')
       elif 'Justin' in message.content.casefold():
@@ -281,13 +286,11 @@ async def on_message(message):
       elif message.content.startswith('$father'):
           await message.channel.send(jesusAt + ' father :pleading_face:')
       elif message.content.startswith('$rps'):
+          rps_bool = True
           quitMessage = "yes"
           await message.channel.send('Hey {0}, wanna play rock paper scissors?'.format(user))
           channel = message.channel
           author = message.author
-          agreement_words = ['yes', 'y', 'sure', 'mhmm', 'okay']
-          quit = ['nope', 'no', 'stop', 'quit', 'n', 'exit', 'leave']
-          options = ['rock', 'paper','scissors']
           def check(m):
             return m.content.casefold() in agreement_words and m.channel == channel and m.author == author
           try:      
@@ -305,7 +308,7 @@ async def on_message(message):
                 # print("2: Seconds gone by {0}".format((datetime.utcnow().second + 60)- currentTimeInSeconds))
                 if ((datetime.utcnow().second + 60) - currentTimeInSeconds) == localCounter and localCounter != 4:
                   localCounter+= 1
-                  await channel.send("{0}".format(datetime.utcnow().second + 60) - currentTimeInSeconds)
+                  await channel.send("{0}".format((datetime.utcnow().second + 60) - currentTimeInSeconds))
               else:
                 if datetime.utcnow().second - currentTimeInSeconds == localCounter and localCounter != 4:
                   await channel.send("{0}".format(datetime.utcnow().second - currentTimeInSeconds))
@@ -329,7 +332,7 @@ async def on_message(message):
               await channel.send('Alright, you got it, you got it. Again?')
               await channel.send('Say yes to go again no to fuck off')
             def check(m):
-              return m.content.casefold() in quit and m.channel == channel and m.author == author
+              return m.content.casefold() in quit  or m.content.casefold() in agreement_words and m.channel == channel and m.author == author
             try:
               msg = await client.wait_for('message', check = check, timeout = 45)
               quitMessage = msg.content.casefold()
@@ -337,6 +340,7 @@ async def on_message(message):
               await message.channel.send('You took too long to respond cunt')
               return
           await message.channel.send('Alright fuck off now.')
+          rps_bool = False
     print('Messages sent: ', counter)
     print('Current random Int: ', yoIndicator)
     print('Current random Int: ', niceIndicator)
