@@ -11,11 +11,13 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 intents = discord.Intents.all()
 client = discord.Client(intents = intents)
-counter = 2541
+counter = 2580
 emoteTimer = datetime.utcnow()
 booingTimer = datetime.utcnow()
 fuckOffTimer = datetime.utcnow()
 rps_bool = False
+excitement_words = ['YOOOOOOOOOOOOOOOOOOO', 'nice', 'sick','poggers', 'owa owa', '+1 good meme', 'nice lmao', 'pog pog pog pog', 'W','mood', 'epic', 'epic sauce']
+disgusted_words = ['wtf', 'die', 'stinky', 'just fuck off already','no', 'gay','cringe','nope','why','I really hate you','sus','shut up','pain',]
 #Checks whether or not the given time is larger than the one the bot currently has, also checks if the difference is large enough to return a True statement
 def timeChecker(currentTime, originalTime, difference):
     #Checks if the day is the same or not
@@ -119,7 +121,7 @@ async def print_channels():
 async def on_ready():
   global guild
   # game = discord.Game('with my pee pee')
-  Stream = discord.Streaming(name = 'The overlords stream :pleading_face:',url = 'https://www.twitch.tv/ulm_nation')
+  Stream = discord.Streaming(name = 'The overlords stream',url = 'https://www.twitch.tv/ulm_nation')
   await client.change_presence(status = discord.Status.online, activity = Stream)
   guild = client.get_guild(751678259657441339)
   print('We have logged in as {0.user}'.format(client))
@@ -226,8 +228,8 @@ async def on_message(message):
       jesusAt = jesusMember.mention
     except:
       print('One of these people are not in the server')
-    yoIndicator = randint(75, 150)
-    niceIndicator = randint(90, 140 )
+    agreementIndicator = randint(60, 150)
+    disgustIndicator = randint(65, 140 )
     # if len(message.mentions) > 0 and message.author.id == jayNatDiscordID:
     #           await message.channel.send(user)
     #           await message.add_reaction(bonkEmoji)
@@ -238,10 +240,12 @@ async def on_message(message):
             # print(client.user)
             if mention == client.user and timeChecker(datetime.utcnow(),fuckOffTimer, 10) is True:
               await message.channel.send("Fuck off you daft cunt ")
-      if counter % yoIndicator == 0:
-          await message.channel.send('Yoooooooooooooooo')
-      elif counter % niceIndicator == 0:
-          await message.channel.send('nice')
+      if counter % agreementIndicator == 0:
+          excited = excitement_words[randint(0, len(excitement_words))]
+          await message.channel.send('{0}'.format(excited))
+      elif counter % disgustIndicator == 0:
+          disagreement = disgusted_words[randint(0, len(disgusted_words))]
+          await message.channel.send('{0}'.format(disagreement))
       else:
         if message.author.bot is False:
           for roles in message.author.roles:
@@ -249,7 +253,6 @@ async def on_message(message):
                   if counter % 6 == 0:
                       await message.channel.send('Yoooooooooo ' + user + ', can you make me some fries.')
         if message.author.id == carlosDiscordID:
-            counter += 1
             if counter % 13 == 0:
                 await message.channel.send(user + ' Just fuck off already')
         elif message.author.id == jayNatDiscordID:
@@ -287,7 +290,7 @@ async def on_message(message):
           await message.channel.send(jesusAt + ' father :pleading_face:')
       elif message.content.startswith('$rps'):
           rps_bool = True
-          quitMessage = "yes"
+          repeat_bool = True
           await message.channel.send('Hey {0}, wanna play rock paper scissors?'.format(user))
           channel = message.channel
           author = message.author
@@ -298,7 +301,7 @@ async def on_message(message):
           except:
             await channel.send('You took too long cunt')
             return
-          while quitMessage == "yes" or quitMessage == 'y':
+          while repeat_bool:
             await channel.send('Alright, on 3 {0}'.format(user))
             currentTimeInSeconds = datetime.utcnow().second
             localCounter = 1
@@ -336,14 +339,16 @@ async def on_message(message):
             try:
               msg = await client.wait_for('message', check = check, timeout = 45)
               quitMessage = msg.content.casefold()
+              if quitMessage in quit:
+                repeat_bool = False
             except:
               await message.channel.send('You took too long to respond cunt')
               return
           await message.channel.send('Alright fuck off now.')
           rps_bool = False
     print('Messages sent: ', counter)
-    print('Current random Int: ', yoIndicator)
-    print('Current random Int: ', niceIndicator)
+    print('Current random Int: ', agreementIndicator)
+    print('Current random Int: ', disgustIndicator)
 
 keep_alive()
 client.run(TOKEN)
