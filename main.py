@@ -11,7 +11,7 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 intents = discord.Intents.all()
 client = discord.Client(intents = intents)
-counter = 2580
+counter = 3500
 emoteTimer = datetime.utcnow()
 booingTimer = datetime.utcnow()
 fuckOffTimer = datetime.utcnow()
@@ -93,8 +93,10 @@ def workInProgress():
     progress.add_field(name = 'Ball itch', value = "If the 'Repost is ball itch' image is sent in the server, the bot will send the image as well", inline = False)
     return progress
 def momChecker(String):
-    if "jesus" and "mom" in String.casefold():
+    if "jesus" in String.casefold() and "mom" in String.casefold():
         print('found jesus and or mom in: \n' + String)
+        print('Jesus in String {0}'.format('jesus' in String.casefold()))
+        print('Mom in String {0}'.format('mom' in String.casefold()))
         return True
     else:
         return False
@@ -228,8 +230,9 @@ async def on_message(message):
       jesusAt = jesusMember.mention
     except:
       print('One of these people are not in the server')
-    agreementIndicator = randint(60, 150)
-    disgustIndicator = randint(65, 140 )
+    agreementIndicator = randint(5, 50)
+    disgustIndicator = randint(3, 30)
+    divider = counter % 100
     # if len(message.mentions) > 0 and message.author.id == jayNatDiscordID:
     #           await message.channel.send(user)
     #           await message.add_reaction(bonkEmoji)
@@ -240,10 +243,10 @@ async def on_message(message):
             # print(client.user)
             if mention == client.user and timeChecker(datetime.utcnow(),fuckOffTimer, 10) is True:
               await message.channel.send("Fuck off you daft cunt ")
-      if counter % agreementIndicator == 0:
+      if divider % agreementIndicator == 0:
           excited = excitement_words[randint(0, len(excitement_words))]
           await message.channel.send('{0}'.format(excited))
-      elif counter % disgustIndicator == 0:
+      elif divider % disgustIndicator == 0:
           disagreement = disgusted_words[randint(0, len(disgusted_words))]
           await message.channel.send('{0}'.format(disagreement))
       else:
