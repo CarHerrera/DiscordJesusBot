@@ -11,7 +11,7 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 intents = discord.Intents.all()
 client = discord.Client(intents = intents)
-counter = 3500
+counter = 3540
 emoteTimer = datetime.utcnow()
 booingTimer = datetime.utcnow()
 fuckOffTimer = datetime.utcnow()
@@ -231,7 +231,7 @@ async def on_message(message):
     except:
       print('One of these people are not in the server')
     agreementIndicator = randint(5, 50)
-    disgustIndicator = randint(3, 30)
+    disgustIndicator = randint(5, 30)
     divider = counter % 100
     # if len(message.mentions) > 0 and message.author.id == jayNatDiscordID:
     #           await message.channel.send(user)
@@ -244,16 +244,16 @@ async def on_message(message):
             if mention == client.user and timeChecker(datetime.utcnow(),fuckOffTimer, 10) is True:
               await message.channel.send("Fuck off you daft cunt ")
       if divider % agreementIndicator == 0:
-          excited = excitement_words[randint(0, len(excitement_words))]
+          excited = excitement_words[randint(0, len(excitement_words)-1)]
           await message.channel.send('{0}'.format(excited))
       elif divider % disgustIndicator == 0:
-          disagreement = disgusted_words[randint(0, len(disgusted_words))]
+          disagreement = disgusted_words[randint(0, len(disgusted_words)-1)]
           await message.channel.send('{0}'.format(disagreement))
       else:
         if message.author.bot is False:
           for roles in message.author.roles:
               if roles.id == fryMakerRoleID:
-                  if counter % 6 == 0:
+                  if counter % 9 == 0:
                       await message.channel.send('Yoooooooooo ' + user + ', can you make me some fries.')
         if message.author.id == carlosDiscordID:
             if counter % 13 == 0:
