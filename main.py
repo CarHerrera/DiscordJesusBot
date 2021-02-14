@@ -11,7 +11,7 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 intents = discord.Intents.all()
 client = discord.Client(intents = intents)
-counter = 3540
+counter = 4050
 emoteTimer = datetime.utcnow()
 booingTimer = datetime.utcnow()
 fuckOffTimer = datetime.utcnow()
@@ -127,7 +127,9 @@ async def on_ready():
   await client.change_presence(status = discord.Status.online, activity = Stream)
   guild = client.get_guild(751678259657441339)
   print('We have logged in as {0.user}'.format(client))
-
+@client.event
+async def on_disconnect():
+  print('No longer connected to discord')
 @client.event
 async def on_member_update(before, after):
     # print("Status change? {}".format(before.status != after.status))
@@ -135,6 +137,7 @@ async def on_member_update(before, after):
     # print("Activity change? {}".format(before.activity != after.activity))
     # print("Email Verified change? {}".format(before.pending != after.pending))
     # print("Role change? {}".format(before.roles != after.roles))
+    global guild
     if before.bot == True or after.bot == True:
         return
     elif before.status != after.status:
@@ -142,11 +145,16 @@ async def on_member_update(before, after):
     elif before.nick != after.nick:
         return
     elif before.activity != after.activity:
+        print('Before activity is {0} and after is {1}'.format(before.activity, after.activity))
+        # if(type(after.activity == discord.activity.Spotify)):
+        #   general = guild.get_channel(751678259657441342)
+          # await general.send('Listening to {0} {1}? cringe lmao'.format(after.activity.title, after.mention))
+          # pass
         return
     elif before.pending != after.pending:
         return
     elif before.roles != after.roles:
-        pass
+        return
         # carlosDiscordID = 263054069885566977
         # jesusMemberId= 213090776001937409
         # guild = before.guild
@@ -192,7 +200,7 @@ async def on_raw_reaction_add(payload):
         if payload.emoji.id == 797305732063297536 and timeChecker(datetime.utcnow(),booingTimer, 10) and message.author == client.user:
             await channel.send('Why are you booing me? I\'m right')
             booingTimer = datetime.utcnow()
-        elif timeChecker(datetime.utcnow(),emoteTimer,10) is True:
+        elif timeChecker(datetime.utcnow(),emoteTimer, 40) is True:
             await channel.send('Yoooooooooo, how do I emote')
             emoteTimer = datetime.utcnow()
 
@@ -230,8 +238,8 @@ async def on_message(message):
       jesusAt = jesusMember.mention
     except:
       print('One of these people are not in the server')
-    agreementIndicator = randint(5, 50)
-    disgustIndicator = randint(5, 30)
+    agreementIndicator = randint(1, 125)
+    disgustIndicator = randint(1, 125)
     divider = counter % 100
     # if len(message.mentions) > 0 and message.author.id == jayNatDiscordID:
     #           await message.channel.send(user)
@@ -259,7 +267,7 @@ async def on_message(message):
             if counter % 13 == 0:
                 await message.channel.send(user + ' Just fuck off already')
         elif message.author.id == jayNatDiscordID:
-            if counter % 12 == 0:
+            if counter % 25 == 0:
                 await message.channel.send(user + ' cringe')
         elif message.author.id == alexDiscordID:
             if counter % 9 == 0:
@@ -291,6 +299,23 @@ async def on_message(message):
           await message.channel.send(embed = attempt)
       elif message.content.startswith('$father'):
           await message.channel.send(jesusAt + ' father :pleading_face:')
+      elif message.content.startswith('$flip'):
+        await message.channel.send('hold on let me get my lucky nickel')
+        currentTimeInSeconds = datetime.utcnow().second
+        timer  = datetime.utcnow().second
+        currentTimeInSeconds = datetime.utcnow().second
+        while timer - currentTimeInSeconds <= 3:
+            if timer - currentTimeInSeconds < 0:
+                timer = datetime.utcnow().second + 60
+            else:
+                timer = datetime.utcnow().second
+        else:
+            await message.channel.send('Alright I got it.')
+        randomChance = randint(0,100)
+        if randomChance <= 50 :
+            await message.channel.send('the lucky nickel saids heads')
+        else:
+            await message.channel.send('the lucky nickel saids tails')
       elif message.content.startswith('$rps'):
           rps_bool = True
           repeat_bool = True
@@ -349,6 +374,7 @@ async def on_message(message):
               return
           await message.channel.send('Alright fuck off now.')
           rps_bool = False
+           
     print('Messages sent: ', counter)
     print('Current random Int: ', agreementIndicator)
     print('Current random Int: ', disgustIndicator)
