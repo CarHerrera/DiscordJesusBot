@@ -1,4 +1,4 @@
-# bot.py
+#000000#FFFFFF#000000#000000# bot.py
 import discord
 import os
 from dotenv import load_dotenv
@@ -223,6 +223,7 @@ async def on_message(message):
     elif message.channel.name == 'politics':
       return
     user = message.author.mention
+    users_name = message.author.name
     agreement_words = ['yes', 'y', 'sure', 'mhmm', 'okay', 'yup', 'ofc', 'ok','okey dokey',]
     quit = ['nope', 'no', 'stop', 'quit', 'n', 'exit', 'leave', 'fuck off', 'die']
     options = ['rock', 'paper','scissors']
@@ -237,8 +238,8 @@ async def on_message(message):
       jesusAt = jesusMember.mention
     except:
       print('One of these people are not in the server')
-    agreementIndicator = randint(1, 125)
-    disgustIndicator = randint(1, 125)
+    agreementIndicator = randint(1, 140)
+    disgustIndicator = randint(1, 140)
     divider = counter % 100
     # if len(message.mentions) > 0 and message.author.id == jayNatDiscordID:
     #           await message.channel.send(user)
@@ -382,7 +383,30 @@ async def on_message(message):
               return
           await message.channel.send('Alright fuck off now.')
           rps_bool = False
-           
+      elif message.content.startswith('$bonk'):
+            try:                
+                channel = message.author.voice.channel 
+                vc = await channel.connect()
+                vc.play(discord.FFmpegPCMAudio(executable = '/usr/bin/ffmpeg', source = '/home/pi/Desktop/DiscordJesusBot/bonk.mp3'))
+                while vc.is_playing():
+                    print('playing bonk audio')
+                await vc.disconnect()
+            except:
+                await message.channel.send('user is not in a voice channel')
+      elif message.content.startswith('$join'):
+          try:
+              channel = message.author.voice.channel
+              vc = await channel.connect()
+          except:
+              print('{0} is not in a channel'.format(users_name))
+      elif message.content.startswith('$disc'):
+          try:
+              for voice_channels in client.voice_clients:
+                  if voice_channels.channel == message.author.voice.channel:
+                     await voice_channels.disconnect()
+          except:
+              await message.channel.send('already not in a server')
+        
     print('Messages sent: ', counter)
     print('Current random Int: ', agreementIndicator)
     print('Current random Int: ', disgustIndicator)
