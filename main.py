@@ -223,7 +223,6 @@ async def on_message(message):
     elif message.channel.name == 'politics':
       return
     user = message.author.mention
-    userId = message.author.id
     agreement_words = ['yes', 'y', 'sure', 'mhmm', 'okay', 'yup', 'ofc', 'ok','okey dokey',]
     quit = ['nope', 'no', 'stop', 'quit', 'n', 'exit', 'leave', 'fuck off', 'die']
     options = ['rock', 'paper','scissors']
@@ -261,7 +260,7 @@ async def on_message(message):
         if message.author.bot is False:
           for roles in message.author.roles:
               if roles.id == fryMakerRoleID:
-                  if counter % 9 == 0:
+                  if counter % 12 == 0:
                       await message.channel.send('Yoooooooooo ' + user + ', can you make me some fries.')
         if message.author.id == carlosDiscordID:
             if counter % 13 == 0:
@@ -299,18 +298,27 @@ async def on_message(message):
           await message.channel.send(embed = attempt)
       elif message.content.startswith('$father'):
           await message.channel.send(jesusAt + ' father :pleading_face:')
+      elif message.content.startswith('$choose'):
+        split_list = message.content.split()
+        split_list.remove('$choose')
+        randnum = randint(0, len(split_list) -1 )
+        await message.channel.send('Hmmmmmm, I choose {0}'.format(split_list[randnum]))
       elif message.content.startswith('$flip'):
         await message.channel.send('hold on let me get my lucky nickel')
         currentTimeInSeconds = datetime.utcnow().second
         timer  = datetime.utcnow().second
         currentTimeInSeconds = datetime.utcnow().second
+        findcoin = randint(0, 100)
         while timer - currentTimeInSeconds <= 3:
             if timer - currentTimeInSeconds < 0:
                 timer = datetime.utcnow().second + 60
             else:
                 timer = datetime.utcnow().second
         else:
-            await message.channel.send('Alright I got it.')
+          if findcoin < 15:
+            await message.channel.send('wtf I can\'t find it. this is some bullshit')
+            return
+          await message.channel.send('Alright I got it.')
         randomChance = randint(0,100)
         if randomChance <= 50 :
             await message.channel.send('the lucky nickel saids heads')
