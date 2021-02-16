@@ -176,6 +176,9 @@ async def on_ready():
     await client.change_presence(status = discord.Status.online, activity = Stream)
     print('We have logged in as {0.user}'.format(client))
 @client.event
+async def on_disconnect():
+    print('No longer connected to discord')
+@client.event
 async def on_member_update(before, after):
     # print("Status change? {}".format(before.status != after.status))
     # print("Nickname change? {}".format(before.nick != after.nick))
@@ -252,7 +255,6 @@ async def on_raw_reaction_add(payload):
         elif timeChecker(datetime.utcnow(),emoteTimer, 40) is True:
             await channel.send('Yoooooooooo, how do I emote')
             emoteTimer = datetime.utcnow()
-
 @client.event
 async def on_guild_role_update(before, after):
   oldRole = before
