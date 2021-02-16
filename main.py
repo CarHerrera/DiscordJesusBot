@@ -1,6 +1,8 @@
-#000000#FFFFFF#000000#000000# bot.py
+# bot.py
+#Author is Carlos Herrera
 import discord
 import os
+from discord.ext import commands
 from dotenv import load_dotenv
 from keep_alive import keep_alive
 from random import seed
@@ -10,11 +12,12 @@ seed(4300)
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 intents = discord.Intents.all()
-client = discord.Client(intents = intents)
+discord_client = discord.Client(intents = intents)
 counter = 4050
 emoteTimer = datetime.utcnow()
 booingTimer = datetime.utcnow()
 fuckOffTimer = datetime.utcnow()
+client = commands.bot(command_prefix = '$')
 rps_bool = False
 excitement_words = ['YOOOOOOOOOOOOOOOOOOO', 'nice', 'sick','poggers', 'owa owa', '+1 good meme', 'nice lmao', 'pog pog pog pog', 'W','mood', 'epic', 'epic sauce']
 disgusted_words = ['wtf', 'die', 'stinky', 'just fuck off already','no', 'gay','cringe','nope','why','I really hate you','sus','shut up','pain',]
@@ -100,36 +103,78 @@ def momChecker(String):
         return True
     else:
         return False
-async def print_members():
-    for guild in client.guilds:
-        for member in guild.members:
-                print(member.name)
-async def print_guilds():
-    for guild in client.guilds:
-        print(guild.name)
-async def print_roles():
-    for guild in client.guilds:
-        for roles in guild.roles:
-            print(roles.name, roles.id)
-async def print_emojis():
-    for guild in client.guilds:
-        for emoji in client.emojis:
-            print(emoji.name ,emoji.id)
-async def print_channels():
-    for guild in client.guilds:
-        for channel in guild.channels:
-            print(channel.category)
+@client.command()
+async def test(ctx):
+    # print(ctx)
+    await ctx.send('Hello world!')
+@client.command()
+async def choose(ctx, *args):
+    rand_num = randint(0, len(args) -1)
+    await ctx.send('Hmmmmmmm, I choose {}'.format(args[rand_num]))
+@client.command()
+async def flip(ctx):
+    await ctx.send('hold on let me get my lucky nickel')
+    currentTimeInSeconds = datetime.utcnow().second
+    timer = datetime.utcnow().second
+    maxOdds = 10000
+    findcoin = randint(0, maxOdds)
+    difference = timer - currentTimeInSeconds
+    while timer - currentTimeInSeconds < 3:
+        if timer - currentTimeInSeconds < 0:
+            timer = datetime.utcnow().second + 60
+        else:
+            timer = datetime.utcnow().second
+    else:
+        await ctx.send('alright I got it')
+        if findcoin < 100:
+            await ctx.send('wtf the coin landed on its side, thats like a {0}% chance'.format((100/maxOdds) * 100))
+            return
+        elif findcoin < 500:
+            await ctx.send('wtf I can\'t find the damn thing. this is some bullshit')
+            return
+        elif findcoin < 5250:
+            await ctx.send('the lucky nickel said heads')
+        else:
+            await ctx.send('the lucky nickel said tails')
+@client.command()
+async def join(ctx):
+    global vc
+    try:
+        if vc == None:
+            channel = message.author.voice.channel
+            vc = await channel.connect()
+            vc.play(discord.FFmpegPCMAudio(executable = '/usr/bin/ffmpeg', source = '/home/pi/Desktop/DiscordJesusBot/sounds/undertaker.mp3'))
+        else:
+            vc.play(discord.FFmpegPCMAudio(executable = '/usr/bin/ffmpeg', source = '/home/pi/Desktop/DiscordJesusBot/sounds/undertaker.mp3'))
+    except:
+        await ctx.send('{.author.name} is not in a channel'.format(ctx))
+@client.command()
+async def bonk(ctx):
+    global vc
+    try:
+        if vc == None:
+            channel = ctx.author.voice.channel
+            vc = await channel.connect()
+            vc.play(vc.play(discord.FFmpegPCMAudio(executable = '/usr/bin/ffmpeg', source = '/home/pi/Desktop/DiscordJesusBot/sounds/bonk.mp3')))
+        else:
+            vc.play(vc.play(discord.FFmpegPCMAudio(executable = '/usr/bin/ffmpeg', source = '/home/pi/Desktop/DiscordJesusBot/sounds/bonk.mp3')))
+    except:
+        await ctx.send('user is not in a voice channel')
+@client.command()
+async def disc(ctx):
+    global vc
+    try:
+        await vc.disconnect()
+        vc = None
+    except:
+        await ctx.send('already not in a server')
 @client.event
 async def on_ready():
-  global guild
-  # game = discord.Game('with my pee pee')
-  Stream = discord.Streaming(name = 'The overlords stream',url = 'https://www.twitch.tv/ulm_nation')
-  await client.change_presence(status = discord.Status.online, activity = Stream)
-  guild = client.get_guild(751678259657441339)
-  print('We have logged in as {0.user}'.format(client))
-@client.event
-async def on_disconnect():
-  print('No longer connected to discord')
+    global guild
+    game = discord.Game('with my pee pee')
+    Stream = discord.Streaming(name = 'The overloads stream :pleading_face:',url = 'https://www.twitch.tv/ulm_nation')
+    await client.change_presence(status = discord.Status.online, activity = Stream)
+    print('We have logged in as {0.user}'.format(client))
 @client.event
 async def on_member_update(before, after):
     # print("Status change? {}".format(before.status != after.status))
@@ -145,7 +190,7 @@ async def on_member_update(before, after):
     elif before.nick != after.nick:
         return
     elif before.activity != after.activity:
-        jesusMember = await message.guild.fetch_member(213090776001937409)
+        jesusMember = await before.guild.fetch_member(213090776001937409)
         if before == jesusMember:
             if type(after) == discord.Streaming:
                 print('streaming?')
@@ -208,7 +253,7 @@ async def on_raw_reaction_add(payload):
             await channel.send('Yoooooooooo, how do I emote')
             emoteTimer = datetime.utcnow()
 
-@client.event 
+@client.event
 async def on_guild_role_update(before, after):
   oldRole = before
   newRole = after
@@ -223,7 +268,7 @@ async def on_message(message):
     if message.author == client.user:
       return
     elif message.author.bot == True:
-      return 
+      return
     elif message.channel.name == 'politics':
       return
     user = message.author.mention
@@ -242,7 +287,7 @@ async def on_message(message):
       jesusAt = jesusMember.mention
     except:
       print('One of these people are not in the server')
-    agreementIndicator = randint(1, 140)
+    agreementIndicator = randint(1, 160)
     disgustIndicator = randint(1, 140)
     divider = counter % 100
     # if len(message.mentions) > 0 and message.author.id == jayNatDiscordID:
@@ -303,32 +348,6 @@ async def on_message(message):
           await message.channel.send(embed = attempt)
       elif message.content.startswith('$father'):
           await message.channel.send(jesusAt + ' father :pleading_face:')
-      elif message.content.startswith('$choose'):
-        split_list = message.content.split()
-        split_list.remove('$choose')
-        randnum = randint(0, len(split_list) -1 )
-        await message.channel.send('Hmmmmmm, I choose {0}'.format(split_list[randnum]))
-      elif message.content.startswith('$flip'):
-        await message.channel.send('hold on let me get my lucky nickel')
-        currentTimeInSeconds = datetime.utcnow().second
-        timer  = datetime.utcnow().second
-        currentTimeInSeconds = datetime.utcnow().second
-        findcoin = randint(0, 100)
-        while timer - currentTimeInSeconds <= 3:
-            if timer - currentTimeInSeconds < 0:
-                timer = datetime.utcnow().second + 60
-            else:
-                timer = datetime.utcnow().second
-        else:
-          if findcoin < 15:
-            await message.channel.send('wtf I can\'t find it. this is some bullshit')
-            return
-          await message.channel.send('Alright I got it.')
-        randomChance = randint(0,100)
-        if randomChance <= 50 :
-            await message.channel.send('the lucky nickel saids heads')
-        else:
-            await message.channel.send('the lucky nickel saids tails')
       elif message.content.startswith('$rps'):
           rps_bool = True
           repeat_bool = True
@@ -337,7 +356,7 @@ async def on_message(message):
           author = message.author
           def check(m):
             return m.content.casefold() in agreement_words and m.channel == channel and m.author == author
-          try:      
+          try:
             msg = await client.wait_for('message', check=check, timeout = 30)
           except:
             await channel.send('You took too long cunt')
@@ -372,7 +391,7 @@ async def on_message(message):
             elif msg.content == 'scissors':
               await channel.send('Get fucked. Wanna play again?')
               await channel.send('Say yes to go again no to fuck off')
-            else: 
+            else:
               await channel.send('Alright, you got it, you got it. Again?')
               await channel.send('Say yes to go again no to fuck off')
             def check(m):
@@ -387,33 +406,6 @@ async def on_message(message):
               return
           await message.channel.send('Alright fuck off now.')
           rps_bool = False
-      elif message.content.startswith('$bonk'):
-            try:                
-                channel = message.author.voice.channel 
-                vc = await channel.connect()
-                vc.play(discord.FFmpegPCMAudio(executable = '/usr/bin/ffmpeg', source = '/home/pi/Desktop/DiscordJesusBot/sounds/bonk.mp3'))
-                while vc.is_playing():
-                    print('playing bonk audio')
-                await vc.disconnect()
-            except:
-                await message.channel.send('user is not in a voice channel')
-      elif message.content.startswith('$join'):
-          try:
-              channel = message.author.voice.channel
-              vc = await channel.connect()
-              vc.play(discord.FFmpegPCMAudio(executable = '/usr/bin/ffmpeg', source = '/home/pi/Desktop/DiscordJesusBot/sounds/undertaker.mp3'))
-          except:
-              
-              await message.channel.send('{0} is not in a channel'.format(users_name))
-      elif message.content.startswith('$disc'):
-          try:
-              channel = message.author.voice.channel
-              for voice_channels in client.voice_clients:
-                  if voice_channels.channel == channel:
-                     await voice_channels.disconnect()
-          except:
-              await message.channel.send('already not in a server')
-        
     print('Messages sent: ', counter)
     print('Current random Int: ', agreementIndicator)
     print('Current random Int: ', disgustIndicator)
