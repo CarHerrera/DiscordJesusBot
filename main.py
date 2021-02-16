@@ -6,7 +6,7 @@ from keep_alive import keep_alive
 from random import seed
 from random import randint
 from datetime import datetime
-seed(1)
+seed(4300)
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 intents = discord.Intents.all()
@@ -145,7 +145,11 @@ async def on_member_update(before, after):
     elif before.nick != after.nick:
         return
     elif before.activity != after.activity:
-        print('Before activity is {0} and after is {1}'.format(before.activity, after.activity))
+        jesusMember = await message.guild.fetch_member(213090776001937409)
+        if before == jesusMember:
+            if type(after) == discord.Streaming:
+                print('streaming?')
+            print('Before activity is {0} and after is {1}'.format(before.activity, after.activity))
         # if(type(after.activity == discord.activity.Spotify)):
         #   general = guild.get_channel(751678259657441342)
           # await general.send('Listening to {0} {1}? cringe lmao'.format(after.activity.title, after.mention))
@@ -194,7 +198,7 @@ async def on_raw_reaction_add(payload):
     # print('Emote timer should fire: {0}'.format(timeChecker(currentTime,emoteTimer,10)))
     if lastMessage.author == client.user:
         return
-    elif timeChecker(currentTime, messageTime, 45) is True:
+    elif timeChecker(currentTime, messageTime, 20) is True:
         return
     else:
         if payload.emoji.id == 797305732063297536 and timeChecker(datetime.utcnow(),booingTimer, 10) and message.author == client.user:
@@ -387,7 +391,7 @@ async def on_message(message):
             try:                
                 channel = message.author.voice.channel 
                 vc = await channel.connect()
-                vc.play(discord.FFmpegPCMAudio(executable = '/usr/bin/ffmpeg', source = '/home/pi/Desktop/DiscordJesusBot/bonk.mp3'))
+                vc.play(discord.FFmpegPCMAudio(executable = '/usr/bin/ffmpeg', source = '/home/pi/Desktop/DiscordJesusBot/sounds/bonk.mp3'))
                 while vc.is_playing():
                     print('playing bonk audio')
                 await vc.disconnect()
@@ -397,12 +401,15 @@ async def on_message(message):
           try:
               channel = message.author.voice.channel
               vc = await channel.connect()
+              vc.play(discord.FFmpegPCMAudio(executable = '/usr/bin/ffmpeg', source = '/home/pi/Desktop/DiscordJesusBot/sounds/undertaker.mp3'))
           except:
-              print('{0} is not in a channel'.format(users_name))
+              
+              await message.channel.send('{0} is not in a channel'.format(users_name))
       elif message.content.startswith('$disc'):
           try:
+              channel = message.author.voice.channel
               for voice_channels in client.voice_clients:
-                  if voice_channels.channel == message.author.voice.channel:
+                  if voice_channels.channel == channel:
                      await voice_channels.disconnect()
           except:
               await message.channel.send('already not in a server')
