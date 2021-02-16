@@ -12,12 +12,11 @@ seed(4300)
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 intents = discord.Intents.all()
-discord_client = discord.Client(intents = intents)
 counter = 4050
 emoteTimer = datetime.utcnow()
 booingTimer = datetime.utcnow()
 fuckOffTimer = datetime.utcnow()
-client = commands.bot(command_prefix = '$')
+client = commands.Bot(command_prefix = '$', intents = intents)
 rps_bool = False
 excitement_words = ['YOOOOOOOOOOOOOOOOOOO', 'nice', 'sick','poggers', 'owa owa', '+1 good meme', 'nice lmao', 'pog pog pog pog', 'W','mood', 'epic', 'epic sauce']
 disgusted_words = ['wtf', 'die', 'stinky', 'just fuck off already','no', 'gay','cringe','nope','why','I really hate you','sus','shut up','pain',]
@@ -54,47 +53,7 @@ def timeChecker(currentTime, originalTime, difference):
             return True
     else:
         return True
-def helpMessage():
-    attempt = discord.Embed(title = "All the commands currently in this bot", type = 'rich')
-    attempt.set_thumbnail(url = 'https://i.imgur.com/GbDdMj2.png')
-    attempt.add_field(name = "Commands", value = "$help commands")
-    attempt.add_field(name = "Trigger Words", value ="$help trigger words")
-    attempt.add_field(name = "User Responses", value = "$help user responses")
-    attempt.add_field(name = 'Work in Progress', value = "$help in progress")
-    attempt.add_field(name = "Emoting", value = '$help emotes')
-    return attempt
-def helpCommands():
-    commands = discord.Embed(title = "Current comands the bot supports")
-    commands.add_field(name = '$help', value = 'use to get more information on commands', inline = False)
-    commands.add_field(name = '$hello', value = 'Literally tells you to fuck off', inline = False)
-    commands.add_field(name = '$father', value = '@\'s the person the bot is based off of', inline = False)
-    return commands
-def triggerCommands():
-    trigger = discord.Embed(title = 'Phrases the bot is triggered by')
-    trigger.add_field(name = 'Justin', value = 'If any message has justin in it, it will repsond "Yooooooo, I got a friend named justin that\'s cracked at fornite my gaiiiii :weary:"', inline = False)
-    trigger.add_field(name = 'can you buy me this', value = 'If any message has can you buy me this in it, it will repsond "Sure."', inline = False)
-    trigger.add_field(name = 'Jesus\'s mom ', value = 'If any message has Jesus and his mom in it, it will repsond "Best not be talking about my mom you bitch"', inline = False)
-    return trigger
-def userResponses():
-    responses = discord.Embed(title = 'How the bot responds to user input')
-    responses.add_field(name = 'Mentioning the Bot', value = 'If the bot is mentioned in a message, and enough time has passed, it will tell you to fuck off', inline = False)
-    responses.add_field(name = 'Mr.Lettuce', value = 'If Mr.Lettuce sends enough messages for the criteria to be met, he will be called cringe by the bot', inline = False)
-    responses.add_field(name = 'Mr.Arsenate', value = 'If Mr.Arsenate sends enough messages for the criteria to be met, he will be told to fuck off by the bot', inline = False)
-    responses.add_field(name = 'Mr.Potato', value = 'If Mr.Potato sends enough messages for the criteria to be met, he will be bonked by the bot', inline = False)
-    responses.add_field(name = 'Mr.Spaghetti', value = 'If Mr.Spaghetti sends enough messages for the criteria to be met, he will be told he has a small penis at Mr.Jesus\'s request', inline = False)
-    responses.add_field(name = 'The FryMakers', value = 'If the criteria is met, and the last user that has the FryMaker role, will be mentioned and asked to make fries for the bot', inline = False)
-    return responses
-def reactions():
-    reactions = discord.Embed(title = 'Emoting')
-    reactions.set_thumbnail(url = 'https://i.imgur.com/Ygoheor.png')
-    reactions.add_field(name = 'How do I emote?', value = 'Whenever someone reacts to a recent enough message the bot will say "Yo, how do I emote"')
-    reactions.add_field(name = 'Why are you booing me', value = 'Whenever someone bonks a message sent by the bot will say "Why are you booing me, I\'m right"')
-    return reactions
-def workInProgress():
-    progress = discord.Embed(title = 'Things that are currently a work in progress',inline = False)
-    progress.add_field(name = '$bonk', value = "Is meant to join the discord channel and play a bonking sound", inline = False)
-    progress.add_field(name = 'Ball itch', value = "If the 'Repost is ball itch' image is sent in the server, the bot will send the image as well", inline = False)
-    return progress
+
 def momChecker(String):
     if "jesus" in String.casefold() and "mom" in String.casefold():
         print('found jesus and or mom in: \n' + String)
@@ -103,71 +62,18 @@ def momChecker(String):
         return True
     else:
         return False
+
+client.remove_command('help')
 @client.command()
-async def test(ctx):
-    # print(ctx)
-    await ctx.send('Hello world!')
+async def load(ctx, extension):
+    client.load_extension('cogs.{}'.format(extension))
 @client.command()
-async def choose(ctx, *args):
-    rand_num = randint(0, len(args) -1)
-    await ctx.send('Hmmmmmmm, I choose {}'.format(args[rand_num]))
-@client.command()
-async def flip(ctx):
-    await ctx.send('hold on let me get my lucky nickel')
-    currentTimeInSeconds = datetime.utcnow().second
-    timer = datetime.utcnow().second
-    maxOdds = 10000
-    findcoin = randint(0, maxOdds)
-    difference = timer - currentTimeInSeconds
-    while timer - currentTimeInSeconds < 3:
-        if timer - currentTimeInSeconds < 0:
-            timer = datetime.utcnow().second + 60
-        else:
-            timer = datetime.utcnow().second
-    else:
-        await ctx.send('alright I got it')
-        if findcoin < 100:
-            await ctx.send('wtf the coin landed on its side, thats like a {0}% chance'.format((100/maxOdds) * 100))
-            return
-        elif findcoin < 500:
-            await ctx.send('wtf I can\'t find the damn thing. this is some bullshit')
-            return
-        elif findcoin < 5250:
-            await ctx.send('the lucky nickel said heads')
-        else:
-            await ctx.send('the lucky nickel said tails')
-@client.command()
-async def join(ctx):
-    global vc
-    try:
-        if vc == None:
-            channel = message.author.voice.channel
-            vc = await channel.connect()
-            vc.play(discord.FFmpegPCMAudio(executable = '/usr/bin/ffmpeg', source = '/home/pi/Desktop/DiscordJesusBot/sounds/undertaker.mp3'))
-        else:
-            vc.play(discord.FFmpegPCMAudio(executable = '/usr/bin/ffmpeg', source = '/home/pi/Desktop/DiscordJesusBot/sounds/undertaker.mp3'))
-    except:
-        await ctx.send('{.author.name} is not in a channel'.format(ctx))
-@client.command()
-async def bonk(ctx):
-    global vc
-    try:
-        if vc == None:
-            channel = ctx.author.voice.channel
-            vc = await channel.connect()
-            vc.play(vc.play(discord.FFmpegPCMAudio(executable = '/usr/bin/ffmpeg', source = '/home/pi/Desktop/DiscordJesusBot/sounds/bonk.mp3')))
-        else:
-            vc.play(vc.play(discord.FFmpegPCMAudio(executable = '/usr/bin/ffmpeg', source = '/home/pi/Desktop/DiscordJesusBot/sounds/bonk.mp3')))
-    except:
-        await ctx.send('user is not in a voice channel')
-@client.command()
-async def disc(ctx):
-    global vc
-    try:
-        await vc.disconnect()
-        vc = None
-    except:
-        await ctx.send('already not in a server')
+async def unload(ctx, extension):
+    client.unload_extension('cogs.{}'.format(extension))
+for filename in os.listdir('./cogs'):
+    if filename.endswith('.py'):
+        client.load_extension('cogs.{}'.format(filename[:-3]))
+
 @client.event
 async def on_ready():
     global guild
@@ -207,25 +113,6 @@ async def on_member_update(before, after):
         return
     elif before.roles != after.roles:
         return
-        # carlosDiscordID = 263054069885566977
-        # jesusMemberId= 213090776001937409
-        # guild = before.guild
-        # jesusMember = await guild.fetch_member(jesusMemberId)
-        # carlosMember = await guild.fetch_member(carlosDiscordID)
-        # hasFishFucker = False
-        # if after == jesusMember:
-        #   for role in after.roles:
-        #     if role.name.casefold() == "fish fucker":
-        #       print("Has fish fucker role")
-        #       hasFishFucker = True
-        #   if hasFishFucker == False:
-        #     dmChannel = await carlosMember.create_dm()
-        #     await dmChannel.send('Fish fucker role does not exist')
-            # fish_fucker_role = await before.guild.create_role(name = "fish fucker")
-            # await jesusMember.add_roles(fish_fucker_role)
-        # print(guild.roles)
-    # if after.id == jesusId:
-    #     print( "fish fucker" in after.roles.name.casefold())
     # print(after.activity)
 # payload has channel_id, emoji, event_type, guild_id, member, message_id, user_id
 # as attributes
@@ -278,6 +165,7 @@ async def on_message(message):
     agreement_words = ['yes', 'y', 'sure', 'mhmm', 'okay', 'yup', 'ofc', 'ok','okey dokey',]
     quit = ['nope', 'no', 'stop', 'quit', 'n', 'exit', 'leave', 'fuck off', 'die']
     options = ['rock', 'paper','scissors']
+    await client.process_commands(message)
     try:
       carlosDiscordID = 263054069885566977
       fryMakerRoleID = 783852650314596362
@@ -332,23 +220,7 @@ async def on_message(message):
           await message.channel.send('Yooooooo, I got a friend named justin that\'s cracked at fornite my gaiiiii :weary:')
       elif momChecker(message.content.casefold()) is True:
           await message.channel.send('Best not be talking about my mom you bitch')
-      if '$help commands' in message.content.casefold():
-        await message.channel.send(embed = helpCommands())
-      elif '$help trigger words' in message.content.casefold():
-        await message.channel.send(embed = triggerCommands())
-      elif '$help user responses' in message.content.casefold():
-         await message.channel.send(embed = userResponses())
-      elif '$help in progress' in message.content.casefold():
-        await message.channel.send(embed = workInProgress())
-      elif '$help emotes' in message.content.casefold():
-        await message.channel.send(embed = reactions())
-      elif message.content.startswith('$hello'):
-          await message.channel.send('Fuck off cunt')
-      elif message.content.startswith('$help'):
-          # await message.channel.send('Fuck off if you think I\'m gonna help you')
-          attempt = helpMessage()
-          await message.channel.send(embed = attempt)
-      elif message.content.startswith('$father'):
+      if message.content.startswith('$father'):
           await message.channel.send(jesusAt + ' father :pleading_face:')
       elif message.content.startswith('$rps'):
           rps_bool = True
