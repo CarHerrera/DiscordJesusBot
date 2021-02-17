@@ -19,6 +19,7 @@ emojis = [ '<:BrazilChan:751686996929544282>',
 '<:drip:799101216876920842>',
 '<:DripMoment:800232915028017202>',
 '<:amogus:810676422981058620>',]
+buy_me = ['can you buy me this', 'buy me this', 'purchase this for me', 'will you buy me this']
 cmd_in_process = False
 fuckOffTimer = datetime.utcnow()
 class Commands(commands.Cog):
@@ -84,9 +85,9 @@ class Commands(commands.Cog):
                 elif message.author.id == alexDiscordID:
                     if counter % 10 == 0:
                         await message.channel.send(bonkEmoji)
-                elif 'justin' in message.content.casefold():
+                if 'justin' in message.content.casefold():
                     await message.channel.send('Yooooooo, I got a friend named justin that\'s cracked at fornite my gaiiiii :weary:')
-                elif 'can you buy me this' in message.content.casefold():
+                elif message.content.casefold() in buy_me:
                     await message.channel.send('Sure.')
                 elif momChecker(message.content.casefold()) is True:
                     print('{0} is where I found mom'.format(message.content))
