@@ -8,7 +8,9 @@ from keep_alive import keep_alive
 from random import seed
 from random import randint
 from datetime import datetime
-seed(4300)
+seedgen = datetime.utcnow().day + datetime.utcnow().second + datetime.utcnow().minute + datetime.utcnow().microsecond
+print(seedgen)
+seed(seedgen)
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 intents = discord.Intents.all()
@@ -201,7 +203,7 @@ async def on_message(message):
           for roles in message.author.roles:
               if roles.id == fryMakerRoleID:
                   if counter % 12 == 0:
-                      await message.channel.send('Yoooooooooo ' + user + ', can you make me some fries.')
+                      await message.channel.send('Yoooooooooo ' + user + ', I hear your fries are a national delight and I am willing to pay top dollar for them. May I put up this formal request for said fries?')
         if message.author.id == carlosDiscordID:
             if counter % 13 == 0:
                 await message.channel.send(user + ' Just fuck off already')
