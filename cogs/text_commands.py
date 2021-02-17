@@ -8,7 +8,7 @@ from main import momChecker
 counter = 5000
 excitement_words = ['YOOOOOOOOOOOOOOOOOOO', 'nice', 'sick','poggers', 'owa owa', '+1 good meme', 'nice lmao', 'pog pog pog pog', 'W','mood', 'epic', 'epic sauce', '<:amogus:810676422981058620>','<:DripMoment:800232915028017202>','<:PepeThink:762416066570747904>']
 disgusted_words = ['wtf', 'die', 'stinky', 'just fuck off already','no', 'gay','cringe','nope','why','I really hate you','sus','shut up','pain','<:Bonk:797305732063297536>','<:HolyPepe:797304202573119529>']
-emojis[ '<:BrazilChan:751686996929544282>',
+emojis = [ '<:BrazilChan:751686996929544282>',
 '<:PepeThink:762416066570747904>',
 '<:PraiseOmnissiah:795396944042262569>',
 '<:HolyPepe:797304202573119529>',
