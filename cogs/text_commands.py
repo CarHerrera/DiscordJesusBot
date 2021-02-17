@@ -55,7 +55,7 @@ class Commands(commands.Cog):
         if cmd_in_process == False:
             if len(message.mentions)>0:
                 for mentions in message.mentions:
-                    if mentions == self.client.user:
+                    if mentions == self.client.user and timeChecker(datetime.utcnow(), fuckOffTimer, 10):
                         if 'i agree with' in message.content.casefold():
                             await message.channel.send('Thanks')
                         else:

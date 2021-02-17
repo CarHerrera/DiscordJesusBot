@@ -14,14 +14,9 @@ seed(seedgen)
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 intents = discord.Intents.all()
-counter = 4050
 emoteTimer = datetime.utcnow()
 booingTimer = datetime.utcnow()
-fuckOffTimer = datetime.utcnow()
 client = commands.Bot(command_prefix = '$', intents = intents)
-rps_bool = False
-excitement_words = ['YOOOOOOOOOOOOOOOOOOO', 'nice', 'sick','poggers', 'owa owa', '+1 good meme', 'nice lmao', 'pog pog pog pog', 'W','mood', 'epic', 'epic sauce']
-disgusted_words = ['wtf', 'die', 'stinky', 'just fuck off already','no', 'gay','cringe','nope','why','I really hate you','sus','shut up','pain',]
 #Checks whether or not the given time is larger than the one the bot currently has, also checks if the difference is large enough to return a True statement
 def timeChecker(currentTime, originalTime, difference):
     #Checks if the day is the same or not
