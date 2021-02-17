@@ -102,11 +102,13 @@ class Commands(commands.Cog):
     async def test(self,ctx):
         # print(ctx)
         """Test command that only says 'Hello World!'"""
+        global cmd_in_process
         cmd_in_process = True
         await ctx.send('Hello world!')
     @commands.command()
     async def choose(self,ctx, *args):
         """Chooses an option out of those provided"""
+        global cmd_in_process
         cmd_in_process = True
         rand_num = randint(0, len(args) -1)
         await ctx.send('Hmmmmmmm, I choose {}'.format(args[rand_num]))
@@ -114,6 +116,7 @@ class Commands(commands.Cog):
     @commands.command()
     async def flip(self, ctx):
         """This command flips a coin"""
+        global cmd_in_process
         cmd_in_process = True
         await ctx.send('hold on let me get my lucky nickel')
         currentTimeInSeconds = datetime.utcnow().second
@@ -141,6 +144,7 @@ class Commands(commands.Cog):
             cmd_in_process = False
     @commands.command()
     async def father(self, ctx):
+        global cmd_in_process
         cmd_in_process = True
         jesusMember = await ctx.guild.fetch_member(213090776001937409)
         jesusAt = jesusMember.mention
@@ -148,6 +152,7 @@ class Commands(commands.Cog):
         cmd_in_process = False
     @commands.command()
     async def rps(self,ctx):
+        global cmd_in_process
         cmd_in_process = True
         agreement_words = ['yes', 'y', 'sure', 'mhmm', 'okay', 'yup', 'ofc', 'ok','okey dokey',]
         quit = ['nope', 'no', 'stop', 'quit', 'n', 'exit', 'leave', 'fuck off', 'die']
