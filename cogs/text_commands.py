@@ -22,6 +22,8 @@ emojis = [ '<:BrazilChan:751686996929544282>',
 buy_me = ['can you buy me this', 'buy me this', 'purchase this for me', 'will you buy me this']
 cmd_in_process = False
 fuckOffTimer = datetime.utcnow()
+seedgen = datetime.utcnow().year + datetime.utcnow().month + datetime.utcnow().day + datetime.utcnow().second + datetime.utcnow().minute + datetime.utcnow().microsecond
+seed(seedgen)
 class Commands(commands.Cog):
     def __init__(self, client):
         self.client = client
@@ -73,25 +75,25 @@ class Commands(commands.Cog):
                         if roles.id == fryMakerRoleID:
                             if counter % 12 == 0:
                                 await message.channel.send('Yoooooooooo ' + user + ', I hear your fries are a national delight and I am willing to pay top dollar for them. May I put up this formal request for said fries?')
-                elif message.author.id == carlosDiscordID:
-                    if counter % 13 == 0:
-                        await message.channel.send('Pop off king :crown:')
-                elif message.author.id == jayNatDiscordID:
-                    if counter % 20 == 0:
-                        await message.channel.send(user + 'haha cringe')
-                elif message.author.id == patrickDiscordID:
-                    if counter % 19 == 0:
-                        await message.channel.send(user + 'haha poo poo head')
-                elif message.author.id == alexDiscordID:
-                    if counter % 10 == 0:
-                        await message.channel.send(bonkEmoji)
-                if 'justin' in message.content.casefold():
-                    await message.channel.send('Yooooooo, I got a friend named justin that\'s cracked at fornite my gaiiiii :weary:')
-                elif message.content.casefold() in buy_me:
-                    await message.channel.send('Sure.')
-                elif momChecker(message.content.casefold()) is True:
-                    print('{0} is where I found mom'.format(message.content))
-                    await message.channel.send('Best not be talking about my mom you bitch')
+                    if message.author.id == carlosDiscordID:
+                        if counter % 13 == 0:
+                            await message.channel.send('Pop off king :crown:')
+                    elif message.author.id == jayNatDiscordID:
+                        if counter % 20 == 0:
+                            await message.channel.send(user + 'haha cringe')
+                    elif message.author.id == patrickDiscordID:
+                        if counter % 19 == 0:
+                            await message.channel.send(user + 'haha poo poo head')
+                    elif message.author.id == alexDiscordID:
+                        if counter % 10 == 0:
+                            await message.channel.send(bonkEmoji)
+                    if 'justin' in message.content.casefold():
+                        await message.channel.send('Yooooooo, I got a friend named justin that\'s cracked at fornite my gaiiiii :weary:')
+                    elif message.content.casefold() in buy_me:
+                        await message.channel.send('Sure.')
+                    elif momChecker(message.content.casefold()) is True:
+                        print('{0} is where I found mom'.format(message.content))
+                        await message.channel.send('Best not be talking about my mom you bitch')
         print('Messages sent: ', counter)
         print('Current random Int: ', agreementIndicator)
         print('Current random Int: ', disgustIndicator)

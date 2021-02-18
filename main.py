@@ -9,7 +9,6 @@ from random import seed
 from random import randint
 from datetime import datetime
 seedgen = datetime.utcnow().year + datetime.utcnow().month + datetime.utcnow().day + datetime.utcnow().second + datetime.utcnow().minute + datetime.utcnow().microsecond
-print(seedgen)
 seed(seedgen)
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
