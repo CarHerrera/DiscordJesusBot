@@ -21,7 +21,7 @@ class Help(commands.Cog):
         commands.add_field(name = '$father', value = '@\'s the person the bot is based off of', inline = False)
         commands.add_field(name = '$flip', value='flips a coin')
         commands.add_field(name = '$choose', value = 'Chooses an option out of those provided')
-        commads.add_field(name = '$rps', value = 'Plays rock paper scissors with me')
+        commands.add_field(name = '$rps', value = 'Plays rock paper scissors with me')
         await ctx.send(embed = commands)
     @help.command(name = 'trigger')
     async def triggerCommands(self, ctx):
