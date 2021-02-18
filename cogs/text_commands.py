@@ -35,8 +35,6 @@ class Commands(commands.Cog):
             return
         elif message.author.bot == True:
             return
-        elif message.channel.name.casefold() == 'politics':
-            return
         try:
             carlosDiscordID = 263054069885566977
             fryMakerRoleID = 783852650314596362
