@@ -63,6 +63,11 @@ class Commands(commands.Cog):
                             await message.channel.send('Thanks')
                         else:
                             await message.channel.send('wtf do you want')
+            elif 'buy' in message.content.casefold():
+                for buy in buy_me:
+                    if buy in message.content.casefold():
+                        await message.channel.send('Sure.')
+                        break
             if divider % agreementIndicator == 0:
                 excited = excitement_words[randint(0, len(excitement_words)-1)]
                 await message.channel.send('{0}'.format(excited))
@@ -89,8 +94,6 @@ class Commands(commands.Cog):
                             await message.channel.send(bonkEmoji)
                     if 'justin' in message.content.casefold():
                         await message.channel.send('Yooooooo, I got a friend named justin that\'s cracked at fornite my gaiiiii :weary:')
-                    elif message.content.casefold() in buy_me:
-                        await message.channel.send('Sure.')
                     elif momChecker(message.content.casefold()) is True:
                         print('{0} is where I found mom'.format(message.content))
                         await message.channel.send('Best not be talking about my mom you bitch')
