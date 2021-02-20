@@ -10,11 +10,9 @@ from random import randint
 from datetime import datetime
 seedgen = datetime.utcnow().year + datetime.utcnow().month + datetime.utcnow().day + datetime.utcnow().second + datetime.utcnow().minute + datetime.utcnow().microsecond
 seed(seedgen)
-load_dotenv()
+load_dotenv(dotenv_path = './.gitignore/.env')
 TOKEN = os.getenv('DISCORD_TOKEN')
 intents = discord.Intents.all()
-emoteTimer = datetime.utcnow()
-booingTimer = datetime.utcnow()
 client = commands.Bot(command_prefix = '$', intents = intents)
 #Checks whether or not the given time is larger than the one the bot currently has, also checks if the difference is large enough to return a True statement
 def timeChecker(currentTime, originalTime, difference):
@@ -66,10 +64,17 @@ async def load(ctx, extension):
 @client.command()
 async def unload(ctx, extension):
     client.unload_extension('cogs.{}'.format(extension))
+@client.command()
+async def reload(ctx, extension):
+    client.unload_extension('cogs.{}'.format(extension))
+    client.load_extension('cogs.{}'.format(extension))
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension('cogs.{}'.format(filename[:-3]))
-
+emoji_file = open('./settings/emojis.txt', 'w')
+for emoji in client.emojis:
+    emoji_file.write(emoji.name+"\n")
+emoji_file.close()
 @client.event
 async def on_ready():
     global guild
@@ -112,32 +117,6 @@ async def on_member_update(before, after):
     # print(after.activity)
 # payload has channel_id, emoji, event_type, guild_id, member, message_id, user_id
 # as attributes
-@client.event
-async def on_raw_reaction_add(payload):
-    if payload.member == client.user:
-        return
-    global emoteTimer,booingTimer
-    channel = guild.get_channel(payload.channel_id)
-    message = await channel.fetch_message(payload.message_id)
-    lastMessage = await channel.fetch_message(channel.last_message_id)
-    print('Reaction found at {0}, authour of message is {1}'.format(channel, message.author))
-    print('Most recent message sent by {0}'.format(lastMessage.author))
-    currentTime = datetime.utcnow()
-    messageTime = message.created_at
-    # print('Checks if message is older than 45: {0}'.format(timeChecker(currentTime, messageTime, 45)))
-    # print('Booing timer should fire: {0} '.format(timeChecker(currentTime,booingTimer, 10)))
-    # print('Emote timer should fire: {0}'.format(timeChecker(currentTime,emoteTimer,10)))
-    if lastMessage.author == client.user:
-        return
-    elif timeChecker(currentTime, messageTime, 20) is True:
-        return
-    else:
-        if payload.emoji.id == 797305732063297536 and timeChecker(datetime.utcnow(),booingTimer, 10) and message.author == client.user:
-            await channel.send('Why are you booing me? I\'m right')
-            booingTimer = datetime.utcnow()
-        elif timeChecker(datetime.utcnow(),emoteTimer, 40) is True:
-            await channel.send('Yoooooooooo, how do I emote')
-            emoteTimer = datetime.utcnow()
 @client.event
 async def on_guild_role_update(before, after):
   oldRole = before

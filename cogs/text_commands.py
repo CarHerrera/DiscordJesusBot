@@ -5,20 +5,18 @@ from random import seed
 from random import randint
 from main import timeChecker
 from main import momChecker
-counter = 5000
+counter_settings = open('./settings/counter.txt')
+for line in counter_settings:
+    if line.startswith('counter'):
+        line = line.rstrip()
+        equalIndex = line.find('=')
+        counter = int(line[equalIndex + 1:])
+counter_settings.close()
 excitement_words = ['YOOOOOOOOOOOOOOOOOOO', 'nice', 'sick','poggers', 'owa owa', '+1 good meme', 'nice lmao', 'pog pog pog pog', 'W','mood', 'epic', 'epic sauce', '<:amogus:810676422981058620>','<:DripMoment:800232915028017202>','<:PepeThink:762416066570747904>']
 disgusted_words = ['wtf', 'die', 'stinky', 'just fuck off already','no', 'gay','cringe','nope','why','I really hate you','sus','shut up','pain','<:Bonk:797305732063297536>','<:HolyPepe:797304202573119529>']
-emojis = [ '<:BrazilChan:751686996929544282>',
-'<:PepeThink:762416066570747904>',
-'<:PraiseOmnissiah:795396944042262569>',
-'<:HolyPepe:797304202573119529>',
-'<:Bonk:797305732063297536>',
-'<:Ballitch:797310799260549140>',
-'<:pepe:798021998957035550>',
-'<:PogChamp:798026632291680266>',
-'<:drip:799101216876920842>',
-'<:DripMoment:800232915028017202>',
-'<:amogus:810676422981058620>',]
+emoji_file = open('./settings/emoji.txt')
+emojis = emoji_file.readlines()
+emoji_file.close()
 buy_me = ['can you buy me this', 'buy me this', 'purchase this for me', 'will you buy me this']
 cmd_in_process = False
 fuckOffTimer = datetime.utcnow()
@@ -31,6 +29,9 @@ class Commands(commands.Cog):
     async def on_message(self, message):
         global counter, cmd_in_process
         counter +=1
+        write_file = open('./cogs/sample.txt', 'w')
+        write_file.write('counter=' + str(counter))
+        write_file.close()
         if message.author == self.client.user:
             return
         elif message.author.bot == True:
@@ -47,8 +48,8 @@ class Commands(commands.Cog):
         except:
             print('One of these people are not in the server')
             # print(timeChecker(datetime.utcnow(), fuckOffTimer, 10))
-        agreementIndicator = randint(1, 160)
-        disgustIndicator = randint(1, 140)
+        agreementIndicator = randint(1, 120)
+        disgustIndicator = randint(1, 110)
         divider = counter % 100
         self_mention = self.client.user.mention
         divider = counter % 100
@@ -77,7 +78,7 @@ class Commands(commands.Cog):
                         if counter % 13 == 0:
                             await message.channel.send('Pop off king :crown:')
                     elif message.author.id == jayNatDiscordID:
-                        if counter % 20 == 0:
+                        if counter % 15 == 0:
                             await message.channel.send(user + 'haha cringe')
                     elif message.author.id == patrickDiscordID:
                         if counter % 19 == 0:
