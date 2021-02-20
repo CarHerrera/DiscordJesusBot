@@ -71,10 +71,6 @@ async def reload(ctx, extension):
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension('cogs.{}'.format(filename[:-3]))
-emoji_file = open('./settings/emojis.txt', 'w')
-for emoji in client.emojis:
-    emoji_file.write(emoji.name+"\n")
-emoji_file.close()
 @client.event
 async def on_ready():
     global guild
@@ -82,6 +78,11 @@ async def on_ready():
     Stream = discord.Streaming(name = 'The overloads stream :pleading_face:',url = 'https://www.twitch.tv/ulm_nation')
     await client.change_presence(status = discord.Status.online, activity = Stream)
     print('We have logged in as {0.user}'.format(client))
+    emoji_file = open('./settings/emojis.txt', 'w')
+    for guild in client.guilds:
+        for emoji in guild.emojis:
+            emoji_file.write("<:" + emoji.name+ ":" + str(emoji.id) +  ">"+"\n")
+    emoji_file.close()
 @client.event
 async def on_disconnect():
     print('No longer connected to discord')

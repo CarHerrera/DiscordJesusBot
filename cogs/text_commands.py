@@ -5,6 +5,9 @@ from random import seed
 from random import randint
 from main import timeChecker
 from main import momChecker
+import os
+counter = 1
+print(os.getcwd())
 counter_settings = open('./settings/counter.txt')
 for line in counter_settings:
     if line.startswith('counter'):
@@ -14,9 +17,6 @@ for line in counter_settings:
 counter_settings.close()
 excitement_words = ['YOOOOOOOOOOOOOOOOOOO', 'nice', 'sick','poggers', 'owa owa', '+1 good meme', 'nice lmao', 'pog pog pog pog', 'W','mood', 'epic', 'epic sauce', '<:amogus:810676422981058620>','<:DripMoment:800232915028017202>','<:PepeThink:762416066570747904>']
 disgusted_words = ['wtf', 'die', 'stinky', 'just fuck off already','no', 'gay','cringe','nope','why','I really hate you','sus','shut up','pain','<:Bonk:797305732063297536>','<:HolyPepe:797304202573119529>']
-emoji_file = open('./settings/emoji.txt')
-emojis = emoji_file.readlines()
-emoji_file.close()
 buy_me = ['can you buy me this', 'buy me this', 'purchase this for me', 'will you buy me this']
 cmd_in_process = False
 fuckOffTimer = datetime.utcnow()
@@ -29,7 +29,7 @@ class Commands(commands.Cog):
     async def on_message(self, message):
         global counter, cmd_in_process
         counter +=1
-        write_file = open('./cogs/sample.txt', 'w')
+        write_file = open('./settings/counter.txt', 'w')
         write_file.write('counter=' + str(counter))
         write_file.close()
         if message.author == self.client.user:
