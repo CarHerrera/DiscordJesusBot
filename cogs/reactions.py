@@ -36,7 +36,7 @@ class Reactions(commands.Cog):
         elif timeChecker(currentTime, messageTime, 30) is True:
             return
         else:
-            if payload.emoji.id == 797305732063297536 and timeChecker(datetime.utcnow(),booingTimer, 10) and message.author == client.user:
+            if payload.emoji.id == 797305732063297536 and timeChecker(datetime.utcnow(),booingTimer, 10) and message.author == self.client.user:
                 await channel.send('Why are you booing me? I\'m right')
                 booingTimer = datetime.utcnow()
             elif timeChecker(datetime.utcnow(),emoteTimer, 30) is True:
