@@ -20,6 +20,7 @@ class Reactions(commands.Cog):
         if payload.member == self.client.user:
             return
         global emoteTimer,booingTimer
+        guild = self.client.get_guild(payload.guild_id)
         channel = guild.get_channel(payload.channel_id)
         message = await channel.fetch_message(payload.message_id)
         lastMessage = await channel.fetch_message(channel.last_message_id)
@@ -38,7 +39,7 @@ class Reactions(commands.Cog):
             if payload.emoji.id == 797305732063297536 and timeChecker(datetime.utcnow(),booingTimer, 10) and message.author == client.user:
                 await channel.send('Why are you booing me? I\'m right')
                 booingTimer = datetime.utcnow()
-            elif timeChecker(datetime.utcnow(),emoteTimer, 20) is True:
+            elif timeChecker(datetime.utcnow(),emoteTimer, 30) is True:
                 await channel.send('Yoooooooooo, how do I emote')
                 emoteTimer = datetime.utcnow()
 def setup(client):
