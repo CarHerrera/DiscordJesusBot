@@ -6,6 +6,12 @@ from random import randint
 from main import timeChecker
 from main import momChecker
 import os
+import requests
+import requests.auth
+import asyncpraw
+import json
+import betamax
+import pprint
 counter = 1
 print(os.getcwd())
 counter_settings = open('./settings/counter.txt')
@@ -15,6 +21,18 @@ for line in counter_settings:
         equalIndex = line.find('=')
         counter = int(line[equalIndex + 1:])
 counter_settings.close()
+file = open("./.gitignore/redditdeets.txt")
+for line in file:
+    line = line.rstrip()
+    equalIndex = line.find('=')
+    if line.startswith('user'):
+        username = line[equalIndex+1:]
+    elif line.startswith('pass'):
+        password = line[equalIndex+1:]
+    elif line.startswith('client_id'):
+        client_id = line[equalIndex+1:]
+    else:
+        client_secret = line[equalIndex+1:]
 excitement_words = ['YOOOOOOOOOOOOOOOOOOO', 'nice', 'sick','poggers', 'owa owa', '+1 good meme', 'nice lmao', 'pog pog pog pog', 'W','mood', 'epic', 'epic sauce', '<:amogus:810676422981058620>','<:DripMoment:800232915028017202>','<:PepeThink:762416066570747904>']
 disgusted_words = ['wtf', 'die', 'stinky', 'just fuck off already','no', 'gay','cringe','nope','why','I really hate you','sus','shut up','pain','<:Bonk:797305732063297536>','<:HolyPepe:797304202573119529>']
 buy_me = ['can you buy me this', 'buy me this', 'purchase this for me', 'will you buy me this']
@@ -22,6 +40,8 @@ cmd_in_process = False
 fuckOffTimer = datetime.utcnow()
 seedgen = datetime.utcnow().year + datetime.utcnow().month + datetime.utcnow().day + datetime.utcnow().second + datetime.utcnow().minute + datetime.utcnow().microsecond
 seed(seedgen)
+memes= []
+usedMemes =[]
 class Commands(commands.Cog):
     def __init__(self, client):
         self.client = client
@@ -215,7 +235,25 @@ class Commands(commands.Cog):
         await channel.send('Alright you can go away now')
         cmd_in_process = False
 
-
+    @commands.command()
+    async def meme(self,ctx):
+        global username, password, client_id, client_secret, memes
+        client_auth = requests.auth.HTTPBasicAuth(client_id, client_secret)
+        post_data = {"grant_type": "password", "username" : username, "password" : password}
+        headers = {"User-Agent": "ChangeMeClient/0.1 by YourUsername"}
+        response = requests.post("https://www.reddit.com/api/v1/access_token", auth=client_auth, data=post_data, headers=headers)
+        response = response.json()
+        headers = {"Authorization": "bearer " + response["access_token"], "User-Agent": "ChangeMeClient/0.1 by Unseenninja1"}
+        response = requests.get("https://oauth.reddit.com/api/v1/me", headers=headers)
+        reddit = asyncpraw.Reddit(client_id = client_id, client_secret = client_secret,
+        password = password, user_agent = "testscript by u/Unseenninja1", username = username, check_for_updates = 'True')
+        subreddit = await reddit.subreddit('dankmemes+okbuddyretard+HolUp+SuddenlyGay')
+        if len(memes) < 20:
+            async for submission in subreddit.hot():
+                memes.append(submission.url)
+        randnum = randint(0, len(memes)-1)
+        await ctx.send(memes[randnum])
+        memes.pop(randnum)
 
 
 def setup(client):
