@@ -22,6 +22,8 @@ class Help(commands.Cog):
         commands.add_field(name = '$flip', value='flips a coin')
         commands.add_field(name = '$choose', value = 'Chooses an option out of those provided')
         commands.add_field(name = '$rps', value = 'Plays rock paper scissors with me')
+        commands.add_field(name = '$uwuify', value = 'Uwuifys the message that was sent to it')
+        commands.add_field(name = '$meme', value = "Sends a random meme from these 4 subreddits, okbuddyretard, dankmemes, HolUp, SuddenlyGay")
         await ctx.send(embed = commands)
     @help.command(name = 'trigger')
     async def triggerCommands(self, ctx):
@@ -50,7 +52,6 @@ class Help(commands.Cog):
     @help.command(name = 'ip')
     async def workInProgress(self, ctx):
         progress = discord.Embed(title = 'Things that are currently a work in progress',inline = False)
-        progress.add_field(name = '$bonk', value = "Is meant to join the discord channel and play a bonking sound", inline = False)
         progress.add_field(name = 'Ball itch', value = "If the 'Repost is ball itch' image is sent in the server, the bot will send the image as well", inline = False)
         await ctx.send(embed = progress)
 def setup(client):
