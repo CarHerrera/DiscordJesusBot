@@ -13,7 +13,7 @@ class Reactions(commands.Cog):
         emoji_file = open('./settings/emojis.txt', 'w').close()
         emoji_file = open('./settings/emojis.txt', 'w')
         for emoji in after:
-            emoji_file.write(emoji.name + '\n')
+            emoji_file.write("<:" + emoji.name+ ":" + str(emoji.id) +  ">"+"\n")
         emoji_file.close()
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
