@@ -24,7 +24,11 @@ class Admin(commands.Cog):
         if len(ctx.message.mentions) == 1:
             member = ctx.message.mentions[0]
             name = member.name
-            nick = member.nick
+            nick = None
+            if member.nick is None:
+                nick = name
+            else:
+                nick = member.nick
             for index in range(len(stars["Members"])):
                 if name in stars["Members"][index]:
                     await ctx.send("{} has {} good noodle stars".format(nick, stars["Members"][index]["Stars"]))
@@ -61,7 +65,11 @@ class Admin(commands.Cog):
         if len(ctx.message.mentions) == 1:
             member = ctx.message.mentions[0]
             name = member.name
-            nick = member.nick
+            nick = None
+            if member.nick is None:
+                nick = name
+            else:
+                nick = member.nick
             for index in range(len(stars["Members"])):
                 if name in stars["Members"][index]:
                     new_stars = stars["Members"][index]["Stars"] + added_stars
@@ -110,7 +118,11 @@ class Admin(commands.Cog):
         if len(ctx.message.mentions) == 1:
             member = ctx.message.mentions[0]
             name = member.name
-            nick = member.nick
+            nick = None
+            if member.nick is None:
+                nick = name
+            else:
+                nick = member.nick
             for index in range(len(stars["Members"])):
                 if name in stars["Members"][index]:
                     new_stars = stars["Members"][index]["Stars"] - added_stars
