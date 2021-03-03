@@ -55,7 +55,7 @@ class Admin(commands.Cog):
             if "Mod" in roles.name or "Owner" in roles.name:
                 permission = True
         if permission is False:
-            ctx.send("User does not have the role to execute command")
+            await ctx.send("User does not have the role to execute command")
             return
         if len(ctx.message.mentions) == 1:
             member = ctx.message.mentions[0]
@@ -103,7 +103,7 @@ class Admin(commands.Cog):
             if "Mod" in roles.name or "Owner" in roles.name:
                 permission = True
         if permission is False:
-            ctx.send("User does not have the role to execute command")
+            await ctx.send("User does not have the role to execute command")
             return
         if len(ctx.message.mentions) == 1:
             member = ctx.message.mentions[0]
