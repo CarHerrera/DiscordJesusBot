@@ -23,13 +23,14 @@ class Admin(commands.Cog):
         #     return
         if len(ctx.message.mentions) == 1:
             member = ctx.message.mentions[0]
-            name = member.nick
+            name = member.name
+            nick = member.nick
             for index in range(len(stars["Members"])):
                 if name in stars["Members"][index]:
-                    await ctx.send("{} has {} good noodle stars".format(name, stars["Members"][index]["Stars"]))
+                    await ctx.send("{} has {} good noodle stars".format(nick, stars["Members"][index]["Stars"]))
                     return
                 elif author.id in stars["Members"][index]:
-                    await ctx.send("{} has {} good noodle stars".format(name, stars["Members"][index]["Stars"]))
+                    await ctx.send("{} has {} good noodle stars".format(nick, stars["Members"][index]["Stars"]))
                     return
             else:
                 await ctx.send("Could not find you on the good noodle star board.")
@@ -67,7 +68,7 @@ class Admin(commands.Cog):
                     file = open("./settings/good_noodle.txt", "w")
                     file.write(json.dumps(stars))
                     file.close()
-                    await ctx.send("{} now has {} good noodle stars".format(name, stars["Members"][index]["Stars"]))
+                    await ctx.send("{} now has {} good noodle stars".format(nick, stars["Members"][index]["Stars"]))
                     return
                 elif author.id in stars["Members"][index]:
                     new_stars = stars["Members"][index]["Stars"] + added_stars
@@ -75,7 +76,7 @@ class Admin(commands.Cog):
                     file = open("./settings/good_noodle.txt", "w")
                     file.write(json.dumps(stars))
                     file.close()
-                    await ctx.send("{} has {} now has good noodle stars".format(name, stars["Members"][index]["Stars"]))
+                    await ctx.send("{} has {} now has good noodle stars".format(nick, stars["Members"][index]["Stars"]))
                     return
             else:
                 await ctx.send("{} does not have the permissions to execute command".format(ctx.author.nick))
@@ -115,7 +116,7 @@ class Admin(commands.Cog):
                     file = open("./settings/good_noodle.txt", "w")
                     file.write(json.dumps(stars))
                     file.close()
-                    await ctx.send("{} now has {} good noodle stars".format(name, stars["Members"][index]["Stars"]))
+                    await ctx.send("{} now has {} good noodle stars".format(nick, stars["Members"][index]["Stars"]))
                     return
                 elif author.id in stars["Members"][index]:
                     new_stars = stars["Members"][index]["Stars"] - added_stars
@@ -123,7 +124,7 @@ class Admin(commands.Cog):
                     file = open("./settings/good_noodle.txt", "w")
                     file.write(json.dumps(stars))
                     file.close()
-                    await ctx.send("{} has {} now has good noodle stars".format(name, stars["Members"][index]["Stars"]))
+                    await ctx.send("{} has {} now has good noodle stars".format(nick, stars["Members"][index]["Stars"]))
                     return
             else:
                 await ctx.send("Could not find you on the good noodle star board.")
