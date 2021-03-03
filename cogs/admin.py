@@ -60,7 +60,8 @@ class Admin(commands.Cog):
             return
         if len(ctx.message.mentions) == 1:
             member = ctx.message.mentions[0]
-            name = member.nick
+            name = member.name
+            nick = member.nick
             for index in range(len(stars["Members"])):
                 if name in stars["Members"][index]:
                     new_stars = stars["Members"][index]["Stars"] + added_stars
@@ -108,7 +109,8 @@ class Admin(commands.Cog):
             return
         if len(ctx.message.mentions) == 1:
             member = ctx.message.mentions[0]
-            name = member.nick
+            name = member.name
+            nick = member.nick
             for index in range(len(stars["Members"])):
                 if name in stars["Members"][index]:
                     new_stars = stars["Members"][index]["Stars"] - added_stars
