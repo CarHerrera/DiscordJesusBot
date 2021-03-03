@@ -23,7 +23,7 @@ class Admin(commands.Cog):
         #     return
         if len(ctx.message.mentions) == 1:
             member = ctx.message.mentions[0]
-            name = member.name
+            name = member.nick
             for index in range(len(stars["Members"])):
                 if name in stars["Members"][index]:
                     await ctx.send("{} has {} good noodle stars".format(name, stars["Members"][index]["Stars"]))
@@ -59,7 +59,7 @@ class Admin(commands.Cog):
             return
         if len(ctx.message.mentions) == 1:
             member = ctx.message.mentions[0]
-            name = member.name
+            name = member.nick
             for index in range(len(stars["Members"])):
                 if name in stars["Members"][index]:
                     new_stars = stars["Members"][index]["Stars"] + added_stars
@@ -78,7 +78,7 @@ class Admin(commands.Cog):
                     await ctx.send("{} has {} now has good noodle stars".format(name, stars["Members"][index]["Stars"]))
                     return
             else:
-                await ctx.send("Could not find you on the good noodle star board.")
+                await ctx.send("{} does not have the permissions to execute command".format(ctx.author.nick))
                 return
         elif len(ctx.message.mentions) > 1:
             await ctx.send("Too many members in the command")
@@ -103,11 +103,11 @@ class Admin(commands.Cog):
             if "Mod" in roles.name or "Owner" in roles.name:
                 permission = True
         if permission is False:
-            await ctx.send("User does not have the role to execute command")
+            await ctx.send("{} does not have the permissions to execute command".format(ctx.author.nick))
             return
         if len(ctx.message.mentions) == 1:
             member = ctx.message.mentions[0]
-            name = member.name
+            name = member.nick
             for index in range(len(stars["Members"])):
                 if name in stars["Members"][index]:
                     new_stars = stars["Members"][index]["Stars"] - added_stars
