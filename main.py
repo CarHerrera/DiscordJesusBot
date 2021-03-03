@@ -1,5 +1,6 @@
 # bot.py
 #Author is Carlos Herrera
+# Todo good noodle star?
 import discord
 import os
 from discord.ext import commands
