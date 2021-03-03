@@ -13,7 +13,6 @@ class Admin(commands.Cog):
     async def stars(self, ctx):
         global stars
         author = ctx.author
-        name = author.name
         permission = False
         print(author)
         # for roles in author.roles:
@@ -24,6 +23,7 @@ class Admin(commands.Cog):
         #     return
         if len(ctx.message.mentions) == 1:
             member = ctx.message.mentions[0]
+            name = member.name
             for index in range(len(stars["Members"])):
                 if name in stars["Members"][index]:
                     await ctx.send("{} has {} good noodle stars".format(name, stars["Members"][index]["Stars"]))
