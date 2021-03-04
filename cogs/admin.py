@@ -1,4 +1,4 @@
-import discord
+-import discord
 import json
 from discord.ext import commands
 file = open("./settings/good_noodle.txt")
@@ -49,6 +49,7 @@ class Admin(commands.Cog):
         global stars
         author = ctx.author
         added_stars = 1
+        permission
         if len(args) == 2:
             try:
                 added_stars = int(args[1])
@@ -99,8 +100,7 @@ class Admin(commands.Cog):
         global stars
         author = ctx.author
         added_stars = 1
-        print(type(-1))
-        print(args)
+        permission
         if len(args) == 2:
             try:
                 added_stars = int(args[1])
