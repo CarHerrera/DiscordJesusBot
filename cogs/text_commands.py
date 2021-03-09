@@ -13,26 +13,20 @@ import json
 import betamax
 import pprint
 import uwuify
-counter = 1
-counter_settings = open('./settings/counter.txt')
-for line in counter_settings:
-    if line.startswith('counter'):
-        line = line.rstrip()
-        equalIndex = line.find('=')
-        counter = int(line[equalIndex + 1:])
-counter_settings.close()
+import re
+settings = open('./settings/sample.txt')
+data = settings.read().split("=")
+counter = int(data[1])
+settings.close()
 file = open("./private/redditdeets.txt")
-for line in file:
-    line = line.rstrip()
-    equalIndex = line.find('=')
-    if line.startswith('user'):
-        username = line[equalIndex+1:]
-    elif line.startswith('pass'):
-        password = line[equalIndex+1:]
-    elif line.startswith('client_id'):
-        client_id = line[equalIndex+1:]
-    else:
-        client_secret = line[equalIndex+1:]
+data = file.read()
+file.close()
+words = re.split('[=\n]', data)
+username = words[1]
+password = words[3]
+client_id = words[5]
+client_secret = words[7]
+client_auth = requests.auth.HTTPBasicAuth(client_id, client_secret)
 client_auth = requests.auth.HTTPBasicAuth(client_id, client_secret)
 post_data = {"grant_type": "password", "username" : username, "password" : password}
 headers = {"User-Agent": "ChangeMeClient/0.1 by YourUsername"}

@@ -9,6 +9,7 @@ from keep_alive import keep_alive
 from random import seed
 from random import randint
 from datetime import datetime
+import json
 seedgen = datetime.utcnow().year + datetime.utcnow().month + datetime.utcnow().day + datetime.utcnow().second + datetime.utcnow().minute + datetime.utcnow().microsecond
 seed(seedgen)
 load_dotenv(dotenv_path = './private/.env')
@@ -84,6 +85,16 @@ async def on_ready():
         for emoji in guild.emojis:
             emoji_file.write("<:" + emoji.name+ ":" + str(emoji.id) +  ">"+"\n")
     emoji_file.close()
+    # members_dict = {"Guilds": []}
+    # count = 0
+    # async for guild in client.fetch_guilds():
+    #     members_dict["Guilds"].append({guild.name:guild.id, "Members": []})
+    #     async for members in guild.fetch_members():
+    #         members_dict["Guilds"][count]["Members"].append({members.name:members.id, "Stars": 0})
+    #     count +=1
+    # file = open("./settings/good_noodle.txt", "w")
+    # file.write(json.dumps(members_dict, indent = 4))
+    # file.close()
 @client.event
 async def on_disconnect():
     print('No longer connected to discord')
