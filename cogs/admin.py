@@ -73,7 +73,7 @@ class Admin(commands.Cog):
             self.remove_stars(msg.author, rand_num)
             return
         elif count > 8:
-            if msg.channel.id == 776308635369472030 and len(msg.channel.attachments) > 0 or len(msg.channel.embed) > 0:
+            if msg.channel.id == 776308635369472030 and len(msg.channel.attachments) > 0 or len(msg.channel.embeds) > 0:
                 await msg.channel.send(f"{msg.author.mention} gets {rand_num} good noodle star(s) for great memes")
                 self.remove_stars(msg.author, rand_num)
             else:
