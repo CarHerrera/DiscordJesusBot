@@ -61,7 +61,7 @@ class Admin(commands.Cog):
         rand_num = randint(1, 30)
         channel = msg.channel
         count = 1
-        async for message in channel.history(limit = 5):
+        async for message in channel.history(limit = 10):
             if message.author == msg.author:
                 count+= 1
         if any(word in msg.content.casefold() for word in bad_words):
@@ -76,11 +76,16 @@ class Admin(commands.Cog):
             await msg.channel.send(f"{msg.author.mention} loses {rand_num} good noodle star(s) for being aggressive")
             self.remove_stars(msg.author, rand_num)
             return
-        elif count > 3:
-            await msg.channel.send(f"{msg.author.mention} loses {rand_num} good noodle star(s) being a dickhead")
-            self.remove_stars(msg.author, rand_num)
+        elif count > 8:
+            if msg.channel.id == 776308635369472030:
+                await msg.channel.send(f"{msg.author.mention} gets {rand_num} good noodle star(s) for great memes")
+                self.remove_stars(msg.author, rand_num)
+            else:
+                await msg.channel.send(f"{msg.author.mention} loses {rand_num} good noodle star(s) being a dickhead")
+                self.remove_stars(msg.author, rand_num)
             return
         elif message.channel.id == 751679824942202960 and len(message.attachments) > 0:
+
             await msg.channel.send(f"{msg.author.mention} loses {rand_num} good noodle star(s) for whatever that thing is.")
             self.remove_stars(msg.author, rand_num)
             return
