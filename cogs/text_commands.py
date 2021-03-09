@@ -14,7 +14,7 @@ import betamax
 import pprint
 import uwuify
 import re
-settings = open('./settings/sample.txt')
+settings = open('./settings/counter.txt')
 data = settings.read().split("=")
 counter = int(data[1])
 settings.close()
