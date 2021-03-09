@@ -61,6 +61,10 @@ class Admin(commands.Cog):
         rand_num = randint(1, 30)
         channel = msg.channel
         count = 1
+        try:
+            difference = timeChecker(datetime.now(), timer[msg.author.name], 5)
+        except:
+            difference = None
         async for message in channel.history(limit = 10):
             if message.author == msg.author:
                 count+= 1
@@ -68,24 +72,27 @@ class Admin(commands.Cog):
             await msg.channel.send(f"{msg.author.mention} loses {rand_num} good noodle star(s)")
             self.remove_stars(msg.author, rand_num)
             return
-        elif len(msg.content) > 150:
-            await msg.channel.send(f"{msg.author.mention} loses {rand_num} good noodle star(s) for sending a message thats too long to read.")
-            self.remove_stars(msg.author, rand_num)
-            return
-        elif msg.content.isupper():
-            await msg.channel.send(f"{msg.author.mention} loses {rand_num} good noodle star(s) for being aggressive")
-            self.remove_stars(msg.author, rand_num)
-            return
         elif count > 8:
-            if msg.channel.id == 776308635369472030:
+            if msg.channel.id == 776308635369472030 and len(msg.channel.attachments) > 0 or len(msg.channel.embed) > 0:
                 await msg.channel.send(f"{msg.author.mention} gets {rand_num} good noodle star(s) for great memes")
                 self.remove_stars(msg.author, rand_num)
             else:
                 await msg.channel.send(f"{msg.author.mention} loses {rand_num} good noodle star(s) being a dickhead")
                 self.remove_stars(msg.author, rand_num)
+        elif len(msg.content) > 150:
+            if msg.channel.id == 776308635369472030 and len(msg.embed) > 0 and difference is not None:
+                if difference:
+                    await msg.channel.send(f"{msg.author.mention} gets {rand_num} good noodle star(s) for great memes")
+                    self.remove_stars(msg.author, rand_num)
+                    timer.update({msg.author.name: datetime.now()})
+            else:
+                await msg.channel.send(f"{msg.author.mention} loses {rand_num} good noodle star(s) being a dickhead")
+                self.remove_stars(msg.author, rand_num)
+        elif msg.content.isupper():
+            await msg.channel.send(f"{msg.author.mention} loses {rand_num} good noodle star(s) for being aggressive")
+            self.remove_stars(msg.author, rand_num)
             return
         elif message.channel.id == 751679824942202960 and len(message.attachments) > 0:
-
             await msg.channel.send(f"{msg.author.mention} loses {rand_num} good noodle star(s) for whatever that thing is.")
             self.remove_stars(msg.author, rand_num)
             return
