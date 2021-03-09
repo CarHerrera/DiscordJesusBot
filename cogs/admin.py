@@ -61,7 +61,7 @@ class Admin(commands.Cog):
         rand_num = randint(1, 30)
         channel = msg.channel
         count = 1
-        async for message in channel.history(limit = 10):
+        async for message in channel.history(limit = 5):
             if message.author == msg.author:
                 count+= 1
         if any(word in msg.content.casefold() for word in bad_words):
@@ -76,7 +76,7 @@ class Admin(commands.Cog):
             await msg.channel.send(f"{msg.author.mention} loses {rand_num} good noodle star(s) for being aggressive")
             self.remove_stars(msg.author, rand_num)
             return
-        elif count > 5:
+        elif count > 3:
             await msg.channel.send(f"{msg.author.mention} loses {rand_num} good noodle star(s) being a dickhead")
             self.remove_stars(msg.author, rand_num)
             return
@@ -174,7 +174,26 @@ class Admin(commands.Cog):
                     return
             else:
                 await ctx.send(f'Something went wrong, could not find you on the good noodle board, maybe you are not on the board?')
-    #
+    @commands.command()
+    async def reset(self,ctx):
+        if ctx.author.id == 263054069885566977:
+            global stars
+            member= ctx.mssage.mentions[0]
+            name = member.name
+            guild = member.guild
+            print(guild)
+            working_stars = None
+            GuildIndex = None
+            for index in range(len(stars["Guilds"])):
+                if guild.name in stars["Guilds"][index]:
+                    GuildIndex = index
+            for index in range(len(stars["Guilds"][GuildIndex]["Members"])):
+                if name in stars["Guilds"][GuildIndex]["Members"][index]:
+                    current_stars=stars["Guilds"][GuildIndex]["Members"][index]["Stars"]
+                    stars["Guilds"][GuildIndex]["Members"][index]["Stars"] = 0
+            file = open("./settings/good_noodle.txt", "w")
+            file.write(json.dumps(stars, indent = 4))
+            file.close()
     # @commands.command()
     # async def add(self,ctx, *args):
     #     global stars
