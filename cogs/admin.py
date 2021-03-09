@@ -73,20 +73,17 @@ class Admin(commands.Cog):
             self.remove_stars(msg.author, rand_num)
             return
         elif count > 8:
-            if msg.channel.id == 776308635369472030 and len(msg.channel.attachments) > 0 or len(msg.channel.embeds) > 0:
+            if msg.channel.id == 776308635369472030 and len(msg.attachments) > 0 or len(msg.embeds) > 0:
                 await msg.channel.send(f"{msg.author.mention} gets {rand_num} good noodle star(s) for great memes")
                 self.remove_stars(msg.author, rand_num)
             else:
                 await msg.channel.send(f"{msg.author.mention} loses {rand_num} good noodle star(s) being a dickhead")
                 self.remove_stars(msg.author, rand_num)
         elif len(msg.content) > 150:
-            if msg.channel.id == 776308635369472030 and len(msg.embed) > 0 and difference is not None:
-                if difference:
-                    await msg.channel.send(f"{msg.author.mention} gets {rand_num} good noodle star(s) for great memes")
-                    self.remove_stars(msg.author, rand_num)
-                    timer.update({msg.author.name: datetime.now()})
+            if len(msg.embeds) > 0 or len(msg.attachments) > 0:
+                return
             else:
-                await msg.channel.send(f"{msg.author.mention} loses {rand_num} good noodle star(s) being a dickhead")
+                await msg.channel.send(f"{msg.author.mention} loses {rand_num} good noodle star(s) sending a long ass message")
                 self.remove_stars(msg.author, rand_num)
         elif msg.content.isupper():
             await msg.channel.send(f"{msg.author.mention} loses {rand_num} good noodle star(s) for being aggressive")
