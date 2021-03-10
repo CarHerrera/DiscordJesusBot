@@ -137,8 +137,16 @@ class Admin(commands.Cog):
             if message.author == msg.author:
                 count+= 1
         if any(word in msg.content.casefold() for word in bad_words):
-            await msg.channel.send(self.remove_stars(msg.author, msg.channel, randint(1, 30)))
-            rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
+            if msg.author.name in timer.keys():
+                dif = timeChecker(datetime.now(), timer[msg.author.name], 10)
+                if dif is True:
+                    await msg.channel.send(self.remove_stars(msg.author, msg.channel, randint(1, 30)))
+                    rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
+                    timer.update({msg.author.name:datetime.now()})
+            else:
+                await msg.channel.send(self.remove_stars(msg.author, msg.channel, randint(1, 30)))
+                rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
+                timer.update({msg.author.name:datetime.now()})
             return
         elif count > 8:
             if msg.channel.id == 776308635369472030 and len(msg.attachments) > 0 or len(msg.embeds) > 0:
@@ -169,8 +177,15 @@ class Admin(commands.Cog):
             await msg.channel.send(self.add_stars(msg.author, msg.channel, rand_num))
             rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
         elif any(word in msg.content.casefold() for word in good_words):
-            await msg.channel.send(self.add_stars(msg.author, msg.channel, randint(5,15)))
-            rules_followed["Guilds"][index]["Members"][msg.author.name] += 1
+            if msg.author.name in timer.keys():
+                dif = timeChecker(datetime.now(), timer[msg.author.name], 10)
+                if dif is True:
+                    await msg.channel.send(self.add_stars(msg.author, msg.channel, randint(5,15)))
+                    rules_followed["Guilds"][index]["Members"][msg.author.name] += 1
+                    timer.update({msg.author.name:datetime.now()})
+            else:
+                await msg.channel.send(self.add_stars(msg.author, msg.channel, randint(5,15)))
+                timer.update({msg.author.name:datetime.now()})
         else:
             rules_followed["Guilds"][index]["Members"][msg.author.name] += 1
 
@@ -264,7 +279,7 @@ class Admin(commands.Cog):
         """This command is meant to reset a users stars"""
         if ctx.author.id == 263054069885566977:
             global stars
-            member= ctx.mssage.mentions[0]
+            member= ctx.message.mentions[0]
             name = member.name
             guild = member.guild
             print(guild)
