@@ -292,7 +292,7 @@ class Admin(commands.Cog):
             for index in range(len(stars["Guilds"][GuildIndex]["Members"])):
                 if name in stars["Guilds"][GuildIndex]["Members"][index]:
                     if "Weekly_Stars" not in stars["Guilds"][GuildIndex]["Members"][index].keys():
-                        stars["Guilds"][GuildIndex]["Members"][index].update({"Weekly_Stars":0}
+                        stars["Guilds"][GuildIndex]["Members"][index].update({"Weekly_Stars":0})
                     else:
                         stars["Guilds"][GuildIndex]["Members"][index]["Weekly_Stars"] = 0
                     stars["Guilds"][GuildIndex]["Members"][index]["Stars"] +=
