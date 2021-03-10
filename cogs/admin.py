@@ -24,7 +24,7 @@ class Admin(commands.Cog):
     @tasks.loop(hours = 24)
     async def reset_weekly_stars(self):
         global last_reset
-        day = last_reset.strftime("%A")
+        day = datetime.now().strftime("%A")
         if day == "Monday":
             last_reset = datetime.now()
             idx = 0
