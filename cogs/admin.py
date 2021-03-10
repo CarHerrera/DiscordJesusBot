@@ -3,7 +3,7 @@ import json
 from random import randint
 from discord.ext import commands, tasks
 from datetime import datetime
-from bot import timeChecker
+from main import timeChecker
 file = open("./settings/good_noodle.txt")
 data = file.read()
 stars = json.loads(data)
