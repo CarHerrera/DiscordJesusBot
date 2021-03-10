@@ -89,6 +89,7 @@ class Admin(commands.Cog):
                 GuildIndex = index
         for index in range(len(stars["Guilds"][GuildIndex]["Members"])):
             if name in stars["Guilds"][GuildIndex]["Members"][index]:
+                # Checks if weekly stars are in the members dictionary. If not means either hasn't messaged enough to remove and add stars.
                 if "Weekly_Stars" not in stars["Guilds"][GuildIndex]["Members"][index].keys():
                     stars["Guilds"][GuildIndex]["Members"][index].update({"Weekly_Stars":0})
                     stars["Guilds"][GuildIndex]["Members"][index]["Weekly_Stars"] += rand_num
@@ -290,6 +291,11 @@ class Admin(commands.Cog):
                     GuildIndex = index
             for index in range(len(stars["Guilds"][GuildIndex]["Members"])):
                 if name in stars["Guilds"][GuildIndex]["Members"][index]:
+                    if "Weekly_Stars" not in stars["Guilds"][GuildIndex]["Members"][index].keys():
+                        stars["Guilds"][GuildIndex]["Members"][index].update({"Weekly_Stars":0}
+                    else:
+                        stars["Guilds"][GuildIndex]["Members"][index]["Weekly_Stars"] = 0
+                    stars["Guilds"][GuildIndex]["Members"][index]["Stars"] +=
                     current_stars=stars["Guilds"][GuildIndex]["Members"][index]["Stars"]
                     stars["Guilds"][GuildIndex]["Members"][index]["Stars"] = 0
             file = open("./settings/good_noodle.txt", "w")
