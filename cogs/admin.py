@@ -295,8 +295,6 @@ class Admin(commands.Cog):
                         stars["Guilds"][GuildIndex]["Members"][index].update({"Weekly_Stars":0})
                     else:
                         stars["Guilds"][GuildIndex]["Members"][index]["Weekly_Stars"] = 0
-                    stars["Guilds"][GuildIndex]["Members"][index]["Stars"] +=
-                    current_stars=stars["Guilds"][GuildIndex]["Members"][index]["Stars"]
                     stars["Guilds"][GuildIndex]["Members"][index]["Stars"] = 0
             file = open("./settings/good_noodle.txt", "w")
             file.write(json.dumps(stars, indent = 4))
