@@ -14,7 +14,7 @@ class Sounds(commands.Cog):
     def __init__(self,client):
         self.client = client
         self.checkMidnight.start()
-    @tasks.loop(minutes = 1)
+    @tasks.loop(hours = 1)
     async def checkMidnight(self):
         channel = self.client.get_channel(814346019806117898)
         if datetime.datetime.now().hour == 0:
