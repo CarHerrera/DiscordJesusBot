@@ -3,7 +3,7 @@ import json
 from random import randint
 from discord.ext import commands, tasks
 from datetime import datetime
-from main import timeChecker
+from bot import timeChecker
 file = open("./settings/good_noodle.txt")
 data = file.read()
 stars = json.loads(data)
@@ -132,7 +132,7 @@ class Admin(commands.Cog):
             difference = timeChecker(datetime.now(), timer[msg.author.name], 5)
         except:
             difference = None
-        rules_followed = rules_followed["Guilds"][index]["Members"][msg.author.name]
+        rules_followed_counter = rules_followed["Guilds"][index]["Members"][msg.author.name]
         async for message in channel.history(limit = 10):
             if message.author == msg.author:
                 count+= 1
@@ -165,7 +165,7 @@ class Admin(commands.Cog):
         elif "bot" in msg.content.casefold() and "poppin" in msg.content.casefold():
             await msg.channel.send(self.add_stars(msg.author, msg.author.channel, rand_num))
             rules_followed["Guilds"][index]["Members"][msg.author.name] += 1
-        elif rules_followed > 10:
+        elif rules_followed_counter > 10:
             await msg.channel.send(self.add_stars(msg.author, msg.channel, rand_num))
             rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
         elif any(word in msg.content.casefold() for word in good_words):
