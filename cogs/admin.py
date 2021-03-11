@@ -135,7 +135,9 @@ class Admin(commands.Cog):
             difference = None
         rules_followed_counter = rules_followed["Guilds"][index]["Members"][msg.author.name]
         async for message in channel.history(limit = 10):
-            if message.author == msg.author:
+            if len(message.attachments) > 0 or len(message.embeds) > 0:
+                pass
+            elif message.author == msg.author:
                 count+= 1
         if any(word in msg.content.casefold() for word in bad_words):
             if msg.author.name in timer.keys():
@@ -148,6 +150,10 @@ class Admin(commands.Cog):
                 await msg.channel.send(self.remove_stars(msg.author, msg.channel, randint(1, 30)))
                 rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
                 timer.update({msg.author.name:datetime.now()})
+            return
+        elif message.channel.id == 751679824942202960 and len(message.attachments) > 0:
+            await msg.channel.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for whatever that thing is"))
+            rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
             return
         elif count > 8:
             if msg.channel.id == 776308635369472030 and len(msg.attachments) > 0 or len(msg.embeds) > 0:
@@ -165,10 +171,6 @@ class Admin(commands.Cog):
                 rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
         elif msg.content.isupper():
             await msg.channel.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for being aggressive"))
-            rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
-            return
-        elif message.channel.id == 751679824942202960 and len(message.attachments) > 0:
-            await msg.channel.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for whatever that thing is"))
             rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
             return
         elif "bot" in msg.content.casefold() and "poppin" in msg.content.casefold():
@@ -198,10 +200,13 @@ class Admin(commands.Cog):
         rand_num = randint(1, 30)
         if payload.member == self.client.user:
             return
+        # Bonk Emoji
         if payload.emoji.id == 797305732063297536:
+            # Checks if person who reacted has reacted before
             if payload.member.name in timer.keys():
                 dif = timeChecker(datetime.now(), timer[payload.member.name], 5)
                 if dif is True:
+                    # Removes stars from the person who sent the message
                     await msg.channel.send(self.remove_stars(msg.author, channel, rand_num))
                     timer.update({payload.member.name:datetime.now()})
                     return
@@ -213,13 +218,13 @@ class Admin(commands.Cog):
             if payload.member.name in timer.keys():
                 dif = timeChecker(datetime.now(), timer[payload.member.name], 5)
                 if dif:
-                    await channel.send(self.add_stars(msg.author, msg, rand_num, reason = " for emoting"))
+                    await channel.send(self.add_stars(payload.member, msg, rand_num, reason = " for emoting"))
                     timer.update({payload.member.name:datetime.now()})
                     print(timer)
                     return
             else:
 
-                await channel.send(self.add_stars(msg.author, channel, rand_num, reason = " for emoting"))
+                await channel.send(self.add_stars(payload.member, channel, rand_num, reason = " for emoting"))
                 timer.update({payload.member.name:datetime.now()})
                 print(timer)
                 return
