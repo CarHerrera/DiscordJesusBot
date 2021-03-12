@@ -159,7 +159,7 @@ class Admin(commands.Cog):
                 rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
                 timer.update({msg.author.name:datetime.now()})
             return
-        elif msg.channel.id == 751679824942202960 and len(msg.attachments) > 0 or len(msg.embeds):
+        elif msg.channel.id == 751679824942202960 and (len(msg.attachments) > 0 or len(msg.embeds)):
             await msg.channel.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for whatever that thing is"))
             rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
             return
@@ -270,8 +270,6 @@ class Admin(commands.Cog):
                     if "Weekly_Stars" in working_stars["Members"][_].keys():
                         await ctx.send(f'{member_name} also got {working_stars["Members"][_]["Weekly_Stars"]} this week')
                     return
-
-
             else:
                 await ctx.send(f"Could not find {name} on the good noodle board")
                 return
