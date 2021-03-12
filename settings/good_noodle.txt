@@ -87,8 +87,8 @@
                 },
                 {
                     "Iceberg Lettuce": 412385688332402689,
-                    "Stars": -34,
-                    "Weekly_Stars": 29
+                    "Stars": 54,
+                    "Weekly_Stars": 117
                 },
                 {
                     "McBloom": 410931567360475136,
@@ -124,12 +124,13 @@
                 },
                 {
                     "usedstarfighter": 352550834103386133,
-                    "Stars": 28,
-                    "Weekly_Stars": 63
+                    "Stars": 90,
+                    "Weekly_Stars": 125
                 },
                 {
                     "Rylan": 335789721496059904,
-                    "Stars": 0
+                    "Stars": -4,
+                    "Weekly_Stars": -4
                 },
                 {
                     "Yuskea": 330208800080527371,
@@ -149,8 +150,8 @@
                 },
                 {
                     "monpress": 310149886228299776,
-                    "Stars": 0,
-                    "Weekly_Stars": 0
+                    "Stars": 7,
+                    "Weekly_Stars": 7
                 },
                 {
                     "Malcon": 291021692430712835,
@@ -166,8 +167,8 @@
                 },
                 {
                     "Arsenate": 263054069885566977,
-                    "Stars": 54,
-                    "Weekly_Stars": 62
+                    "Stars": 92,
+                    "Weekly_Stars": 100
                 },
                 {
                     "Elliptic": 261007745375928321,
@@ -175,8 +176,8 @@
                 },
                 {
                     "spagh3tt0": 251770515432275968,
-                    "Stars": -144,
-                    "Weekly_Stars": -144
+                    "Stars": -157,
+                    "Weekly_Stars": -157
                 },
                 {
                     "ALin": 251228021715894282,

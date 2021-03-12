@@ -216,7 +216,7 @@ class Admin(commands.Cog):
                     timer.update({payload.member.name:datetime.now()})
                     return
             else:
-                channel, rand_num, reason = f" for being bonked by {payload.member.name}"))
+                await msg.channel.send(self.remove_stars(msg.author, channel, rand_num, reason = f" for being bonked by {payload.member.name}"))
                 # Adds person to the timer dictionary
                 timer.update({payload.member.name:datetime.now()})
                 return
