@@ -87,8 +87,8 @@
                 },
                 {
                     "Iceberg Lettuce": 412385688332402689,
-                    "Stars": 54,
-                    "Weekly_Stars": 117
+                    "Stars": 70,
+                    "Weekly_Stars": 133
                 },
                 {
                     "McBloom": 410931567360475136,
@@ -124,8 +124,8 @@
                 },
                 {
                     "usedstarfighter": 352550834103386133,
-                    "Stars": 90,
-                    "Weekly_Stars": 125
+                    "Stars": 94,
+                    "Weekly_Stars": 129
                 },
                 {
                     "Rylan": 335789721496059904,
@@ -176,8 +176,8 @@
                 },
                 {
                     "spagh3tt0": 251770515432275968,
-                    "Stars": -157,
-                    "Weekly_Stars": -157
+                    "Stars": -172,
+                    "Weekly_Stars": -172
                 },
                 {
                     "ALin": 251228021715894282,
@@ -197,7 +197,8 @@
                 },
                 {
                     "Bandit": 213090776001937409,
-                    "Stars": 0
+                    "Stars": -38,
+                    "Weekly_Stars": -38
                 },
                 {
                     "Darren Chui": 201159875366092800,
@@ -225,7 +226,8 @@
                 },
                 {
                     "Rampant Potato": 113820933013110788,
-                    "Stars": 0
+                    "Stars": 3,
+                    "Weekly_Stars": 3
                 },
                 {
                     "droddyy": 92780550913269760,

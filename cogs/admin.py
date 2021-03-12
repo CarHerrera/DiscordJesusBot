@@ -142,7 +142,7 @@ class Admin(commands.Cog):
         except:
             difference = None
         rules_followed_counter = rules_followed["Guilds"][index]["Members"][msg.author.name]
-        async for message in channel.history(limit = 10):
+        async for message in msg.channel.history(limit = 10):
             if len(message.attachments) > 0 or len(message.embeds) > 0:
                 pass
             elif message.author == msg.author:
