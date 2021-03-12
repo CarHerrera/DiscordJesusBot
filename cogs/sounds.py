@@ -4,11 +4,10 @@ from discord.ext import tasks, commands
 import datetime
 from random import seed, randint
 file = open("./settings/names.txt")
-names = []
+names = file.read().split()
+ffmpegExec = '/usr/bin/ffmpeg'
+file.close()
 seed(1)
-for line in file:
-    line = line.rstrip()
-    names.append(line)
 vc = None
 class Sounds(commands.Cog):
     def __init__(self,client):

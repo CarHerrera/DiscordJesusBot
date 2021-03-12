@@ -124,7 +124,6 @@ class Admin(commands.Cog):
         elif msg.author.bot == True:
             return
         rand_num = randint(1, 30)
-        channel = msg.channel
         count = 0
         index = 0
         guild = msg.guild
