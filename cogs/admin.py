@@ -160,7 +160,7 @@ class Admin(commands.Cog):
                 rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
                 timer.update({msg.author.name:datetime.now()})
             return
-        elif message.channel.id == 751679824942202960 and len(message.attachments) > 0 or len(message.embeds) > 0:
+        elif msg.channel.id == 751679824942202960 and len(msg.attachments) > 0 or len(msg.embeds):
             await msg.channel.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for whatever that thing is"))
             rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
             return
