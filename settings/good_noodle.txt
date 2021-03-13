@@ -74,8 +74,8 @@
                 },
                 {
                     "Big Jello": 476466028990169122,
-                    "Stars": -1,
-                    "Weekly_Stars": 14
+                    "Stars": 29,
+                    "Weekly_Stars": 44
                 },
                 {
                     "Xander": 464833739403427840,
@@ -92,7 +92,8 @@
                 },
                 {
                     "McBloom": 410931567360475136,
-                    "Stars": 0
+                    "Stars": 27,
+                    "Weekly_Stars": 27
                 },
                 {
                     "PatchBot": 402528814548254720,
@@ -124,8 +125,8 @@
                 },
                 {
                     "usedstarfighter": 352550834103386133,
-                    "Stars": 94,
-                    "Weekly_Stars": 129
+                    "Stars": 106,
+                    "Weekly_Stars": 141
                 },
                 {
                     "Rylan": 335789721496059904,
@@ -150,8 +151,8 @@
                 },
                 {
                     "monpress": 310149886228299776,
-                    "Stars": 7,
-                    "Weekly_Stars": 7
+                    "Stars": 43,
+                    "Weekly_Stars": 43
                 },
                 {
                     "Malcon": 291021692430712835,
@@ -167,8 +168,8 @@
                 },
                 {
                     "Arsenate": 263054069885566977,
-                    "Stars": 92,
-                    "Weekly_Stars": 100
+                    "Stars": 75,
+                    "Weekly_Stars": 83
                 },
                 {
                     "Elliptic": 261007745375928321,
@@ -176,8 +177,8 @@
                 },
                 {
                     "spagh3tt0": 251770515432275968,
-                    "Stars": -172,
-                    "Weekly_Stars": -172
+                    "Stars": -193,
+                    "Weekly_Stars": -193
                 },
                 {
                     "ALin": 251228021715894282,
