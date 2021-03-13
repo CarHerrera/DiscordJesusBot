@@ -3,7 +3,8 @@ import json
 from random import randint
 from discord.ext import commands, tasks
 from datetime import datetime
-from main import timeChecker
+from bot import timeChecker
+import pandas, csv
 file = open("./settings/good_noodle.txt")
 data = file.read()
 stars = json.loads(data)
@@ -17,6 +18,14 @@ file.close()
 timer = {}
 last_reset = datetime.now()
 rules_followed = {"Guilds":[]}
+# cities = pandas.DataFrame(columns=['Guild', 'Member', 'Reason', 'Added', 'Stars', 'Day', 'MSGID', 'Channel'])
+# cities.to_csv('./private/good_noodle_data.csv', index = False)
+try:
+    stars_data = open("./private/good_noodle_data.csv", "a")
+except FileNotFoundError:
+    df = pandas.DataFrame(columns=['Guild', 'Member', 'Reason', 'Added', 'Stars', 'Day', 'MSGID', 'Channel'])
+    df.to_csv('./private/good_noodle_data.csv', index = False)
+    stars_data = open("./private/good_noodle_data.csv", "a")
 class Admin(commands.Cog):
     def __init__(self,client):
         self.client = client
@@ -67,7 +76,6 @@ class Admin(commands.Cog):
         member = user
         name = member.name
         guild = member.guild
-        print(guild)
         working_stars = None
         GuildIndex = None
         for index in range(len(stars["Guilds"])):
@@ -116,6 +124,27 @@ class Admin(commands.Cog):
             for guild in self.client.guilds:
                 rules_followed["Guilds"].append({guild.name:guild.id, "Members":{}})
             return
+    def data_gatherer(self, msg, reason, added, stars):
+        global stars_data
+        if stars_data.closed:
+            stars_data = open("./private/good_noodle_data.csv", "a")
+        if type(msg) == discord.Message:
+            guild = msg.guild.name
+            name = msg.author.name
+            now = datetime.now()
+            time = now.strftime("%m/%d/%y %H:%M")
+            string = guild + "," + name + "," + reason + "," + str(added) + "," + str(stars) + "," + time + "," + str(msg.id) + "," + msg.channel.name
+            stars_data.write(string + "\n")
+            stars_data.close()
+        elif type(msg) == discord.Member:
+            member = msg
+            guild = member.guild.name
+            name = member.name
+            now = datetime.now()
+            time = now.strftime("%m/%d/%y %H:%M")
+            string = guild + "," + name + "," + reason + "," + str(added) + "," + str(stars) + "," + time + "," + "None" + "," + "None"
+            stars_data.write(string + "\n")
+            stars_data.close()
     @commands.Cog.listener('on_message')
     async def star_message(self, msg):
         global rules_followed
@@ -154,35 +183,42 @@ class Admin(commands.Cog):
                     await msg.channel.send(self.remove_stars(msg.author, msg.channel, randint(1, 30)))
                     rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
                     timer.update({msg.author.name:datetime.now()})
+                    self.data_gatherer(msg, "Bad words", False, -rand_num)
             else:
                 await msg.channel.send(self.remove_stars(msg.author, msg.channel, randint(1, 30)))
                 rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
                 timer.update({msg.author.name:datetime.now()})
+                self.data_gatherer(msg, "Bad words", False, -rand_num)
             return
         elif msg.channel.id == 751679824942202960 and (len(msg.attachments) > 0 or len(msg.embeds)):
             await msg.channel.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for whatever that thing is"))
             rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
+            self.data_gatherer(msg, "Cursed Image", False, -rand_num)
             return
         elif count > 8:
             await msg.channel.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for being a dick head"))
             rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
+            self.data_gatherer(msg, "Spammed Messages", False, -rand_num)
         elif len(msg.content) > 250:
             if len(msg.embeds) > 0 or len(msg.attachments) > 0:
-                rules_followed["Guilds"][index]["Members"][msg.author.name] += 1
                 return
             else:
                 await msg.channel.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for sending way to long of a message"))
                 rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
+                self.data_gatherer(msg, "Long message", False, -rand_num)
         elif msg.content.isupper():
             await msg.channel.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for being aggressive"))
             rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
+            self.data_gatherer(msg, "Message in caps", False, -rand_num)
             return
         elif "bot" in msg.content.casefold() and "poppin" in msg.content.casefold():
             await msg.channel.send(self.add_stars(msg.author, msg.author.channel, rand_num))
             rules_followed["Guilds"][index]["Members"][msg.author.name] += 1
+            self.data_gatherer(msg, "Complimented Bot", True, rand_num)
         elif rules_followed_counter > 20:
             await msg.channel.send(self.add_stars(msg.author, msg.channel, rand_num))
             rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
+            self.data_gatherer(msg, "Didn't trigger an if statement", True, rand_num)
         elif any(word in msg.content.casefold() for word in good_words):
             if msg.author.name in timer.keys():
                 dif = timeChecker(datetime.now(), timer[msg.author.name], 10)
@@ -190,9 +226,11 @@ class Admin(commands.Cog):
                     await msg.channel.send(self.add_stars(msg.author, msg.channel, randint(5,15)))
                     rules_followed["Guilds"][index]["Members"][msg.author.name] += 1
                     timer.update({msg.author.name:datetime.now()})
+                    self.data_gatherer(msg, "Said nice word", True, rand_num)
             else:
                 await msg.channel.send(self.add_stars(msg.author, msg.channel, randint(5,15)))
                 timer.update({msg.author.name:datetime.now()})
+                self.data_gatherer(msg, "Said nice word", True, rand_num)
         else:
             rules_followed["Guilds"][index]["Members"][msg.author.name] += 1
 
@@ -213,11 +251,13 @@ class Admin(commands.Cog):
                     # Removes stars from the person who sent the message
                     await msg.channel.send(self.remove_stars(msg.author, channel, rand_num, reason = f" for being bonked by {payload.member.name}"))
                     timer.update({payload.member.name:datetime.now()})
+                    self.data_gatherer(msg, "got bonked", False, -rand_num)
                     return
             else:
                 await msg.channel.send(self.remove_stars(msg.author, channel, rand_num, reason = f" for being bonked by {payload.member.name}"))
                 # Adds person to the timer dictionary
                 timer.update({payload.member.name:datetime.now()})
+                self.data_gatherer(msg, "got bonked", False, -rand_num)
                 return
         # Any other emoji
         else:
@@ -226,13 +266,12 @@ class Admin(commands.Cog):
                 if dif:
                     await channel.send(self.add_stars(payload.member, msg, rand_num, reason = " for emoting"))
                     timer.update({payload.member.name:datetime.now()})
-                    print(timer)
+                    self.data_gatherer(msg, "Reacted to a message", True, rand_num)
                     return
             else:
-
                 await channel.send(self.add_stars(payload.member, channel, rand_num, reason = " for emoting"))
                 timer.update({payload.member.name:datetime.now()})
-                print(timer)
+                self.data_gatherer(msg, "Reacted to a message", True, rand_num)
                 return
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
@@ -246,7 +285,8 @@ class Admin(commands.Cog):
             counter = 1
             async for thing in audit_logs:
                 if thing.action == discord.AuditLogAction.member_update:
-                    await msg.channel.send(self.remove_stars(thing.user, channel,rand_num, reason = f" for muting/deafing {member.name}"))
+                    await channel.send(self.remove_stars(thing.user, channel,rand_num, reason = f" for muting/deafing {member.name}"))
+                    self.data_gatherer(thing.user, "Deafened a person", False, -rand_num)
                     return
 
 
