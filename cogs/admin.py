@@ -266,12 +266,12 @@ class Admin(commands.Cog):
                 if dif:
                     await channel.send(self.add_stars(payload.member, msg, rand_num, reason = " for emoting"))
                     timer.update({payload.member.name:datetime.now()})
-                    self.data_gatherer(msg, "Reacted to a message", True, rand_num)
+                    self.data_gatherer(payload.member, "Reacted to a message", True, rand_num)
                     return
             else:
                 await channel.send(self.add_stars(payload.member, channel, rand_num, reason = " for emoting"))
                 timer.update({payload.member.name:datetime.now()})
-                self.data_gatherer(msg, "Reacted to a message", True, rand_num)
+                self.data_gatherer(payload.member, "Reacted to a message", True, rand_num)
                 return
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
