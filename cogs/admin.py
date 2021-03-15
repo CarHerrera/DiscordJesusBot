@@ -190,11 +190,6 @@ class Admin(commands.Cog):
                 timer.update({msg.author.name:datetime.now()})
                 self.data_gatherer(msg, "Bad words", False, -rand_num)
             return
-        elif msg.channel.id == 751679824942202960 and len(msg.attachments) > 0 or len(msg.embeds) > 0:
-            await msg.channel.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for whatever that thing is"))
-            rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
-            self.data_gatherer(msg, "Cursed Image", False, -rand_num)
-            return
         elif count > 8:
             await msg.channel.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for being a dick head"))
             rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
@@ -215,7 +210,7 @@ class Admin(commands.Cog):
             await msg.channel.send(self.add_stars(msg.author, msg.author.channel, rand_num))
             rules_followed["Guilds"][index]["Members"][msg.author.name] += 1
             self.data_gatherer(msg, "Complimented Bot", True, rand_num)
-        elif rules_followed_counter > 20:
+        elif rules_followed_counter > 30:
             await msg.channel.send(self.add_stars(msg.author, msg.channel, rand_num))
             rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
             self.data_gatherer(msg, "Didn't trigger an if statement", True, rand_num)
