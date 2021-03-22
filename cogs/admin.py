@@ -43,7 +43,6 @@ class Admin(commands.Cog):
             for guild in self.client.guilds:
                 if guild.name in stars["Guilds"][idx]:
                     for index in range(len(stars["Guilds"][idx]["Members"])):
-                        channel = guild.system_channel
                         # Checks if the member has any weekly stars
                         if "Weekly_Stars" in stars["Guilds"][idx]["Members"][index].keys():
                             # Adds the number of weekly stars to a list
@@ -53,6 +52,7 @@ class Admin(commands.Cog):
                             stars["Guilds"][idx]["Members"][index]["Weekly_Stars"] = 0
                 idx += 1
                 if len(number_of_stars) > 0:
+                    channel = discord.utils.get(guild.text_channels, name='bot-spam')
                     highest_stars = max(number_of_stars)
                     highest = number_of_stars.index(highest_stars)
                     user = members_list[highest]
@@ -234,6 +234,8 @@ class Admin(commands.Cog):
         global stars
         channel = await self.client.fetch_channel(payload.channel_id)
         msg = await channel.fetch_message(payload.message_id)
+        guild = self.client.get_guild(751678259657441339)
+        spam = discord.utils.get(guild.text_channels, name='bot-spam')
         rand_num = randint(1, 30)
         if payload.member == self.client.user:
             return
@@ -244,33 +246,34 @@ class Admin(commands.Cog):
                 dif = timeChecker(datetime.now(), timer[payload.member.name], 5)
                 if dif is True:
                     # Removes stars from the person who sent the message
-                    await msg.channel.send(self.remove_stars(msg.author, channel, rand_num, reason = f" for being bonked by {payload.member.name}"))
+                    await spam.send(self.remove_stars(msg.author, channel, rand_num, reason = f" for being bonked by {payload.member.name}"))
                     timer.update({payload.member.name:datetime.now()})
-                    self.data_gatherer(msg, "got bonked", False, -rand_num)
+                    self.data_gatherer(msg, "got bonked", False, -randint(10,60))
                     return
             else:
-                await msg.channel.send(self.remove_stars(msg.author, channel, rand_num, reason = f" for being bonked by {payload.member.name}"))
+                await spam.send(self.remove_stars(msg.author, channel, rand_num, reason = f" for being bonked by {payload.member.name}"))
                 # Adds person to the timer dictionary
                 timer.update({payload.member.name:datetime.now()})
-                self.data_gatherer(msg, "got bonked", False, -rand_num)
+                self.data_gatherer(msg, "got bonked", False, -randint(10,60))
                 return
         # Any other emoji
         else:
             if payload.member.name in timer.keys():
-                dif = timeChecker(datetime.now(), timer[payload.member.name], 5)
+                dif = timeChecker(datetime.now(), timer[payload.member.name], 20)
                 if dif:
-                    await channel.send(self.add_stars(payload.member, msg, rand_num, reason = " for emoting"))
+                    await spam.send(self.add_stars(payload.member, msg, rand_num, reason = " for emoting"))
                     timer.update({payload.member.name:datetime.now()})
-                    self.data_gatherer(payload.member, "Reacted to a message", True, rand_num)
+                    self.data_gatherer(payload.member, "Reacted to a message", True, randint(1,10))
                     return
             else:
-                await channel.send(self.add_stars(payload.member, channel, rand_num, reason = " for emoting"))
+                await spam.send(self.add_stars(payload.member, channel, rand_num, reason = " for emoting"))
                 timer.update({payload.member.name:datetime.now()})
-                self.data_gatherer(payload.member, "Reacted to a message", True, rand_num)
+                self.data_gatherer(payload.member, "Reacted to a message", True, randint(1,10))
                 return
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         guild = self.client.get_guild(member.guild.id)
+        spam = discord.utils.get(guild.text_channels, name='bot-spam')
         channel = guild.system_channel
         # print(after.deaf)
         # print(after.mute)
@@ -280,7 +283,7 @@ class Admin(commands.Cog):
             counter = 1
             async for thing in audit_logs:
                 if thing.action == discord.AuditLogAction.member_update:
-                    await channel.send(self.remove_stars(thing.user, channel,rand_num, reason = f" for muting/deafing {member.name}"))
+                    await spam.send(self.remove_stars(thing.user, channel,rand_num, reason = f" for muting/deafing {member.name}"))
                     self.data_gatherer(thing.user, "Deafened a person", False, -rand_num)
                     return
 
