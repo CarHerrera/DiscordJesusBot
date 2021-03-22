@@ -32,41 +32,41 @@ class Admin(commands.Cog):
         self.reset_weekly_stars.start()
     @tasks.loop(hours = 24)
     # This loops every 24 hours and resets the servers weekly stars and send a message with who had the highest and lowest stars
-    async def reset_weekly_stars(self):
-        global last_reset
-        day = datetime.now().strftime("%A")
-        if day == "Monday":
-            last_reset = datetime.now()
-            idx = 0
-            number_of_stars = []
-            members_list = []
-            for guild in self.client.guilds:
-                if guild.name in stars["Guilds"][idx]:
-                    for index in range(len(stars["Guilds"][idx]["Members"])):
-                        # Checks if the member has any weekly stars
-                        if "Weekly_Stars" in stars["Guilds"][idx]["Members"][index].keys():
-                            # Adds the number of weekly stars to a list
-                            number_of_stars.append(stars["Guilds"][idx]["Members"][index]["Weekly_Stars"])
-                            # Adds members to a seperate list
-                            members_list.append(list(iter(stars["Guilds"][idx]["Members"][index].keys()))[0])
-                            stars["Guilds"][idx]["Members"][index]["Weekly_Stars"] = 0
-                idx += 1
-                if len(number_of_stars) > 0:
-                    channel = discord.utils.get(guild.text_channels, name='bot-spam')
-                    highest_stars = max(number_of_stars)
-                    highest = number_of_stars.index(highest_stars)
-                    user = members_list[highest]
-                    member = discord.utils.find(lambda m: m.name == user, guild.members)
-                    lowest_stars = min(number_of_stars)
-                    user_low = members_list[number_of_stars.index(lowest_stars)]
-                    lowest_member = discord.utils.find(lambda m: m.name == user_low, guild.members)
-                    await channel.send(f"{member.mention} got this weeks highest stars at {highest_stars} and unsurprisngly {lowest_member.mention} got the lowest amount of stars at {lowest_stars}")
-                    lowest_stars = min(number_of_stars)
-                    member = members_list[number_of_stars.index(highest_stars)]
-            file = open("./settings/good_noodle.txt", "w")
-            file.write(json.dumps(stars, indent = 4))
-            file.close()
-            print("Stars have been reset")
+    # async def reset_weekly_stars(self):
+    #     global last_reset
+    #     day = datetime.now().strftime("%A")
+    #     if day == "Monday":
+    #         last_reset = datetime.now()
+    #         idx = 0
+    #         number_of_stars = []
+    #         members_list = []
+    #         for guild in self.client.guilds:
+    #             if guild.name in stars["Guilds"][idx]:
+    #                 for index in range(len(stars["Guilds"][idx]["Members"])):
+    #                     # Checks if the member has any weekly stars
+    #                     if "Weekly_Stars" in stars["Guilds"][idx]["Members"][index].keys():
+    #                         # Adds the number of weekly stars to a list
+    #                         number_of_stars.append(stars["Guilds"][idx]["Members"][index]["Weekly_Stars"])
+    #                         # Adds members to a seperate list
+    #                         members_list.append(list(iter(stars["Guilds"][idx]["Members"][index].keys()))[0])
+    #                         stars["Guilds"][idx]["Members"][index]["Weekly_Stars"] = 0
+    #             idx += 1
+    #             if len(number_of_stars) > 0:
+    #                 channel = discord.utils.get(guild.text_channels, name='bot-spam')
+    #                 highest_stars = max(number_of_stars)
+    #                 highest = number_of_stars.index(highest_stars)
+    #                 user = members_list[highest]
+    #                 member = discord.utils.find(lambda m: m.name == user, guild.members)
+    #                 lowest_stars = min(number_of_stars)
+    #                 user_low = members_list[number_of_stars.index(lowest_stars)]
+    #                 lowest_member = discord.utils.find(lambda m: m.name == user_low, guild.members)
+    #                 await channel.send(f"{member.mention} got this weeks highest stars at {highest_stars} and unsurprisngly {lowest_member.mention} got the lowest amount of stars at {lowest_stars}")
+    #                 lowest_stars = min(number_of_stars)
+    #                 member = members_list[number_of_stars.index(highest_stars)]
+    #         file = open("./settings/good_noodle.txt", "w")
+    #         file.write(json.dumps(stars, indent = 4))
+    #         file.close()
+    #         print("Stars have been reset")
     @reset_weekly_stars.before_loop
     async def before_check(self):
         await self.client.wait_until_ready()
@@ -210,20 +210,21 @@ class Admin(commands.Cog):
             await msg.channel.send(self.add_stars(msg.author, msg.author.channel, rand_num))
             rules_followed["Guilds"][index]["Members"][msg.author.name] += 1
             self.data_gatherer(msg, "Complimented Bot", True, rand_num)
-        elif rules_followed_counter > 30:
-            await msg.channel.send(self.add_stars(msg.author, msg.channel, rand_num))
+        elif rules_followed_counter > 20:
+            star_rules = randint(30, 100)
+            await msg.channel.send(self.add_stars(msg.author, msg.channel, star_rules))
             rules_followed["Guilds"][index]["Members"][msg.author.name] = 0
             self.data_gatherer(msg, "Didn't trigger an if statement", True, rand_num)
         elif any(word in msg.content.casefold() for word in good_words):
             if msg.author.name in timer.keys():
                 dif = timeChecker(datetime.now(), timer[msg.author.name], 10)
                 if dif is True:
-                    await msg.channel.send(self.add_stars(msg.author, msg.channel, randint(5,15)))
+                    await msg.channel.send(self.add_stars(msg.author, msg.channel, randint(5,10)))
                     rules_followed["Guilds"][index]["Members"][msg.author.name] += 1
                     timer.update({msg.author.name:datetime.now()})
                     self.data_gatherer(msg, "Said nice word", True, rand_num)
             else:
-                await msg.channel.send(self.add_stars(msg.author, msg.channel, randint(5,15)))
+                await msg.channel.send(self.add_stars(msg.author, msg.channel, randint(5,10)))
                 timer.update({msg.author.name:datetime.now()})
                 self.data_gatherer(msg, "Said nice word", True, rand_num)
         else:
@@ -236,7 +237,8 @@ class Admin(commands.Cog):
         msg = await channel.fetch_message(payload.message_id)
         guild = self.client.get_guild(751678259657441339)
         spam = discord.utils.get(guild.text_channels, name='bot-spam')
-        rand_num = randint(1, 30)
+        bonked = randint(20, 80)
+        emote = randint(1,10)
         if payload.member == self.client.user:
             return
         # Bonk Emoji
@@ -246,9 +248,9 @@ class Admin(commands.Cog):
                 dif = timeChecker(datetime.now(), timer[payload.member.name], 5)
                 if dif is True:
                     # Removes stars from the person who sent the message
-                    await spam.send(self.remove_stars(msg.author, channel, rand_num, reason = f" for being bonked by {payload.member.name}"))
+                    await spam.send(self.remove_stars(msg.author, channel, bonked, reason = f" for being bonked by {payload.member.name}"))
                     timer.update({payload.member.name:datetime.now()})
-                    self.data_gatherer(msg, "got bonked", False, -randint(10,60))
+                    self.data_gatherer(msg, "got bonked", False, -bonked)
                     return
             else:
                 await spam.send(self.remove_stars(msg.author, channel, rand_num, reason = f" for being bonked by {payload.member.name}"))
@@ -261,14 +263,14 @@ class Admin(commands.Cog):
             if payload.member.name in timer.keys():
                 dif = timeChecker(datetime.now(), timer[payload.member.name], 20)
                 if dif:
-                    await spam.send(self.add_stars(payload.member, msg, rand_num, reason = " for emoting"))
+                    await spam.send(self.add_stars(payload.member, msg, emote, reason = " for emoting"))
                     timer.update({payload.member.name:datetime.now()})
-                    self.data_gatherer(payload.member, "Reacted to a message", True, randint(1,10))
+                    self.data_gatherer(payload.member, "Reacted to a message", True, emote)
                     return
             else:
-                await spam.send(self.add_stars(payload.member, channel, rand_num, reason = " for emoting"))
+                await spam.send(self.add_stars(payload.member, msg, emote, reason = " for emoting"))
                 timer.update({payload.member.name:datetime.now()})
-                self.data_gatherer(payload.member, "Reacted to a message", True, randint(1,10))
+                self.data_gatherer(payload.member, "Reacted to a message", True, emote)
                 return
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
@@ -277,7 +279,7 @@ class Admin(commands.Cog):
         channel = guild.system_channel
         # print(after.deaf)
         # print(after.mute)
-        rand_num = randint(1, 15)
+        rand_num = randint(20, 50)
         audit_logs = guild.audit_logs(limit = 5)
         if after.deaf or after.mute:
             counter = 1
