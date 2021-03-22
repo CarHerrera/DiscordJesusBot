@@ -29,8 +29,8 @@ except FileNotFoundError:
 class Admin(commands.Cog):
     def __init__(self,client):
         self.client = client
-        self.reset_weekly_stars.start()
-    @tasks.loop(hours = 24)
+        # self.reset_weekly_stars.start()
+    # @tasks.loop(hours = 24)
     # This loops every 24 hours and resets the servers weekly stars and send a message with who had the highest and lowest stars
     # async def reset_weekly_stars(self):
     #     global last_reset
@@ -67,9 +67,9 @@ class Admin(commands.Cog):
     #         file.write(json.dumps(stars, indent = 4))
     #         file.close()
     #         print("Stars have been reset")
-    @reset_weekly_stars.before_loop
-    async def before_check(self):
-        await self.client.wait_until_ready()
+    # @reset_weekly_stars.before_loop
+    # async def before_check(self):
+    #     await self.client.wait_until_ready()
     def remove_stars(self, user, channel, rand_num, reason = ""):
         """This function removes stars"""
         global stars
