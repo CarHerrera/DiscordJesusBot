@@ -173,16 +173,15 @@ class Stars(commands.Cog):
             elif message.author == msg.author:
                 count+= 1
         if any(word in msg.content.casefold() for word in bad_words):
-            self.remove_stars(msg.author,msg.channel,randint(1, 30))
             if msg.author.name in timer.keys():
                 dif = timeChecker(datetime.now(), timer[msg.author.name], 10)
                 if dif is True:
-                    # await msg.channel.send(self.remove_stars(msg.author, msg.channel, randint(1, 30)))
+                    await msg.channel.send(self.remove_stars(msg.author, msg.channel, randint(1, 30)))
                     rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
                     timer.update({msg.author.name:datetime.now()})
                     self.data_gatherer(msg, "Bad words", False, -rand_num)
             else:
-                # await msg.channel.send(self.remove_stars(msg.author, msg.channel, randint(1, 30)))
+                await msg.channel.send(self.remove_stars(msg.author, msg.channel, randint(1, 30)))
                 rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
                 timer.update({msg.author.name:datetime.now()})
                 self.data_gatherer(msg, "Bad words", False, -rand_num)
@@ -233,7 +232,7 @@ class Stars(commands.Cog):
         msg = await channel.fetch_message(payload.message_id)
         guild = self.client.get_guild(751678259657441339)
         spam = discord.utils.get(guild.text_channels, name='bot-spam')
-        bonked = randint(20, 80)
+        bonked = randint(20, 70)
         emote = randint(1,15)
         if payload.member == self.client.user:
             return
@@ -249,10 +248,10 @@ class Stars(commands.Cog):
                     self.data_gatherer(msg, "got bonked", False, -bonked)
                     return
             else:
-                await spam.send(self.remove_stars(msg.author, channel, rand_num, reason = f" for being bonked by {payload.member.name}"))
+                await spam.send(self.remove_stars(msg.author, channel, bonked, reason = f" for being bonked by {payload.member.name}"))
                 # Adds person to the timer dictionary
                 timer.update({payload.member.name:datetime.now()})
-                self.data_gatherer(msg, "got bonked", False, -randint(10,60))
+                self.data_gatherer(msg, "got bonked", False, -bonked)
                 return
         # Any other emoji
         else:
