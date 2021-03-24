@@ -18,6 +18,7 @@ file.close()
 timer = {}
 last_reset = datetime.now()
 rules_followed = {"Guilds":[]}
+test_stars = None
 # cities = pandas.DataFrame(columns=['Guild', 'Member', 'Reason', 'Added', 'Stars', 'Day', 'MSGID', 'Channel'])
 # cities.to_csv('./private/good_noodle_data.csv', index = False)
 try:
@@ -26,50 +27,67 @@ except FileNotFoundError:
     df = pandas.DataFrame(columns=['Guild', 'Member', 'Reason', 'Added', 'Stars', 'Day', 'MSGID', 'Channel'])
     df.to_csv('./private/good_noodle_data.csv', index = False)
     stars_data = open("./private/good_noodle_data.csv", "a")
-class Admin(commands.Cog):
+class Stars(commands.Cog):
     def __init__(self,client):
         self.client = client
-        # self.reset_weekly_stars.start()
-    # @tasks.loop(hours = 24)
+        self.reset_weekly_stars.start()
+    @tasks.loop(hours = 24)
     # This loops every 24 hours and resets the servers weekly stars and send a message with who had the highest and lowest stars
-    # async def reset_weekly_stars(self):
-    #     global last_reset
-    #     day = datetime.now().strftime("%A")
-    #     if day == "Monday":
-    #         last_reset = datetime.now()
-    #         idx = 0
-    #         number_of_stars = []
-    #         members_list = []
-    #         for guild in self.client.guilds:
-    #             if guild.name in stars["Guilds"][idx]:
-    #                 for index in range(len(stars["Guilds"][idx]["Members"])):
-    #                     # Checks if the member has any weekly stars
-    #                     if "Weekly_Stars" in stars["Guilds"][idx]["Members"][index].keys():
-    #                         # Adds the number of weekly stars to a list
-    #                         number_of_stars.append(stars["Guilds"][idx]["Members"][index]["Weekly_Stars"])
-    #                         # Adds members to a seperate list
-    #                         members_list.append(list(iter(stars["Guilds"][idx]["Members"][index].keys()))[0])
-    #                         stars["Guilds"][idx]["Members"][index]["Weekly_Stars"] = 0
-    #             idx += 1
-    #             if len(number_of_stars) > 0:
-    #                 channel = discord.utils.get(guild.text_channels, name='bot-spam')
-    #                 highest_stars = max(number_of_stars)
-    #                 highest = number_of_stars.index(highest_stars)
-    #                 user = members_list[highest]
-    #                 member = discord.utils.find(lambda m: m.name == user, guild.members)
-    #                 lowest_stars = min(number_of_stars)
-    #                 user_low = members_list[number_of_stars.index(lowest_stars)]
-    #                 lowest_member = discord.utils.find(lambda m: m.name == user_low, guild.members)
-    #                 await channel.send(f"{member.mention} got this weeks highest stars at {highest_stars} and unsurprisngly {lowest_member.mention} got the lowest amount of stars at {lowest_stars}")
-    #                 lowest_stars = min(number_of_stars)
-    #                 member = members_list[number_of_stars.index(highest_stars)]
-    #         file = open("./settings/good_noodle.txt", "w")
-    #         file.write(json.dumps(stars, indent = 4))
-    #         file.close()
-    #         print("Stars have been reset")
-    # @reset_weekly_stars.before_loop
-    # async def before_check(self):
-    #     await self.client.wait_until_ready()
+    async def reset_weekly_stars(self):
+        global last_reset
+        day = datetime.now().strftime("%A")
+        if day == "Monday":
+            last_reset = datetime.now()
+            idx = 0
+            number_of_stars = []
+            members_list = []
+            for guild in self.client.guilds:
+                if guild.name in stars["Guilds"][idx]:
+                    for index in range(len(stars["Guilds"][idx]["Members"])):
+                        # Checks if the member has any weekly stars
+                        if "Weekly_Stars" in stars["Guilds"][idx]["Members"][index].keys():
+                            # Adds the number of weekly stars to a list
+                            number_of_stars.append(stars["Guilds"][idx]["Members"][index]["Weekly_Stars"])
+                            # Adds members to a seperate list
+                            members_list.append(list(iter(stars["Guilds"][idx]["Members"][index].keys()))[0])
+                            stars["Guilds"][idx]["Members"][index]["Weekly_Stars"] = 0
+                idx += 1
+                if len(number_of_stars) > 0:
+                    channel = discord.utils.get(guild.text_channels, name='bot-spam')
+                    highest_stars = max(number_of_stars)
+                    highest = number_of_stars.index(highest_stars)
+                    user = members_list[highest]
+                    member = discord.utils.find(lambda m: m.name == user, guild.members)
+                    lowest_stars = min(number_of_stars)
+                    user_low = members_list[number_of_stars.index(lowest_stars)]
+                    lowest_member = discord.utils.find(lambda m: m.name == user_low, guild.members)
+                    await channel.send(f"{member.mention} got this weeks highest stars at {highest_stars} and unsurprisngly {lowest_member.mention} got the lowest amount of stars at {lowest_stars}")
+            file = open("./settings/good_noodle.txt", "w")
+            file.write(json.dumps(stars, indent = 4))
+            file.close()
+            print("Stars have been reset")
+    @reset_weekly_stars.before_loop
+    async def before_check(self):
+        await self.client.wait_until_ready()
+        global test_stars, rules_followed
+        try:
+            file = open('./settings/stars.txt', "r")
+            test_stars = json.loads(file.read())
+            file.close()
+            print("Opened existing file")
+        except FileNotFoundError:
+            test_stars = {"Guilds":{}}
+            async for guild in self.client.fetch_guilds():
+                if guild.name not in test_stars["Guilds"].keys():
+                    test_stars["Guilds"][guild.name] = {"Members":{}}
+                    test_stars["Guilds"][guild.name]["Sent"] = False
+                async for member in guild.fetch_members():
+                    if member.name not in test_stars["Guilds"][guild.name]["Members"].keys() and member.bot is False:
+                        test_stars["Guilds"][guild.name]["Members"][member.name] = {"Stars": 0}
+            print("Created a stars file")
+            file = open('./settings/stars.txt', "w+")
+            file.write(json.dumps(test_stars, indent = 4))
+            file.close()
     def remove_stars(self, user, channel, rand_num, reason = ""):
         """This function removes stars"""
         global stars
@@ -353,4 +371,4 @@ class Admin(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(Admin(client))
+    client.add_cog(Stars(client))

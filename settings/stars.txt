@@ -1,0 +1,165 @@
+{
+    "Guilds": {
+        "Mega Big BOI Server": {
+            "Members": {
+                "PPmaster27": {
+                    "Stars": 0
+                },
+                "t-rin": {
+                    "Stars": 0
+                },
+                "urfavvlogger": {
+                    "Stars": 0
+                },
+                "Pickles": {
+                    "Stars": 0
+                },
+                "pissbaby": {
+                    "Stars": 0
+                },
+                "LuizSanchez": {
+                    "Stars": 0
+                },
+                "belen": {
+                    "Stars": 0
+                },
+                "Dabe": {
+                    "Stars": 0
+                },
+                "tinyforest": {
+                    "Stars": 0
+                },
+                "Antennie": {
+                    "Stars": 0
+                },
+                "Clara": {
+                    "Stars": 0
+                },
+                "okiguess": {
+                    "Stars": 0
+                },
+                "Shlumperd": {
+                    "Stars": 0
+                },
+                "fangtx": {
+                    "Stars": 0
+                },
+                "graciouslors": {
+                    "Stars": 0
+                },
+                "Deltaninja36": {
+                    "Stars": 0
+                },
+                "Big Jello": {
+                    "Stars": 0
+                },
+                "Xander": {
+                    "Stars": 0
+                },
+                "agce63": {
+                    "Stars": 0
+                },
+                "Iceberg Lettuce": {
+                    "Stars": 0
+                },
+                "McBloom": {
+                    "Stars": 0
+                },
+                "ruh roh shaggy": {
+                    "Stars": 0
+                },
+                "chu": {
+                    "Stars": 0
+                },
+                "serina": {
+                    "Stars": 0
+                },
+                "thespeedturtle": {
+                    "Stars": 0
+                },
+                "sashka.draws": {
+                    "Stars": 0
+                },
+                "usedstarfighter": {
+                    "Stars": 0
+                },
+                "Rylan": {
+                    "Stars": 0
+                },
+                "Yuskea": {
+                    "Stars": 0
+                },
+                "HeyItsMatt": {
+                    "Stars": 0
+                },
+                "Justwannaplay277": {
+                    "Stars": 0
+                },
+                "Arbo": {
+                    "Stars": 0
+                },
+                "monpress": {
+                    "Stars": 0
+                },
+                "Malcon": {
+                    "Stars": 0
+                },
+                "Leo the Black": {
+                    "Stars": 0
+                },
+                "Igunguru": {
+                    "Stars": 0
+                },
+                "Arsenate": {
+                    "Stars": 0
+                },
+                "Elliptic": {
+                    "Stars": 0
+                },
+                "spagh3tt0": {
+                    "Stars": 0
+                },
+                "ALin": {
+                    "Stars": 0
+                },
+                "Mr Shifter": {
+                    "Stars": 0
+                },
+                "bearfan444": {
+                    "Stars": 0
+                },
+                "Bandit": {
+                    "Stars": 0
+                },
+                "Darren Chui": {
+                    "Stars": 0
+                },
+                "Pooper7692": {
+                    "Stars": 0
+                },
+                "Uber donger": {
+                    "Stars": 0
+                },
+                "Kou Tokachi": {
+                    "Stars": 0
+                },
+                "Toby5001": {
+                    "Stars": 0
+                },
+                "Bubsquat is me.": {
+                    "Stars": 0
+                },
+                "Rampant Potato": {
+                    "Stars": 0
+                },
+                "glizzy demon": {
+                    "Stars": 0
+                },
+                "Milano": {
+                    "Stars": 0
+                }
+            },
+            "Sent": false
+        }
+    }
+}
