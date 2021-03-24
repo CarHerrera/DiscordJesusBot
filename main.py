@@ -53,13 +53,11 @@ def timeChecker(currentTime, originalTime, difference):
 def momChecker(String):
     if "jesus" in String.casefold() and "mom" in String.casefold():
         print('found jesus and or mom in: \n' + String)
-        print('Jesus in String {0}'.format('jesus' in String.casefold()))
-        print('Mom in String {0}'.format('mom' in String.casefold()))
         return True
     else:
         return False
 
-client.remove_command('help')
+client.remove_command('help')z
 @client.command()
 async def load(ctx, extension):
     client.load_extension('cogs.{}'.format(extension))
@@ -117,7 +115,7 @@ async def on_member_update(before, after):
         if before == jesusMember:
             if type(after) == discord.Streaming:
                 print('streaming?')
-            print('Before activity is {0} and after is {1}'.format(before.activity, after.activity))
+            # print('Before activity is {0} and after is {1}'.format(before.activity, after.activity))
         # if(type(after.activity == discord.activity.Spotify)):
         #   general = guild.get_channel(751678259657441342)
           # await general.send('Listening to {0} {1}? cringe lmao'.format(after.activity.title, after.mention))

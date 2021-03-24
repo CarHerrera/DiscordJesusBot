@@ -155,6 +155,7 @@ class Stars(commands.Cog):
             return
         elif msg.author.bot == True:
             return
+        spam = discord.utils.get(guild.text_channels, name='bot-spam')
         rand_num = randint(1, 30)
         guild = msg.guild
         count = 0
@@ -176,18 +177,18 @@ class Stars(commands.Cog):
             if msg.author.name in timer.keys():
                 dif = timeChecker(datetime.now(), timer[msg.author.name], 10)
                 if dif is True:
-                    await msg.channel.send(self.remove_stars(msg.author, msg.channel, randint(1, 30)))
+                    await spam.send(self.remove_stars(msg.author, msg.channel, randint(1, 30)))
                     rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
                     timer.update({msg.author.name:datetime.now()})
                     self.data_gatherer(msg, "Bad words", False, -rand_num)
             else:
-                await msg.channel.send(self.remove_stars(msg.author, msg.channel, randint(1, 30)))
+                await spam.send(self.remove_stars(msg.author, msg.channel, randint(1, 30)))
                 rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
                 timer.update({msg.author.name:datetime.now()})
                 self.data_gatherer(msg, "Bad words", False, -rand_num)
             return
         elif count > 8:
-            await msg.channel.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for being a dick head"))
+            await spam.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for being a dick head"))
             rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
             self.data_gatherer(msg, "Spammed Messages", False, -rand_num)
         elif len(msg.content) > 250:
@@ -197,29 +198,29 @@ class Stars(commands.Cog):
                 await msg.channel.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for sending way to long of a message"))
                 rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
                 self.data_gatherer(msg, "Long message", False, -rand_num)
-        elif msg.content.isupper():
+        elif spam.isupper():
             await msg.channel.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for being aggressive"))
             rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
             self.data_gatherer(msg, "Message in caps", False, -rand_num)
             return
         elif "bot" in msg.content.casefold() and "poppin" in msg.content.casefold():
-            await msg.channel.send(self.add_stars(msg.author, msg.author.channel, rand_num))
+            await spam.send(self.add_stars(msg.author, msg.author.channel, rand_num))
             rules_followed["Guilds"][guild.name]["Members"][msg.author.name] += 1
             self.data_gatherer(msg, "Complimented Bot", True, rand_num)
         elif rules_followed_counter > 20:
-            await msg.channel.send(self.add_stars(msg.author, msg.channel, rand_num))
+            await spam.send(self.add_stars(msg.author, msg.channel, rand_num))
             rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
             self.data_gatherer(msg, "Didn't trigger an if statement", True, rand_num)
         elif any(word in msg.content.casefold() for word in good_words):
             if msg.author.name in timer.keys():
                 dif = timeChecker(datetime.now(), timer[msg.author.name], 10)
                 if dif is True:
-                    await msg.channel.send(self.add_stars(msg.author, msg.channel, randint(5,15)))
+                    await spam.send(self.add_stars(msg.author, msg.channel, randint(5,15)))
                     rules_followed["Guilds"][guild.name]["Members"][msg.author.name] += 1
                     timer.update({msg.author.name:datetime.now()})
                     self.data_gatherer(msg, "Said nice word", True, rand_num)
             else:
-                await msg.channel.send(self.add_stars(msg.author, msg.channel, randint(5,15)))
+                await spam.send(self.add_stars(msg.author, msg.channel, randint(5,15)))
                 timer.update({msg.author.name:datetime.now()})
                 self.data_gatherer(msg, "Said nice word", True, rand_num)
         else:
