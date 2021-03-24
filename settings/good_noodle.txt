@@ -9,8 +9,8 @@
                 },
                 {
                     "Lord And Savior": 794708032688881675,
-                    "Stars": -81,
-                    "Weekly_Stars": -81
+                    "Stars": -319,
+                    "Weekly_Stars": 0
                 },
                 {
                     "t-rin": 757349207463165994,
@@ -47,8 +47,8 @@
                 },
                 {
                     "Antennie": 601112466197315594,
-                    "Stars": 10,
-                    "Weekly_Stars": 0
+                    "Stars": -31,
+                    "Weekly_Stars": -41
                 },
                 {
                     "Clara": 587278793341665301,
@@ -60,8 +60,8 @@
                 },
                 {
                     "Shlumperd": 547574072922603530,
-                    "Stars": 58,
-                    "Weekly_Stars": 30
+                    "Stars": 86,
+                    "Weekly_Stars": 0
                 },
                 {
                     "fangtx": 502709998648819743,
@@ -77,8 +77,8 @@
                 },
                 {
                     "Big Jello": 476466028990169122,
-                    "Stars": 50,
-                    "Weekly_Stars": -3
+                    "Stars": 138,
+                    "Weekly_Stars": 21
                 },
                 {
                     "Xander": 464833739403427840,
@@ -90,13 +90,13 @@
                 },
                 {
                     "Iceberg Lettuce": 412385688332402689,
-                    "Stars": 95,
-                    "Weekly_Stars": 5
+                    "Stars": 168,
+                    "Weekly_Stars": -38
                 },
                 {
                     "McBloom": 410931567360475136,
-                    "Stars": 80,
-                    "Weekly_Stars": 14
+                    "Stars": 109,
+                    "Weekly_Stars": 7
                 },
                 {
                     "PatchBot": 402528814548254720,
@@ -128,12 +128,12 @@
                 },
                 {
                     "usedstarfighter": 352550834103386133,
-                    "Stars": 277,
-                    "Weekly_Stars": 90
+                    "Stars": 659,
+                    "Weekly_Stars": 38
                 },
                 {
                     "Rylan": 335789721496059904,
-                    "Stars": -1,
+                    "Stars": 45,
                     "Weekly_Stars": 0
                 },
                 {
@@ -154,8 +154,8 @@
                 },
                 {
                     "monpress": 310149886228299776,
-                    "Stars": 166,
-                    "Weekly_Stars": 77
+                    "Stars": 178,
+                    "Weekly_Stars": 0
                 },
                 {
                     "Malcon": 291021692430712835,
@@ -171,8 +171,8 @@
                 },
                 {
                     "Arsenate": 263054069885566977,
-                    "Stars": 128,
-                    "Weekly_Stars": -7
+                    "Stars": 103,
+                    "Weekly_Stars": -70
                 },
                 {
                     "Elliptic": 261007745375928321,
@@ -180,8 +180,8 @@
                 },
                 {
                     "spagh3tt0": 251770515432275968,
-                    "Stars": -250,
-                    "Weekly_Stars": -5
+                    "Stars": -203,
+                    "Weekly_Stars": -4
                 },
                 {
                     "ALin": 251228021715894282,
@@ -201,8 +201,8 @@
                 },
                 {
                     "Bandit": 213090776001937409,
-                    "Stars": -23,
-                    "Weekly_Stars": -31
+                    "Stars": 31,
+                    "Weekly_Stars": -45
                 },
                 {
                     "Darren Chui": 201159875366092800,
@@ -230,8 +230,8 @@
                 },
                 {
                     "Rampant Potato": 113820933013110788,
-                    "Stars": -91,
-                    "Weekly_Stars": -30
+                    "Stars": -192,
+                    "Weekly_Stars": -117
                 },
                 {
                     "droddyy": 92780550913269760,
