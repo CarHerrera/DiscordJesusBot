@@ -63,22 +63,23 @@ class Stars(commands.Cog):
             elif day != "Monday":
                 stars["Guilds"][guild.name]["Sent"] = False
                 file_trasnfer = db_uploader.TransferData(os.getenv('ACCESS_TOKEN'))
-        file_from = "./private/good_noodle_data.csv"
-        today = datetime.now().strftime("%m-%d-%y")
-        file_to = f"/code/Python/Discord/StarsData/{today} stars.csv"
-        file_trasnfer.upload_file(file_from, file_to)
-        if stars_data.closed:
-            stars_data = open("./private/good_noodle_data.csv", "w")
-            stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel")
-            stars_data.close()
-        else:
-            stars_data.close()
-            stars_data = open("./private/good_noodle_data.csv", "w")
-            stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel")
-            stars_data.close()
-        file = open('./settings/stars.txt', "w")
-        file.write(json.dumps(stars, indent = 4))
-        file.close()
+        if stars["Guilds"][guild.name]["Sent"] is True:
+            file_from = "./private/good_noodle_data.csv"
+            today = datetime.now().strftime("%m-%d-%y")
+            file_to = f"/code/Python/Discord/StarsData/{today} stars.csv"
+            file_trasnfer.upload_file(file_from, file_to)
+            if stars_data.closed:
+                stars_data = open("./private/good_noodle_data.csv", "w")
+                stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel")
+                stars_data.close()
+            else:
+                stars_data.close()
+                stars_data = open("./private/good_noodle_data.csv", "w")
+                stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel")
+                stars_data.close()
+            file = open('./settings/stars.txt', "w")
+            file.write(json.dumps(stars, indent = 4))
+            file.close()
 
     @reset_weekly_stars.before_loop
     async def before_check(self):

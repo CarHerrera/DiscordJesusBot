@@ -55,8 +55,8 @@
                     "Stars": 0
                 },
                 "Big Jello": {
-                    "Stars": 153,
-                    "Weekly Stars": 36
+                    "Stars": 157,
+                    "Weekly Stars": 40
                 },
                 "Xander": {
                     "Stars": 0
@@ -88,8 +88,8 @@
                     "Stars": 0
                 },
                 "usedstarfighter": {
-                    "Stars": 641,
-                    "Weekly Stars": 20
+                    "Stars": 506,
+                    "Weekly Stars": -115
                 },
                 "Rylan": {
                     "Stars": 45,
@@ -121,15 +121,15 @@
                     "Stars": 0
                 },
                 "Arsenate": {
-                    "Stars": 103,
-                    "Weekly Stars": -70
+                    "Stars": 105,
+                    "Weekly Stars": -68
                 },
                 "Elliptic": {
                     "Stars": 0
                 },
                 "spagh3tt0": {
-                    "Stars": 203,
-                    "Weekly Stars": -4
+                    "Stars": 171,
+                    "Weekly Stars": -36
                 },
                 "ALin": {
                     "Stars": 0
@@ -141,8 +141,8 @@
                     "Stars": 0
                 },
                 "Bandit": {
-                    "Stars": 39,
-                    "Weekly Stars": -37
+                    "Stars": 51,
+                    "Weekly Stars": -25
                 },
                 "Darren Chui": {
                     "Stars": 0

@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 import dropbox
 
-class TrasnferData:
+class TransferData:
     def __init__(self, access_token):
         self.access_token = access_token
     def upload_file(self, file_from, file_to):
