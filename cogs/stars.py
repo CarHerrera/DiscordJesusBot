@@ -155,10 +155,10 @@ class Stars(commands.Cog):
             return
         elif msg.author.bot == True:
             return
-        spam = discord.utils.get(guild.text_channels, name='bot-spam')
         rand_num = randint(1, 30)
         guild = msg.guild
         count = 0
+        spam = discord.utils.get(guild.text_channels, name='bot-spam')
         if msg.guild.name in rules_followed["Guilds"]:
             # Checks if the user that sent a message is in the dictionary, if not will add it to it
             if msg.author.name not in rules_followed["Guilds"][guild.name]["Members"].keys():
