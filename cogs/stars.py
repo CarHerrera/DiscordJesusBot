@@ -4,7 +4,9 @@ from random import randint
 from discord.ext import commands, tasks
 from datetime import datetime
 from main import timeChecker
-import pandas, csv
+import pandas, csv, os
+from dotenv import load_dotenv
+import db_uploader
 file = open("./private/swearWords.txt")
 bad_words = file.read().split()
 file.close()
@@ -15,6 +17,7 @@ timer = {}
 last_reset = datetime.now()
 stars = None
 rules_followed = {"Guilds":{}}
+load_dotenv(dotenv_path = "./private/.env")
 # cities = pandas.DataFrame(columns=['Guild', 'Member', 'Reason', 'Added', 'Stars', 'Day', 'MSGID', 'Channel'])
 # cities.to_csv('./private/good_noodle_data.csv', index = False)
 try:
@@ -59,6 +62,20 @@ class Stars(commands.Cog):
                     stars["Guilds"][guild.name]["Sent"] = True
             elif day != "Monday":
                 stars["Guilds"][guild.name]["Sent"] = False
+                file_trasnfer = db_uploader.TransferData(os.getenv('ACCESS_TOKEN'))
+        file_from = "./private/good_noodle_data.csv"
+        today = datetime.now().strftime("%m-%d-%y")
+        file_to = f"/code/Python/Discord/StarsData/{today} stars.csv"
+        file_trasnfer.upload_file(file_from, file_to)
+        if stars_data.closed:
+            stars_data = open("./private/good_noodle_data.csv", "w")
+            stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel")
+            stars_data.close()
+        else:
+            stars_data.close()
+            stars_data = open("./private/good_noodle_data.csv", "w")
+            stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel")
+            stars_data.close()
         file = open('./settings/stars.txt', "w")
         file.write(json.dumps(stars, indent = 4))
         file.close()
