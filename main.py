@@ -57,7 +57,7 @@ def momChecker(String):
     else:
         return False
 
-client.remove_command('help')z
+client.remove_command('help')
 @client.command()
 async def load(ctx, extension):
     client.load_extension('cogs.{}'.format(extension))

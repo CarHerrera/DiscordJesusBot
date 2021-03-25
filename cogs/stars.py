@@ -198,7 +198,7 @@ class Stars(commands.Cog):
                 await msg.channel.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for sending way to long of a message"))
                 rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
                 self.data_gatherer(msg, "Long message", False, -rand_num)
-        elif spam.isupper():
+        elif msg.content.isupper():
             await msg.channel.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for being aggressive"))
             rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
             self.data_gatherer(msg, "Message in caps", False, -rand_num)

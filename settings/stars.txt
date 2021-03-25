@@ -3,7 +3,8 @@
         "Mega Big BOI Server": {
             "Members": {
                 "PPmaster27": {
-                    "Stars": 0
+                    "Stars": 2,
+                    "Weekly Stars": 2
                 },
                 "t-rin": {
                     "Stars": 0
@@ -54,8 +55,8 @@
                     "Stars": 0
                 },
                 "Big Jello": {
-                    "Stars": 138,
-                    "Weekly Stars": 21
+                    "Stars": 153,
+                    "Weekly Stars": 36
                 },
                 "Xander": {
                     "Stars": 0
@@ -64,8 +65,8 @@
                     "Stars": 0
                 },
                 "Iceberg Lettuce": {
-                    "Stars": 168,
-                    "Weekly Stars": -38
+                    "Stars": 127,
+                    "Weekly Stars": -79
                 },
                 "McBloom": {
                     "Stars": 109,
@@ -87,8 +88,8 @@
                     "Stars": 0
                 },
                 "usedstarfighter": {
-                    "Stars": 659,
-                    "Weekly Stars": 38
+                    "Stars": 641,
+                    "Weekly Stars": 20
                 },
                 "Rylan": {
                     "Stars": 45,
@@ -140,8 +141,8 @@
                     "Stars": 0
                 },
                 "Bandit": {
-                    "Stars": 31,
-                    "Weekly Stars": -45
+                    "Stars": 39,
+                    "Weekly Stars": -37
                 },
                 "Darren Chui": {
                     "Stars": 0
@@ -162,8 +163,8 @@
                     "Stars": 0
                 },
                 "Rampant Potato": {
-                    "Stars": -192,
-                    "Weekly Stars": -117
+                    "Stars": -272,
+                    "Weekly Stars": -197
                 },
                 "glizzy demon": {
                     "Stars": 0
