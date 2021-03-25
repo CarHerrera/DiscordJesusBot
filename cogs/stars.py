@@ -47,7 +47,7 @@ class Stars(commands.Cog):
                         members_list.append(member.name)
                         stars["Guilds"][guild.name]["Members"][member.name]["Weekly Stars"] = 0
                 if len(number_of_stars) > 0:
-                    channel = discord.utils.get(guild.text_channels, name='bot')
+                    channel = discord.utils.get(guild.text_channels, name='bot-spam')
                     highest_stars = max(number_of_stars)
                     hs_index = number_of_stars.index(highest_stars)
                     user = members_list[hs_index]
@@ -191,15 +191,15 @@ class Stars(commands.Cog):
             await spam.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for being a dick head"))
             rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
             self.data_gatherer(msg, "Spammed Messages", False, -rand_num)
-        elif len(msg.content) > 250:
+        elif len(msg.content) > 300:
             if len(msg.embeds) > 0 or len(msg.attachments) > 0:
                 return
             else:
-                await msg.channel.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for sending way to long of a message"))
+                await spam.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for sending way to long of a message"))
                 rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
                 self.data_gatherer(msg, "Long message", False, -rand_num)
         elif msg.content.isupper():
-            await msg.channel.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for being aggressive"))
+            await spam.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for being aggressive"))
             rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
             self.data_gatherer(msg, "Message in caps", False, -rand_num)
             return
