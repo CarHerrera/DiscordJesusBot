@@ -24,9 +24,7 @@ class Sounds(commands.Cog):
             print(f"Changed name to {name}")
     @checkMidnight.before_loop
     async def before_check(self):
-        print("Waiting...")
         await self.client.wait_until_ready()
-        print("Ready")
     @commands.command()
     async def join(self, ctx):
         global vc, ffmpegExec

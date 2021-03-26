@@ -78,11 +78,11 @@ async def on_ready():
     Stream = discord.Streaming(name = 'The overloads stream :pleading_face:',url = 'https://www.twitch.tv/ulm_nation')
     await client.change_presence(status = discord.Status.online, activity = Stream)
     print('We have logged in as {0.user}'.format(client))
-    emoji_file = open('./settings/emojis.txt', 'w')
-    for guild in client.guilds:
-        for emoji in guild.emojis:
-            emoji_file.write("<:" + emoji.name+ ":" + str(emoji.id) +  ">"+"\n")
-    emoji_file.close()
+    # emoji_file = open('./settings/emojis.txt', 'w')
+    # for guild in client.guilds:
+    #     for emoji in guild.emojis:
+    #         emoji_file.write("<:" + emoji.name+ ":" + str(emoji.id) +  ">"+"\n")
+    # emoji_file.close()
     # members_dict = {"Guilds": []}
     # count = 0
     # async for guild in client.fetch_guilds():

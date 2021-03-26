@@ -85,12 +85,18 @@ class Stars(commands.Cog):
     async def before_check(self):
         await self.client.wait_until_ready()
         global stars, rules_followed
-        async for guild in self.client.fetch_guilds():
-            rules_followed["Guilds"][guild.name] = {"Members":{}}
+        # async for guild in self.client.fetch_guilds():
+        #     rules_followed["Guilds"][guild.name] = {"Members":{}}
         try:
             file = open('./settings/stars.txt', "r")
             stars = json.loads(file.read())
             file.close()
+            async for guild in self.client.fetch_guilds():
+                rules_followed["Guilds"][guild.name] = {"Members":{}}
+                async for member in guild.fetch_members():
+                    if member.name not in stars["Guilds"][guild.name]["Members"] and member.bot is False:
+                        stars["Guilds"][guild.name]["Members"][member.name] = {"Stars":0}
+                        # print(member.name, sep = " ")
             print("Opened existing file")
         except FileNotFoundError:
             stars = {"Guilds":{}}
@@ -302,7 +308,19 @@ class Stars(commands.Cog):
                     await spam.send(self.remove_stars(thing.user, channel,rand_num, reason = f" for muting/deafing {member.name}"))
                     self.data_gatherer(thing.user, "Deafened a person", False, -rand_num)
                     return
-
+    @commands.Cog.listener()
+    async def on_member_join(member):
+        stars["Guilds"][member.guild.name]["Members"][member.name] = {"Stars":0}
+        file = open('./settings/stars.txt', "w+")
+        file.write(json.dumps(stars, indent = 4))
+        file.close()
+        # print(member.name, sep = " ")
+    @commands.Cog.listener()
+    async def on_member_remove(member):
+        stars["Guilds"][member.guild.name]["Members"].pop(member.name)
+        file = open('./settings/stars.txt', "w+")
+        file.write(json.dumps(stars, indent = 4))
+        file.close()
     @commands.command()
     async def stars(self, ctx):
         """This commands allow the user to see how many stars they have, or the person they pinged has"""
