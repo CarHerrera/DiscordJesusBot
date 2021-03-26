@@ -74,14 +74,14 @@ class Commands(commands.Cog):
             bonkEmoji = '<:Bonk:797305732063297536>'
             jesusMember = await message.guild.fetch_member(213090776001937409)
             jesusAt = jesusMember.mention
+            fry_role = message.guild.get_role(fryMakerRoleID)
         except:
             print('One of these people are not in the server')
             # print(timeChecker(datetime.utcnow(), fuckOffTimer, 10))
-        agreementIndicator = randint(1, 120)
-        disgustIndicator = randint(1, 110)
+        agreementIndicator = randint(23, 69)
+        disgustIndicator = randint(23, 69)
         divider = counter % 100
         self_mention = self.client.user.mention
-        divider = counter % 100
         user = message.author.mention
         if cmd_in_process == False:
             if len(message.mentions)>0:
@@ -98,19 +98,17 @@ class Commands(commands.Cog):
                 disagreement = disgusted_words[randint(0, len(disgusted_words)-1)]
                 await message.channel.send('{0}'.format(disagreement))
             else:
-                if message.author.bot is False:
-                    for roles in message.author.roles:
-                        if roles.id == fryMakerRoleID:
-                            if counter % 12 == 0:
-                                await message.channel.send('Yoooooooooo ' + user + ', I hear your fries are a national delight and I am willing to pay top dollar for them. May I put up this formal request for said fries?')
-                    if message.author.id == alexDiscordID:
-                        if counter % 10 == 0:
-                            await message.channel.send(bonkEmoji)
-                    elif any(ele in message.content.casefold() for ele in buy_me):
-                        await message.channel.send('Sure.')
-                    elif momChecker(message.content.casefold()) is True:
-                        print('{0} is where I found mom'.format(message.content))
-                        await message.channel.send('Best not be talking about my mom you bitch')
+                if message.author.id == alexDiscordID:
+                    if counter % 23 == 0:
+                        await message.channel.send(bonkEmoji)
+                elif any(ele in message.content.casefold() for ele in buy_me):
+                    await message.channel.send('Sure.')
+                elif momChecker(message.content.casefold()) is True:
+                    print('{0} is where I found mom'.format(message.content))
+                    await message.channel.send('Best not be talking about my mom you bitch')
+                elif fry_role in message.author.roles:
+                    if counter % 12 == 0:
+                        await message.channel.send('Yoooooooooo ' + user + ', I hear your fries are a national delight and I am willing to pay top dollar for them. May I put up this formal request for said fries?')
         print('Messages sent: ', counter)
         print('Current random Int: ', agreementIndicator)
         print('Current random Int: ', disgustIndicator)
