@@ -85,18 +85,21 @@ class Stars(commands.Cog):
     async def before_check(self):
         await self.client.wait_until_ready()
         global stars, rules_followed
-        # async for guild in self.client.fetch_guilds():
-        #     rules_followed["Guilds"][guild.name] = {"Members":{}}
+        async for guild in self.client.fetch_guilds():
+            rules_followed["Guilds"][guild.name] = {"Members":{}}
         try:
             file = open('./settings/stars.txt', "r")
             stars = json.loads(file.read())
             file.close()
-            async for guild in self.client.fetch_guilds():
-                rules_followed["Guilds"][guild.name] = {"Members":{}}
-                async for member in guild.fetch_members():
-                    if member.name not in stars["Guilds"][guild.name]["Members"] and member.bot is False:
-                        stars["Guilds"][guild.name]["Members"][member.name] = {"Stars":0}
-                        # print(member.name, sep = " ")
+            # async for guild in self.client.fetch_guilds():
+                # rules_followed["Guilds"][guild.name] = {"Members":{}}
+                # async for member in guild.fetch_members():
+                    # if member.name not in stars["Guilds"][guild.name]["Members"] and member.bot is False:
+                        # stars["Guilds"][guild.name]["Members"][member.name] = {"Stars":0}
+                        # # print(member.name, sep = " ")
+            # file = open('./settings/stars.txt', "w")
+            # file.write(json.dumps(stars, indent = 4))
+            # file.close()
             print("Opened existing file")
         except FileNotFoundError:
             stars = {"Guilds":{}}

@@ -55,8 +55,8 @@
                     "Stars": 0
                 },
                 "Big Jello": {
-                    "Stars": 157,
-                    "Weekly Stars": 40
+                    "Stars": 175,
+                    "Weekly Stars": 58
                 },
                 "Xander": {
                     "Stars": 0
@@ -65,8 +65,8 @@
                     "Stars": 0
                 },
                 "Iceberg Lettuce": {
-                    "Stars": 127,
-                    "Weekly Stars": -79
+                    "Stars": 138,
+                    "Weekly Stars": -68
                 },
                 "McBloom": {
                     "Stars": 109,
@@ -88,8 +88,8 @@
                     "Stars": 0
                 },
                 "usedstarfighter": {
-                    "Stars": 506,
-                    "Weekly Stars": -115
+                    "Stars": 485,
+                    "Weekly Stars": -136
                 },
                 "Rylan": {
                     "Stars": 45,
@@ -128,8 +128,8 @@
                     "Stars": 0
                 },
                 "spagh3tt0": {
-                    "Stars": 171,
-                    "Weekly Stars": -36
+                    "Stars": 156,
+                    "Weekly Stars": -51
                 },
                 "ALin": {
                     "Stars": 0
@@ -141,8 +141,8 @@
                     "Stars": 0
                 },
                 "Bandit": {
-                    "Stars": 51,
-                    "Weekly Stars": -25
+                    "Stars": 65,
+                    "Weekly Stars": -11
                 },
                 "Darren Chui": {
                     "Stars": 0
@@ -170,6 +170,12 @@
                     "Stars": 0
                 },
                 "Milano": {
+                    "Stars": 0
+                },
+                "IClearlyFeltTheTap": {
+                    "Stars": 0
+                },
+                "Thanatoasty": {
                     "Stars": 0
                 }
             },
