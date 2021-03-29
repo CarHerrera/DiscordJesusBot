@@ -33,7 +33,7 @@ class Stars(commands.Cog):
     @tasks.loop(minutes = 1)
     # This loops every 24 hours and resets the servers weekly stars and send a message with who had the highest and lowest stars
     async def reset_weekly_stars(self):
-        global last_reset, stars
+        global last_reset, stars, stars_data
         day = datetime.now().strftime("%A")
         time = datetime.now()
         count = 0
@@ -46,6 +46,9 @@ class Stars(commands.Cog):
                     if member.bot is True:
                         continue
                     # Checks if the member has weekly stars then resets it
+                    if member.name not in stars["Guilds"][guild.name]["Members"]:
+                       stars["Guilds"][guild.name]["Members"][member.name] = {"Stars":0}
+                       print(member.name) 
                     if "Weekly Stars" in stars["Guilds"][guild.name]["Members"][member.name]:
                         number_of_stars.append(stars["Guilds"][guild.name]["Members"][member.name]["Weekly Stars"])
                         members_list.append(member.name)
@@ -59,43 +62,33 @@ class Stars(commands.Cog):
                     lowest_stars = min(number_of_stars)
                     user_low = members_list[number_of_stars.index(lowest_stars)]
                     lowest_member = discord.utils.find(lambda m: m.name == user_low, guild.members)
-                    await channel.send(f"{member.mention} got this weeks highest stars at {highest_stars} and unsurprisngly {lowest_member.mention} got the lowest amount of stars at {lowest_stars}")
+                    print(f'Sent out {guild.name} star information')
+                    # await channel.send(f"{member.mention} got this weeks highest stars at {highest_stars} and unsurprisngly {lowest_member.mention} got the lowest amount of stars at {lowest_stars}")
                     stars["Guilds"][guild.name]["Sent"] = True
                     count+=1
                     if stars["Guilds"][guild.name]["Sent"] is True and count == 1:
-                        file_from = "./private/good_noodle_data.csv"
-                        today = datetime.now().strftime("%m-%d-%y")
-                        file_to = f"/code/Python/Discord/StarsData/{today} stars.csv"
-                        file_trasnfer.upload_file(file_from, file_to)
-                        if stars_data.closed:
-                            stars_data = open("./private/good_noodle_data.csv", "w")
-                            stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel")
-                            stars_data.close()
-                        else:
-                            stars_data.close()
-                            stars_data = open("./private/good_noodle_data.csv", "w")
-                            stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel")
-                            stars_data.close()
+                        try:
+                            file_trasnfer = db_uploader.TransferData(os.getenv('ACCESS_TOKEN'))
+                            file_from = "./private/good_noodle_data.csv"
+                            today = datetime.now().strftime("%m-%d-%y")
+                            file_to = f"/code/Python/Discord/StarsData/{today} stars.csv"
+                            file_trasnfer.upload_file(file_from, file_to)
+                            if stars_data.closed:
+                                stars_data = open("./private/good_noodle_data.csv", "w")
+                                stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel")
+                                stars_data.close()
+                            else:
+                                stars_data.close()
+                                stars_data = open("./private/good_noodle_data.csv", "w")
+                                stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel")
+                                stars_data.close()
+                        except Exception:
+                            print(str(Exception))
             elif day != "Monday":
                 stars["Guilds"][guild.name]["Sent"] = False
-                file_trasnfer = db_uploader.TransferData(os.getenv('ACCESS_TOKEN'))
-        if stars["Guilds"][guild.name]["Sent"] is True and count :
-            file_from = "./private/good_noodle_data.csv"
-            today = datetime.now().strftime("%m-%d-%y")
-            file_to = f"/code/Python/Discord/StarsData/{today} stars.csv"
-            file_trasnfer.upload_file(file_from, file_to)
-            if stars_data.closed:
-                stars_data = open("./private/good_noodle_data.csv", "w")
-                stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel")
-                stars_data.close()
-            else:
-                stars_data.close()
-                stars_data = open("./private/good_noodle_data.csv", "w")
-                stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel")
-                stars_data.close()
-            file = open('./settings/stars.txt', "w")
-            file.write(json.dumps(stars, indent = 4))
-            file.close()
+        file = open('./settings/stars.txt', "w")
+        file.write(json.dumps(stars, indent = 4))
+        file.close()
 
     @reset_weekly_stars.before_loop
     async def before_check(self):

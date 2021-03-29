@@ -21,7 +21,6 @@ class Hltv(commands.Cog):
         cs_channel = discord.utils.find(lambda c: c.name == 'csgo', guild.channels)
         if current_time.strftime('%A') == 'Monday' and sent is False:
             pot_partial = partial + str(current_time.year) + "/" + current_time.strftime('%B').casefold()+ "/" + str(current_time.day)
-            print(pot_partial)
             async with aiohttp.ClientSession() as session:
                 async with session.get(pot_partial) as r:
                     if r.status == 200:

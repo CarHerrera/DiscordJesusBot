@@ -4,7 +4,7 @@
             "Members": {
                 "PPmaster27": {
                     "Stars": 2,
-                    "Weekly Stars": 2
+                    "Weekly Stars": 0
                 },
                 "t-rin": {
                     "Stars": 0
@@ -32,7 +32,7 @@
                     "Stars": 0
                 },
                 "Antennie": {
-                    "Stars": -31,
+                    "Stars": -15,
                     "Weekly Stars": 0
                 },
                 "Clara": {
@@ -55,8 +55,8 @@
                     "Stars": 0
                 },
                 "Big Jello": {
-                    "Stars": 175,
-                    "Weekly Stars": 58
+                    "Stars": 212,
+                    "Weekly Stars": 0
                 },
                 "Xander": {
                     "Stars": 0
@@ -65,12 +65,12 @@
                     "Stars": 0
                 },
                 "Iceberg Lettuce": {
-                    "Stars": 138,
-                    "Weekly Stars": -68
+                    "Stars": 90,
+                    "Weekly Stars": 0
                 },
                 "McBloom": {
-                    "Stars": 109,
-                    "Weekly Stars": 7
+                    "Stars": 126,
+                    "Weekly Stars": 0
                 },
                 "ruh roh shaggy": {
                     "Stars": 0
@@ -88,8 +88,8 @@
                     "Stars": 0
                 },
                 "usedstarfighter": {
-                    "Stars": 485,
-                    "Weekly Stars": -136
+                    "Stars": 427,
+                    "Weekly Stars": 0
                 },
                 "Rylan": {
                     "Stars": 45,
@@ -108,7 +108,7 @@
                     "Stars": 0
                 },
                 "monpress": {
-                    "Stars": 178,
+                    "Stars": 190,
                     "Weekly Stars": 0
                 },
                 "Malcon": {
@@ -121,15 +121,15 @@
                     "Stars": 0
                 },
                 "Arsenate": {
-                    "Stars": 105,
-                    "Weekly Stars": -68
+                    "Stars": 156,
+                    "Weekly Stars": 0
                 },
                 "Elliptic": {
                     "Stars": 0
                 },
                 "spagh3tt0": {
-                    "Stars": 156,
-                    "Weekly Stars": -51
+                    "Stars": -499,
+                    "Weekly Stars": 0
                 },
                 "ALin": {
                     "Stars": 0
@@ -141,8 +141,8 @@
                     "Stars": 0
                 },
                 "Bandit": {
-                    "Stars": 65,
-                    "Weekly Stars": -11
+                    "Stars": 68,
+                    "Weekly Stars": 0
                 },
                 "Darren Chui": {
                     "Stars": 0
@@ -163,8 +163,8 @@
                     "Stars": 0
                 },
                 "Rampant Potato": {
-                    "Stars": -272,
-                    "Weekly Stars": -197
+                    "Stars": -452,
+                    "Weekly Stars": 0
                 },
                 "glizzy demon": {
                     "Stars": 0
@@ -177,9 +177,12 @@
                 },
                 "Thanatoasty": {
                     "Stars": 0
+                },
+                "LETS GOOO": {
+                    "Stars": 0
                 }
             },
-            "Sent": false
+            "Sent": true
         }
     }
 }
