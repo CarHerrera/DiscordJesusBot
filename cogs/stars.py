@@ -36,6 +36,7 @@ class Stars(commands.Cog):
         global last_reset, stars
         day = datetime.now().strftime("%A")
         time = datetime.now()
+        count = 0
         for guild in self.client.guilds:
             sent = stars["Guilds"][guild.name]["Sent"]
             if (day == "Monday" and time.hour == 12) and sent is False:
@@ -60,10 +61,25 @@ class Stars(commands.Cog):
                     lowest_member = discord.utils.find(lambda m: m.name == user_low, guild.members)
                     await channel.send(f"{member.mention} got this weeks highest stars at {highest_stars} and unsurprisngly {lowest_member.mention} got the lowest amount of stars at {lowest_stars}")
                     stars["Guilds"][guild.name]["Sent"] = True
+                    count+=1
+                    if stars["Guilds"][guild.name]["Sent"] is True and count == 1:
+                        file_from = "./private/good_noodle_data.csv"
+                        today = datetime.now().strftime("%m-%d-%y")
+                        file_to = f"/code/Python/Discord/StarsData/{today} stars.csv"
+                        file_trasnfer.upload_file(file_from, file_to)
+                        if stars_data.closed:
+                            stars_data = open("./private/good_noodle_data.csv", "w")
+                            stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel")
+                            stars_data.close()
+                        else:
+                            stars_data.close()
+                            stars_data = open("./private/good_noodle_data.csv", "w")
+                            stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel")
+                            stars_data.close()
             elif day != "Monday":
                 stars["Guilds"][guild.name]["Sent"] = False
                 file_trasnfer = db_uploader.TransferData(os.getenv('ACCESS_TOKEN'))
-        if stars["Guilds"][guild.name]["Sent"] is True:
+        if stars["Guilds"][guild.name]["Sent"] is True and count :
             file_from = "./private/good_noodle_data.csv"
             today = datetime.now().strftime("%m-%d-%y")
             file_to = f"/code/Python/Discord/StarsData/{today} stars.csv"
