@@ -65,8 +65,8 @@
                     "Stars": 0
                 },
                 "Iceberg Lettuce": {
-                    "Stars": 90,
-                    "Weekly Stars": 0
+                    "Stars": 95,
+                    "Weekly Stars": 5
                 },
                 "McBloom": {
                     "Stars": 126,
@@ -128,8 +128,8 @@
                     "Stars": 0
                 },
                 "spagh3tt0": {
-                    "Stars": -499,
-                    "Weekly Stars": 0
+                    "Stars": -486,
+                    "Weekly Stars": 13
                 },
                 "ALin": {
                     "Stars": 0
@@ -141,8 +141,8 @@
                     "Stars": 0
                 },
                 "Bandit": {
-                    "Stars": 68,
-                    "Weekly Stars": 0
+                    "Stars": 72,
+                    "Weekly Stars": 4
                 },
                 "Darren Chui": {
                     "Stars": 0

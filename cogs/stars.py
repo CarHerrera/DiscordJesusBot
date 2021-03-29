@@ -63,7 +63,7 @@ class Stars(commands.Cog):
                     user_low = members_list[number_of_stars.index(lowest_stars)]
                     lowest_member = discord.utils.find(lambda m: m.name == user_low, guild.members)
                     print(f'Sent out {guild.name} star information')
-                    # await channel.send(f"{member.mention} got this weeks highest stars at {highest_stars} and unsurprisngly {lowest_member.mention} got the lowest amount of stars at {lowest_stars}")
+                    await channel.send(f"{member.mention} got this weeks highest stars at {highest_stars} and unsurprisngly {lowest_member.mention} got the lowest amount of stars at {lowest_stars}")
                     stars["Guilds"][guild.name]["Sent"] = True
                     count+=1
                     if stars["Guilds"][guild.name]["Sent"] is True and count == 1:
