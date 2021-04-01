@@ -48,7 +48,7 @@ class Stars(commands.Cog):
                     # Checks if the member has weekly stars then resets it
                     if member.name not in stars["Guilds"][guild.name]["Members"]:
                        stars["Guilds"][guild.name]["Members"][member.name] = {"Stars":0}
-                       print(member.name) 
+                       print(member.name)
                     if "Weekly Stars" in stars["Guilds"][guild.name]["Members"][member.name]:
                         number_of_stars.append(stars["Guilds"][guild.name]["Members"][member.name]["Weekly Stars"])
                         members_list.append(member.name)
@@ -204,11 +204,11 @@ class Stars(commands.Cog):
         except:
             difference = None
         rules_followed_counter = rules_followed["Guilds"][guild.name]["Members"][msg.author.name]
-        async for message in msg.channel.history(limit = 10):
-            if len(message.attachments) > 0 or len(message.embeds) > 0:
-                pass
-            elif message.author == msg.author:
-                count+= 1
+        # async for message in msg.channel.history(limit = 10):
+        #     if len(message.attachments) > 0 or len(message.embeds) > 0:
+        #         pass
+        #     elif message.author == msg.author:
+        #         count+= 1
         if any(word in msg.content.casefold() for word in bad_words):
             if msg.author.name in timer.keys():
                 dif = timeChecker(datetime.now(), timer[msg.author.name], 10)
@@ -235,15 +235,18 @@ class Stars(commands.Cog):
                 rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
                 self.data_gatherer(msg, "Long message", False, -rand_num)
         elif msg.content.isupper():
-            await spam.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for being aggressive"))
-            rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
-            self.data_gatherer(msg, "Message in caps", False, -rand_num)
-            return
+            if len(msg.content) > 2:
+                await spam.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for being aggressive"))
+                rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
+                self.data_gatherer(msg, "Message in caps", False, -rand_num)
+                return
+            else:
+                return
         elif "bot" in msg.content.casefold() and "poppin" in msg.content.casefold():
             await spam.send(self.add_stars(msg.author, msg.author.channel, rand_num))
             rules_followed["Guilds"][guild.name]["Members"][msg.author.name] += 1
             self.data_gatherer(msg, "Complimented Bot", True, rand_num)
-        elif rules_followed_counter > 20:
+        elif rules_followed_counter > 8:
             await spam.send(self.add_stars(msg.author, msg.channel, rand_num))
             rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
             self.data_gatherer(msg, "Didn't trigger an if statement", True, rand_num)
@@ -269,7 +272,7 @@ class Stars(commands.Cog):
         msg = await channel.fetch_message(payload.message_id)
         guild = self.client.get_guild(751678259657441339)
         spam = discord.utils.get(guild.text_channels, name='bot-spam')
-        bonked = randint(20, 70)
+        bonked = randint(20, 50)
         emote = randint(1,15)
         if payload.member == self.client.user:
             return

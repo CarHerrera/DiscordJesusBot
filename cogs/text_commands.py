@@ -41,8 +41,8 @@ amogus ='<:amogus:810676422981058620>'
 drip ='<:DripMoment:800232915028017202>'
 PepeThink = '<:PepeThink:762416066570747904>'
 HolyPepe = '<:HolyPepe:797304202573119529>'
-excitement_words = ['YOOOOOOOOOOOOOOOOOOO', 'nice', 'sick','poggers', 'owa owa', '+1 good meme', 'nice lmao', 'pog pog pog pog', 'W','mood', 'epic', 'epic sauce', amogus, drip, PepeThink]
-disgusted_words = ['wtf', 'die', 'stinky', 'just fuck off already','no', 'gay','cringe','nope','why','I really hate you','sus','shut up','pain',bonk, HolyPepe, bonk*6]
+excitement_words = ['YOOOOOOOOOOOOOOOOOOO', 'Fuck yes', 'sick','xd', 'ok thats good', 'good post', 'Nice', 'God I wish', 'W','mood', 'epic', 'nice cock','bruh', amogus, drip, PepeThink]
+disgusted_words = ['*laughs nervously*', 'shit', 'L', 'Hmmmm','no', '?','I found the problem','nope','why','what the fuck is happening','sus','shut up','That\'s an L','Bruh',bonk, HolyPepe, bonk*6]
 buy_me = ['can you buy me this', 'buy me this', 'purchase this for me', 'will you buy me this']
 cmd_in_process = False
 fuckOffTimer = datetime.utcnow()
@@ -88,7 +88,7 @@ class Commands(commands.Cog):
                 for mentions in message.mentions:
                     if mentions == self.client.user and timeChecker(datetime.utcnow(), fuckOffTimer, 10):
                         if 'i agree with' in message.content.casefold():
-                            await message.channel.send('Thanks')
+                            await message.channel.send('Thanks bb')
                         else:
                             await message.channel.send('wtf do you want')
             if divider % agreementIndicator == 0:
@@ -99,16 +99,17 @@ class Commands(commands.Cog):
                 await message.channel.send('{0}'.format(disagreement))
             else:
                 if message.author.id == alexDiscordID:
-                    if counter % 23 == 0:
-                        await message.channel.send(bonkEmoji)
-                elif any(ele in message.content.casefold() for ele in buy_me):
-                    await message.channel.send('Sure.')
+                    pass
+                    # if counter % 23 == 0:
+                    #     await message.channel.send(bonkEmoji)
+                # elif any(ele in message.content.casefold() for ele in buy_me):
+                #     await message.channel.send('Sure.')
                 elif momChecker(message.content.casefold()) is True:
                     print('{0} is where I found mom'.format(message.content))
-                    await message.channel.send('Best not be talking about my mom you bitch')
-                elif fry_role in message.author.roles:
-                    if counter % 12 == 0:
-                        await message.channel.send('Yoooooooooo ' + user + ', I hear your fries are a national delight and I am willing to pay top dollar for them. May I put up this formal request for said fries?')
+                    await message.channel.send('you\'re beyond down bad')
+                # elif fry_role in message.author.roles:
+                #     if counter % 12 == 0:
+                #         await message.channel.send('Yoooooooooo ' + user + ', I hear your fries are a national delight and I am willing to pay top dollar for them. May I put up this formal request for said fries?')
         print('Messages sent: ', counter)
         print('Current random Int: ', agreementIndicator)
         print('Current random Int: ', disgustIndicator)
@@ -136,35 +137,40 @@ class Commands(commands.Cog):
         """This command flips a coin"""
         global cmd_in_process
         cmd_in_process = True
-        await ctx.send('hold on let me get my lucky nickel')
-        currentTimeInSeconds = datetime.utcnow().second
-        timer = datetime.utcnow().second
-        maxOdds = 10000
-        findcoin = randint(0, maxOdds)
-        difference = timer - currentTimeInSeconds
-        while timer - currentTimeInSeconds < 3:
-            if timer - currentTimeInSeconds < 0:
-                timer = datetime.utcnow().second + 60
-            else:
-                timer = datetime.utcnow().second
+        odds = randint(0,10)
+        if odds< 5:
+            await ctx.send('Heads.')
         else:
-            await ctx.send('alright I got it')
-            if findcoin < 100:
-                await ctx.send('wtf the coin landed on its side, thats like a {0}% chance'.format((100/maxOdds) * 100))
-                return
-            elif findcoin < 500:
-                await ctx.send('wtf I can\'t find the damn thing. this is some bullshit')
-                return
-            elif findcoin < 5250:
-                await ctx.send('the lucky nickel said heads')
-            else:
-                await ctx.send('the lucky nickel said tails')
-            cmd_in_process = False
+            await ctx.send('Tails')
+        # await ctx.send('hold on let me get my lucky nickel')
+        # currentTimeInSeconds = datetime.utcnow().second
+        # timer = datetime.utcnow().second
+        # maxOdds = 10000
+        # findcoin = randint(0, maxOdds)
+        # difference = timer - currentTimeInSeconds
+        # while timer - currentTimeInSeconds < 3:
+        #     if timer - currentTimeInSeconds < 0:
+        #         timer = datetime.utcnow().second + 60
+        #     else:
+        #         timer = datetime.utcnow().second
+        # else:
+        #     await ctx.send('alright I got it')
+        #     if findcoin < 100:
+        #         await ctx.send('wtf the coin landed on its side, thats like a {0}% chance'.format((100/maxOdds) * 100))
+        #         return
+        #     elif findcoin < 500:
+        #         await ctx.send('wtf I can\'t find the damn thing. this is some bullshit')
+        #         return
+        #     elif findcoin < 5250:
+        #         await ctx.send('the lucky nickel said heads')
+        #     else:
+        #         await ctx.send('the lucky nickel said tails')
+        #     cmd_in_process = False
     @commands.command()
     async def father(self, ctx):
         global cmd_in_process
         cmd_in_process = True
-        jesusMember = await ctx.guild.fetch_member(213090776001937409)
+        jesusMember = await ctx.guild.fetch_member(352550834103386133)
         jesusAt = jesusMember.mention
         await ctx.send('{} father :pleading_face:'.format(jesusAt))
         cmd_in_process = False
