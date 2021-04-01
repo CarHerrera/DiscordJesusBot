@@ -1,10 +1,10 @@
 {
     "Guilds": {
-        "Mega Big BOI Server": {
+        "Hunter": {
             "Members": {
                 "PPmaster27": {
-                    "Stars": 2,
-                    "Weekly Stars": 0
+                    "Stars": 10,
+                    "Weekly Stars": 8
                 },
                 "t-rin": {
                     "Stars": 0
@@ -32,8 +32,8 @@
                     "Stars": 0
                 },
                 "Antennie": {
-                    "Stars": -15,
-                    "Weekly Stars": 0
+                    "Stars": 3,
+                    "Weekly Stars": 18
                 },
                 "Clara": {
                     "Stars": 0
@@ -42,8 +42,8 @@
                     "Stars": 0
                 },
                 "Shlumperd": {
-                    "Stars": 86,
-                    "Weekly Stars": 0
+                    "Stars": 85,
+                    "Weekly Stars": -1
                 },
                 "fangtx": {
                     "Stars": 0
@@ -55,8 +55,8 @@
                     "Stars": 0
                 },
                 "Big Jello": {
-                    "Stars": 212,
-                    "Weekly Stars": 0
+                    "Stars": 283,
+                    "Weekly Stars": 71
                 },
                 "Xander": {
                     "Stars": 0
@@ -65,12 +65,12 @@
                     "Stars": 0
                 },
                 "Iceberg Lettuce": {
-                    "Stars": 95,
-                    "Weekly Stars": 5
+                    "Stars": 139,
+                    "Weekly Stars": 49
                 },
                 "McBloom": {
-                    "Stars": 126,
-                    "Weekly Stars": 0
+                    "Stars": 141,
+                    "Weekly Stars": 15
                 },
                 "ruh roh shaggy": {
                     "Stars": 0
@@ -88,12 +88,12 @@
                     "Stars": 0
                 },
                 "usedstarfighter": {
-                    "Stars": 427,
-                    "Weekly Stars": 0
+                    "Stars": 430,
+                    "Weekly Stars": 3
                 },
                 "Rylan": {
-                    "Stars": 45,
-                    "Weekly Stars": 0
+                    "Stars": 59,
+                    "Weekly Stars": 14
                 },
                 "Yuskea": {
                     "Stars": 0
@@ -121,15 +121,15 @@
                     "Stars": 0
                 },
                 "Arsenate": {
-                    "Stars": 156,
-                    "Weekly Stars": 0
+                    "Stars": 44,
+                    "Weekly Stars": -112
                 },
                 "Elliptic": {
                     "Stars": 0
                 },
                 "spagh3tt0": {
-                    "Stars": -486,
-                    "Weekly Stars": 13
+                    "Stars": -817,
+                    "Weekly Stars": -318
                 },
                 "ALin": {
                     "Stars": 0
@@ -141,8 +141,8 @@
                     "Stars": 0
                 },
                 "Bandit": {
-                    "Stars": 72,
-                    "Weekly Stars": 4
+                    "Stars": 68,
+                    "Weekly Stars": 0
                 },
                 "Darren Chui": {
                     "Stars": 0
@@ -163,8 +163,8 @@
                     "Stars": 0
                 },
                 "Rampant Potato": {
-                    "Stars": -452,
-                    "Weekly Stars": 0
+                    "Stars": -479,
+                    "Weekly Stars": -27
                 },
                 "glizzy demon": {
                     "Stars": 0
@@ -182,7 +182,7 @@
                     "Stars": 0
                 }
             },
-            "Sent": true
+            "Sent": false
         }
     }
 }

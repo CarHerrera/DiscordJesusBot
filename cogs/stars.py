@@ -194,7 +194,13 @@ class Stars(commands.Cog):
         rand_num = randint(1, 30)
         guild = msg.guild
         count = 0
-        spam = discord.utils.get(guild.text_channels, name='bot-spam')
+        april_fools = datetime.now().strftime("%m-%d")
+        channel_name = None
+        if april_fools == "04-01":
+            channel_name = "hunter-spam"
+        else:
+            channel_name = "bot-spam"
+        spam = discord.utils.get(guild.text_channels, name=channel_name)
         if msg.guild.name in rules_followed["Guilds"]:
             # Checks if the user that sent a message is in the dictionary, if not will add it to it
             if msg.author.name not in rules_followed["Guilds"][guild.name]["Members"].keys():
@@ -271,7 +277,13 @@ class Stars(commands.Cog):
         channel = await self.client.fetch_channel(payload.channel_id)
         msg = await channel.fetch_message(payload.message_id)
         guild = self.client.get_guild(751678259657441339)
-        spam = discord.utils.get(guild.text_channels, name='bot-spam')
+        april_fools = datetime.now().strftime("%m-%d")
+        channel_name = None
+        if april_fools == "04-01":
+            channel_name = "hunter-spam"
+        else:
+            channel_name = "bot-spam"
+        spam = discord.utils.get(guild.text_channels, name=channel_name)
         bonked = randint(20, 50)
         emote = randint(1,15)
         if payload.member == self.client.user:
@@ -310,7 +322,13 @@ class Stars(commands.Cog):
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         guild = self.client.get_guild(member.guild.id)
-        spam = discord.utils.get(guild.text_channels, name='bot-spam')
+        april_fools = datetime.now().strftime("%m-%d")
+        channel_name = None
+        if april_fools == "04-01":
+            channel_name = "hunter-spam"
+        else:
+            channel_name = "bot-spam"
+        spam = discord.utils.get(guild.text_channels, name=channel_name)
         channel = guild.system_channel
         # print(after.deaf)
         # print(after.mute)
