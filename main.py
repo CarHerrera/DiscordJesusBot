@@ -51,7 +51,7 @@ def timeChecker(currentTime, originalTime, difference):
         return True
 
 def momChecker(String):
-    if "hunter" in String.casefold() and "dad" in String.casefold():
+    if "jesus" in String.casefold() and "mom" in String.casefold():
         print('found hunter and or dad in: \n' + String)
         return True
     else:

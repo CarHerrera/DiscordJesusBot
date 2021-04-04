@@ -194,13 +194,7 @@ class Stars(commands.Cog):
         rand_num = randint(1, 30)
         guild = msg.guild
         count = 0
-        april_fools = datetime.now().strftime("%m-%d")
-        channel_name = None
-        if april_fools == "04-01":
-            channel_name = "hunter-spam"
-        else:
-            channel_name = "bot-spam"
-        spam = discord.utils.get(guild.text_channels, name=channel_name)
+        spam = discord.utils.get(guild.text_channels, name='bot-spam')
         if msg.guild.name in rules_followed["Guilds"]:
             # Checks if the user that sent a message is in the dictionary, if not will add it to it
             if msg.author.name not in rules_followed["Guilds"][guild.name]["Members"].keys():
@@ -241,7 +235,7 @@ class Stars(commands.Cog):
                 rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
                 self.data_gatherer(msg, "Long message", False, -rand_num)
         elif msg.content.isupper():
-            if len(msg.content) > 2:
+            if len(msg.content) > 4:
                 await spam.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for being aggressive"))
                 rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
                 self.data_gatherer(msg, "Message in caps", False, -rand_num)
@@ -252,10 +246,10 @@ class Stars(commands.Cog):
             await spam.send(self.add_stars(msg.author, msg.author.channel, rand_num))
             rules_followed["Guilds"][guild.name]["Members"][msg.author.name] += 1
             self.data_gatherer(msg, "Complimented Bot", True, rand_num)
-        elif rules_followed_counter > 8:
+        elif rules_followed_counter > 14:
             await spam.send(self.add_stars(msg.author, msg.channel, rand_num))
             rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
-            self.data_gatherer(msg, "Didn't trigger an if statement", True, rand_num)
+            self.data_gatherer(msg, "Didn't trigger an if statement", True, randint(30, 90))
         elif any(word in msg.content.casefold() for word in good_words):
             if msg.author.name in timer.keys():
                 dif = timeChecker(datetime.now(), timer[msg.author.name], 10)
@@ -277,13 +271,7 @@ class Stars(commands.Cog):
         channel = await self.client.fetch_channel(payload.channel_id)
         msg = await channel.fetch_message(payload.message_id)
         guild = self.client.get_guild(751678259657441339)
-        april_fools = datetime.now().strftime("%m-%d")
-        channel_name = None
-        if april_fools == "04-01":
-            channel_name = "hunter-spam"
-        else:
-            channel_name = "bot-spam"
-        spam = discord.utils.get(guild.text_channels, name=channel_name)
+        spam = discord.utils.get(guild.text_channels, name='bot-spam')
         bonked = randint(20, 50)
         emote = randint(1,15)
         if payload.member == self.client.user:
@@ -322,13 +310,7 @@ class Stars(commands.Cog):
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         guild = self.client.get_guild(member.guild.id)
-        april_fools = datetime.now().strftime("%m-%d")
-        channel_name = None
-        if april_fools == "04-01":
-            channel_name = "hunter-spam"
-        else:
-            channel_name = "bot-spam"
-        spam = discord.utils.get(guild.text_channels, name=channel_name)
+        spam = discord.utils.get(guild.text_channels, name='bot-spam')
         channel = guild.system_channel
         # print(after.deaf)
         # print(after.mute)

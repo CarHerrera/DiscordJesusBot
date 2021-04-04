@@ -41,8 +41,8 @@ amogus ='<:amogus:810676422981058620>'
 drip ='<:DripMoment:800232915028017202>'
 PepeThink = '<:PepeThink:762416066570747904>'
 HolyPepe = '<:HolyPepe:797304202573119529>'
-excitement_words = ['YOOOOOOOOOOOOOOOOOOO', 'Fuck yes', 'sick','xd', 'ok thats good', 'good post', 'Nice', 'God I wish', 'W','mood', 'epic', 'nice cock','bruh', amogus, drip, PepeThink]
-disgusted_words = ['*laughs nervously*', 'shit', 'L', 'Hmmmm','no', '?','I found the problem','nope','why','what the fuck is happening','sus','shut up','That\'s an L','Bruh',bonk, HolyPepe, bonk*6]
+excitement_words = ['YOOOOOOOOOOOOOOOOOOO', 'nice', 'sick','poggers', 'owa owa', '+1 good meme', 'nice lmao', 'pog pog pog pog', 'W','mood', 'epic', 'epic sauce', amogus, drip, PepeThink]
+disgusted_words = ['wtf', 'die', 'stinky', 'just fuck off already','no', 'gay','cringe','nope','why','I really hate you','sus','shut up','pain',bonk, HolyPepe, bonk*6]
 buy_me = ['can you buy me this', 'buy me this', 'purchase this for me', 'will you buy me this']
 cmd_in_process = False
 fuckOffTimer = datetime.utcnow()
@@ -106,10 +106,10 @@ class Commands(commands.Cog):
                 #     await message.channel.send('Sure.')
                 elif momChecker(message.content.casefold()) is True:
                     print('{0} is where I found mom'.format(message.content))
-                    await message.channel.send('you\'re beyond down bad')
-                # elif fry_role in message.author.roles:
-                #     if counter % 12 == 0:
-                #         await message.channel.send('Yoooooooooo ' + user + ', I hear your fries are a national delight and I am willing to pay top dollar for them. May I put up this formal request for said fries?')
+                    await message.channel.send('Just die already')
+                elif fry_role in message.author.roles:
+                    if counter % 12 == 0:
+                        await message.channel.send('Yoooooooooo ' + user + ', I hear your fries are a national delight and I am willing to pay top dollar for them. May I put up this formal request for said fries?')
         print('Messages sent: ', counter)
         print('Current random Int: ', agreementIndicator)
         print('Current random Int: ', disgustIndicator)
@@ -137,40 +137,35 @@ class Commands(commands.Cog):
         """This command flips a coin"""
         global cmd_in_process
         cmd_in_process = True
-        odds = randint(0,10)
-        if odds< 5:
-            await ctx.send('Heads.')
+        await ctx.send('hold on let me get my lucky nickel')
+        currentTimeInSeconds = datetime.utcnow().second
+        timer = datetime.utcnow().second
+        maxOdds = 10000
+        findcoin = randint(0, maxOdds)
+        difference = timer - currentTimeInSeconds
+        while timer - currentTimeInSeconds < 3:
+            if timer - currentTimeInSeconds < 0:
+                timer = datetime.utcnow().second + 60
+            else:
+                timer = datetime.utcnow().second
         else:
-            await ctx.send('Tails')
-        # await ctx.send('hold on let me get my lucky nickel')
-        # currentTimeInSeconds = datetime.utcnow().second
-        # timer = datetime.utcnow().second
-        # maxOdds = 10000
-        # findcoin = randint(0, maxOdds)
-        # difference = timer - currentTimeInSeconds
-        # while timer - currentTimeInSeconds < 3:
-        #     if timer - currentTimeInSeconds < 0:
-        #         timer = datetime.utcnow().second + 60
-        #     else:
-        #         timer = datetime.utcnow().second
-        # else:
-        #     await ctx.send('alright I got it')
-        #     if findcoin < 100:
-        #         await ctx.send('wtf the coin landed on its side, thats like a {0}% chance'.format((100/maxOdds) * 100))
-        #         return
-        #     elif findcoin < 500:
-        #         await ctx.send('wtf I can\'t find the damn thing. this is some bullshit')
-        #         return
-        #     elif findcoin < 5250:
-        #         await ctx.send('the lucky nickel said heads')
-        #     else:
-        #         await ctx.send('the lucky nickel said tails')
-        #     cmd_in_process = False
+            await ctx.send('alright I got it')
+            if findcoin < 100:
+                await ctx.send('wtf the coin landed on its side, thats like a {0}% chance'.format((100/maxOdds) * 100))
+                return
+            elif findcoin < 500:
+                await ctx.send('wtf I can\'t find the damn thing. this is some bullshit')
+                return
+            elif findcoin < 5250:
+                await ctx.send('the lucky nickel said heads')
+            else:
+                await ctx.send('the lucky nickel said tails')
+            cmd_in_process = False
     @commands.command()
     async def father(self, ctx):
         global cmd_in_process
         cmd_in_process = True
-        jesusMember = await ctx.guild.fetch_member(352550834103386133)
+        jesusMember = await ctx.guild.fetch_member(213090776001937409)
         jesusAt = jesusMember.mention
         await ctx.send('{} father :pleading_face:'.format(jesusAt))
         cmd_in_process = False
