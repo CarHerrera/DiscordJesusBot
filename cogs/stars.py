@@ -196,6 +196,10 @@ class Stars(commands.Cog):
         rand_num = randint(1, 30)
         guild = msg.guild
         count = 0
+        file = open('./settings/counter.txt')
+        message_count = int(file.read().split('=')[1]) % 1000
+        file.close()
+        # print(message_count)
         spam = discord.utils.get(guild.text_channels, name='bot-spam')
         if msg.guild.name in rules_followed["Guilds"]:
             # Checks if the user that sent a message is in the dictionary, if not will add it to it
@@ -227,6 +231,15 @@ class Stars(commands.Cog):
                 timer.update({msg.author.name:datetime.now()})
                 self.data_gatherer(msg, "Bad words", False, -bad_rand)
             return
+        elif message_count % 999 == 0:
+            rand_chance_stars = randint(1000, 6000)
+            chance = randint(1,2)
+            if chance == 1:
+                spam.send(self.add_stars(msg.author,rand_chance_stars, reason =" bc I am feeling generous"))
+                self.data_gatherer(msg, "Good RNG", True,rand_chance_stars)
+            else:
+                spam.send(self.remove(msg.author,-rand_chance_stars, reason =" bc fuck you thats why"))
+                self.data_gatherer(msg, "Bad RNG", True ,-rand_chance_stars)
         elif count > 8:
             spam_rand = randint(10, 40)
             await spam.send(self.remove_stars(msg.author, spam_rand, reason = " for being a dick head"))
