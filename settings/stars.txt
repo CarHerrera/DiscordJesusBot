@@ -1,10 +1,10 @@
 {
     "Guilds": {
-        "Hunter": {
+        "Mega Big Boys": {
             "Members": {
                 "PPmaster27": {
                     "Stars": 10,
-                    "Weekly Stars": 8
+                    "Weekly Stars": 0
                 },
                 "t-rin": {
                     "Stars": 0
@@ -19,21 +19,22 @@
                     "Stars": 0
                 },
                 "LuizSanchez": {
-                    "Stars": 0
+                    "Stars": 15,
+                    "Weekly Stars": 0
                 },
                 "belen": {
                     "Stars": 0
                 },
                 "Dabe": {
-                    "Stars": 14,
-                    "Weekly Stars": 0
+                    "Stars": 29,
+                    "Weekly Stars": 15
                 },
                 "tinyforest": {
                     "Stars": 0
                 },
                 "Antennie": {
-                    "Stars": 3,
-                    "Weekly Stars": 18
+                    "Stars": 142,
+                    "Weekly Stars": 119
                 },
                 "Clara": {
                     "Stars": 0
@@ -42,8 +43,8 @@
                     "Stars": 0
                 },
                 "Shlumperd": {
-                    "Stars": 85,
-                    "Weekly Stars": -1
+                    "Stars": 100,
+                    "Weekly Stars": 15
                 },
                 "fangtx": {
                     "Stars": 0
@@ -55,8 +56,8 @@
                     "Stars": 0
                 },
                 "Big Jello": {
-                    "Stars": 283,
-                    "Weekly Stars": 71
+                    "Stars": 484,
+                    "Weekly Stars": 72
                 },
                 "Xander": {
                     "Stars": 0
@@ -65,12 +66,12 @@
                     "Stars": 0
                 },
                 "Iceberg Lettuce": {
-                    "Stars": 139,
-                    "Weekly Stars": 49
+                    "Stars": 78,
+                    "Weekly Stars": -27
                 },
                 "McBloom": {
-                    "Stars": 141,
-                    "Weekly Stars": 15
+                    "Stars": 124,
+                    "Weekly Stars": 0
                 },
                 "ruh roh shaggy": {
                     "Stars": 0
@@ -88,12 +89,12 @@
                     "Stars": 0
                 },
                 "usedstarfighter": {
-                    "Stars": 430,
-                    "Weekly Stars": 3
+                    "Stars": 1970,
+                    "Weekly Stars": 538
                 },
                 "Rylan": {
-                    "Stars": 59,
-                    "Weekly Stars": 14
+                    "Stars": 80,
+                    "Weekly Stars": 0
                 },
                 "Yuskea": {
                     "Stars": 0
@@ -109,7 +110,7 @@
                 },
                 "monpress": {
                     "Stars": 190,
-                    "Weekly Stars": 0
+                    "Weekly Stars": 11
                 },
                 "Malcon": {
                     "Stars": 0
@@ -121,15 +122,15 @@
                     "Stars": 0
                 },
                 "Arsenate": {
-                    "Stars": 44,
-                    "Weekly Stars": -112
+                    "Stars": 181,
+                    "Weekly Stars": 10
                 },
                 "Elliptic": {
                     "Stars": 0
                 },
                 "spagh3tt0": {
-                    "Stars": -817,
-                    "Weekly Stars": -318
+                    "Stars": -354,
+                    "Weekly Stars": 245
                 },
                 "ALin": {
                     "Stars": 0
@@ -141,8 +142,8 @@
                     "Stars": 0
                 },
                 "Bandit": {
-                    "Stars": 68,
-                    "Weekly Stars": 0
+                    "Stars": -112,
+                    "Weekly Stars": 136
                 },
                 "Darren Chui": {
                     "Stars": 0
@@ -157,14 +158,15 @@
                     "Stars": 0
                 },
                 "Toby5001": {
-                    "Stars": 0
+                    "Stars": 6,
+                    "Weekly Stars": 0
                 },
                 "Bubsquat is me.": {
                     "Stars": 0
                 },
                 "Rampant Potato": {
-                    "Stars": -479,
-                    "Weekly Stars": -27
+                    "Stars": -630,
+                    "Weekly Stars": 24
                 },
                 "glizzy demon": {
                     "Stars": 0
@@ -179,6 +181,9 @@
                     "Stars": 0
                 },
                 "LETS GOOO": {
+                    "Stars": 0
+                },
+                "SALAD": {
                     "Stars": 0
                 }
             },
