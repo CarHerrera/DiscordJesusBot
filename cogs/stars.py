@@ -75,12 +75,12 @@ class Stars(commands.Cog):
                             file_trasnfer.upload_file(file_from, file_to)
                             if stars_data.closed:
                                 stars_data = open("./private/good_noodle_data.csv", "w")
-                                stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel")
+                                stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel\n")
                                 stars_data.close()
                             else:
                                 stars_data.close()
                                 stars_data = open("./private/good_noodle_data.csv", "w")
-                                stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel")
+                                stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel\n")
                                 stars_data.close()
                         except Exception:
                             print(str(Exception))
