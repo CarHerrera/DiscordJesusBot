@@ -376,7 +376,7 @@ class Stars(commands.Cog):
             file = open('./settings/stars.txt', "w+")
             file.write(json.dumps(stars, indent = 4))
             file.close()
-    @commands.Cog.listner()
+    @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         if member.bot is True:
             return
