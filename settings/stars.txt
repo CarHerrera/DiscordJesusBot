@@ -56,8 +56,8 @@
                     "Stars": 0
                 },
                 "Big Jello": {
-                    "Stars": 484,
-                    "Weekly Stars": 72
+                    "Stars": 489,
+                    "Weekly Stars": 77
                 },
                 "Xander": {
                     "Stars": 0
@@ -122,8 +122,8 @@
                     "Stars": 0
                 },
                 "Arsenate": {
-                    "Stars": 181,
-                    "Weekly Stars": 10
+                    "Stars": 186,
+                    "Weekly Stars": 15
                 },
                 "Elliptic": {
                     "Stars": 0
