@@ -405,7 +405,7 @@ class Stars(commands.Cog):
                 difference_in_secs = delta_obj.total_seconds()
                 if difference_in_secs < 300:
                     return
-                stars = difference_in_secs * 0.001
+                stars = int(difference_in_secs * 0.01)
                 if stars < 5:
                     stars = 5
                 elif stars > 70:
