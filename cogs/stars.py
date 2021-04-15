@@ -20,6 +20,7 @@ rules_followed = {"Guilds":{}}
 load_dotenv(dotenv_path = "./private/.env")
 # cities = pandas.DataFrame(columns=['Guild', 'Member', 'Reason', 'Added', 'Stars', 'Day', 'MSGID', 'Channel'])
 # cities.to_csv('./private/good_noodle_data.csv', index = False)
+voice_state = {"Guilds": {}}
 try:
     stars_data = open("./private/good_noodle_data.csv", "a")
 except FileNotFoundError:
@@ -96,6 +97,7 @@ class Stars(commands.Cog):
         global stars, rules_followed
         async for guild in self.client.fetch_guilds():
             rules_followed["Guilds"][guild.name] = {"Members":{}}
+            voice_state["Guilds"][guild.name] = {"Members":{}}
         try:
             file = open('./settings/stars.txt', "r")
             stars = json.loads(file.read())
@@ -123,7 +125,7 @@ class Stars(commands.Cog):
             file = open('./settings/stars.txt', "w+")
             file.write(json.dumps(stars, indent = 4))
             file.close()
-    def remove_stars(self, user, channel, rand_num, reason = ""):
+    def remove_stars(self, user, rand_num, reason = ""):
         """This function removes stars"""
         if user.bot is True:
             return
@@ -131,7 +133,7 @@ class Stars(commands.Cog):
         member = user
         name = member.name
         guild = member.guild
-        print("Weekly Stars" in stars["Guilds"][guild.name]["Members"][name].keys())
+        # print("Weekly Stars" in stars["Guilds"][guild.name]["Members"][name].keys())
         if name in stars["Guilds"][guild.name]["Members"]:
             if "Weekly Stars" in stars["Guilds"][guild.name]["Members"][name].keys():
                 stars["Guilds"][guild.name]["Members"][name]["Weekly Stars"] -= rand_num
@@ -143,7 +145,7 @@ class Stars(commands.Cog):
         file.write(json.dumps(stars, indent = 4))
         file.close()
         return f"{name} loses {rand_num} good noodle star(s){reason}"
-    def add_stars(self, user, channel, rand_num, reason = ""):
+    def add_stars(self, user, rand_num, reason = ""):
         """This function adds stars"""
         if user.bot is True:
             return
@@ -151,7 +153,7 @@ class Stars(commands.Cog):
         member = user
         name = member.name
         guild = member.guild
-        print("Weekly Stars" in stars["Guilds"][guild.name]["Members"][name].keys())
+        # print("Weekly Stars" in stars["Guilds"][guild.name]["Members"][name].keys())
         if name in stars["Guilds"][guild.name]["Members"]:
             if "Weekly Stars" in stars["Guilds"][guild.name]["Members"][name].keys():
                 stars["Guilds"][guild.name]["Members"][name]["Weekly Stars"] += rand_num
@@ -204,53 +206,54 @@ class Stars(commands.Cog):
         except:
             difference = None
         rules_followed_counter = rules_followed["Guilds"][guild.name]["Members"][msg.author.name]
-        # async for message in msg.channel.history(limit = 10):
-        #     if len(message.attachments) > 0 or len(message.embeds) > 0:
-        #         pass
-        #     elif message.author == msg.author:
-        #         count+= 1
+        if msg.channel.id == 762894482311217172 or msg.channel.id == 776308635369472030:
+            pass
+        else:
+            async for message in msg.channel.history(limit = 10):
+                if message.author == msg.author:
+                    count+= 1
         if any(word in msg.content.casefold() for word in bad_words):
             bad_rand = randint(1, 30)
             if msg.author.name in timer.keys():
                 dif = timeChecker(datetime.now(), timer[msg.author.name], 10)
                 if dif is True:
-                    await spam.send(self.remove_stars(msg.author, msg.channel, bad_rand))
+                    await spam.send(self.remove_stars(msg.author, bad_rand))
                     rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
                     timer.update({msg.author.name:datetime.now()})
                     self.data_gatherer(msg, "Bad words", False, -bad_rand)
             else:
-                await spam.send(self.remove_stars(msg.author, msg.channel, bad_rand))
+                await spam.send(self.remove_stars(msg.author, bad_rand))
                 rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
                 timer.update({msg.author.name:datetime.now()})
                 self.data_gatherer(msg, "Bad words", False, -bad_rand)
             return
         elif count > 8:
             spam_rand = randint(10, 40)
-            await spam.send(self.remove_stars(msg.author, msg.channel, spam_rand, reason = " for being a dick head"))
+            await spam.send(self.remove_stars(msg.author, spam_rand, reason = " for being a dick head"))
             rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
             self.data_gatherer(msg, "Spammed Messages", False, -spam_rand)
         elif len(msg.content) > 300:
             if len(msg.embeds) > 0 or len(msg.attachments) > 0:
                 return
             else:
-                await spam.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for sending way to long of a message"))
+                await spam.send(self.remove_stars(msg.author, rand_num, reason = " for sending way to long of a message"))
                 rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
                 self.data_gatherer(msg, "Long message", False, -rand_num)
         elif msg.content.isupper():
             if len(msg.content) > 4:
-                await spam.send(self.remove_stars(msg.author, msg.channel, rand_num, reason = " for being aggressive"))
+                await spam.send(self.remove_stars(msg.author, rand_num, reason = " for being aggressive"))
                 rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
                 self.data_gatherer(msg, "Message in caps", False, -rand_num)
                 return
             else:
                 return
         elif "bot" in msg.content.casefold() and "poppin" in msg.content.casefold():
-            await spam.send(self.add_stars(msg.author, msg.author.channel, rand_num))
+            await spam.send(self.add_stars(msg.author, rand_num))
             rules_followed["Guilds"][guild.name]["Members"][msg.author.name] += 1
             self.data_gatherer(msg, "Complimented Bot", True, rand_num)
         elif rules_followed_counter > 14:
             no_trigger = randint(40, 90)
-            await spam.send(self.add_stars(msg.author, msg.channel, no_trigger))
+            await spam.send(self.add_stars(msg.author, no_trigger))
             rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
             self.data_gatherer(msg, "Didn't trigger an if statement", True, no_trigger)
         elif any(word in msg.content.casefold() for word in good_words):
@@ -258,12 +261,12 @@ class Stars(commands.Cog):
             if msg.author.name in timer.keys():
                 dif = timeChecker(datetime.now(), timer[msg.author.name], 10)
                 if dif is True:
-                    await spam.send(self.add_stars(msg.author, msg.channel, nice_rand))
+                    await spam.send(self.add_stars(msg.author, nice_rand))
                     rules_followed["Guilds"][guild.name]["Members"][msg.author.name] += 1
                     timer.update({msg.author.name:datetime.now()})
                     self.data_gatherer(msg, "Said nice word", True, nice_rand)
             else:
-                await spam.send(self.add_stars(msg.author, msg.channel, nice_rand))
+                await spam.send(self.add_stars(msg.author, nice_rand))
                 timer.update({msg.author.name:datetime.now()})
                 self.data_gatherer(msg, "Said nice word", True, nice_rand)
         else:
@@ -274,7 +277,7 @@ class Stars(commands.Cog):
         global stars
         channel = await self.client.fetch_channel(payload.channel_id)
         msg = await channel.fetch_message(payload.message_id)
-        guild = self.client.get_guild(751678259657441339)
+        guild = self.client.get_guild(payload.guild_id)
         spam = discord.utils.get(guild.text_channels, name='bot-spam')
         bonked = randint(20, 50)
         emote = randint(1,15)
@@ -282,34 +285,46 @@ class Stars(commands.Cog):
             return
         # Bonk Emoji
         if payload.emoji.id == 797305732063297536 and msg.author.bot is False:
+            if guild.name in rules_followed["Guilds"]:
+                # Checks if the user that sent a message is in the dictionary, if not will add it to it
+                if msg.author.name not in rules_followed["Guilds"][guild.name]["Members"].keys():
+                    rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
             # Checks if person who reacted has reacted before
             if payload.member.name in timer.keys():
                 dif = timeChecker(datetime.now(), timer[payload.member.name], 5)
                 if dif is True:
                     # Removes stars from the person who sent the message
-                    await spam.send(self.remove_stars(msg.author, channel, bonked, reason = f" for being bonked by {payload.member.name}"))
+                    await spam.send(self.remove_stars(msg.author, bonked, reason = f" for being bonked by {payload.member.name}"))
                     timer.update({payload.member.name:datetime.now()})
                     self.data_gatherer(msg, "got bonked", False, -bonked)
+                    rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
                     return
             else:
-                await spam.send(self.remove_stars(msg.author, channel, bonked, reason = f" for being bonked by {payload.member.name}"))
+                await spam.send(self.remove_stars(msg.author, bonked, reason = f" for being bonked by {payload.member.name}"))
                 # Adds person to the timer dictionary
                 timer.update({payload.member.name:datetime.now()})
+                rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
                 self.data_gatherer(msg, "got bonked", False, -bonked)
                 return
         # Any other emoji
         else:
+            if guild.name in rules_followed["Guilds"]:
+                # Checks if the user that sent a message is in the dictionary, if not will add it to it
+                if payload.member.name not in rules_followed["Guilds"][guild.name]["Members"].keys():
+                    rules_followed["Guilds"][guild.name]["Members"][payload.member.name] = 0
             if payload.member.name in timer.keys():
                 dif = timeChecker(datetime.now(), timer[payload.member.name], 20)
                 if dif:
-                    await spam.send(self.add_stars(payload.member, msg, emote, reason = " for emoting"))
+                    await spam.send(self.add_stars(payload.member, emote, reason = " for emoting"))
                     timer.update({payload.member.name:datetime.now()})
                     self.data_gatherer(payload.member, "Reacted to a message", True, emote)
+                    rules_followed["Guilds"][guild.name]["Members"][payload.member.name] += 1
                     return
             else:
-                await spam.send(self.add_stars(payload.member, msg, emote, reason = " for emoting"))
+                await spam.send(self.add_stars(payload.member, emote, reason = " for emoting"))
                 timer.update({payload.member.name:datetime.now()})
                 self.data_gatherer(payload.member, "Reacted to a message", True, emote)
+                rules_followed["Guilds"][guild.name]["Members"][payload.member.name] += 1
                 return
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
@@ -324,8 +339,14 @@ class Stars(commands.Cog):
             counter = 1
             async for thing in audit_logs:
                 if thing.action == discord.AuditLogAction.member_update:
-                    await spam.send(self.remove_stars(thing.user, channel,rand_num, reason = f" for muting/deafing {member.name}"))
+                    await spam.send(self.remove_stars(thing.user,rand_num, reason = f" for muting/deafing {member.name}"))
                     self.data_gatherer(thing.user, "Deafened a person", False, -rand_num)
+                    if guild.name in rules_followed["Guilds"]:
+                        # Checks if the user that sent a message is in the dictionary, if not will add it to it
+                        if thing.user.name not in rules_followed["Guilds"][guild.name]["Members"].keys():
+                            rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
+                        else:
+                            rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
                     return
     @commands.Cog.listener()
     async def on_member_join(member):
@@ -340,6 +361,47 @@ class Stars(commands.Cog):
         file = open('./settings/stars.txt', "w+")
         file.write(json.dumps(stars, indent = 4))
         file.close()
+
+    @commands.Cog.listener()
+    async def on_user_update(self, before, after):
+        if before.bot or after.bot:
+            return
+        if before.name != after.name:
+            async for guild in self.client.fetch_guilds():
+                for member in guild.fetch_members():
+                    if before.name in stars['Guilds'][guild.name]["Members"].keys():
+                        temp_stars = stars['Guilds'][guild.name]["Members"][before.name]["Stars"]
+                        stars["Guilds"][member.guild.name]["Members"].pop(before.name)
+                        stars["Guilds"][member.guild.name]["Members"][after.name] = {'Stars':temp_stars}
+            file = open('./settings/stars.txt', "w+")
+            file.write(json.dumps(stars, indent = 4))
+            file.close()
+    @commands.Cog.listner()
+    async def on_voice_state_update(self, member, before, after):
+        if member.bot is True:
+            return
+        guild = member.guild
+        spam = discord.utils.get(guild.text_channels, name='bot-spam')
+        stars = 0
+        if guild.name in voice_state["Guilds"]:
+            if member.name not in voice_state['Guilds'][guild.name]["Members"].keys() and after.channel is not None:
+                voice_state['Guilds'][guild.name]["Members"][member.name] = datetime.now()
+        if after.channel is None:
+            delta_obj = datetime.now() -voice_state['Guilds'][guild.name]["Members"][member.name]
+            difference_in_secs = delta_obj.total_seconds()
+            if difference_in_secs < 300:
+                return
+            stars = difference_in_secs * 0.001
+            if stars < 5:
+                stars = 5
+            elif stars > 70:
+                stars = 70
+            if before.afk:
+                stars *= -1
+                await spam.send(self.remove_stars(member, stars, reason = " being in afk channel"))
+            else:
+                await spam.send(self.add_stars(member, stars))
+            voice_state['Guilds'][guild.name]["Members"].pop(member.name)
     @commands.command()
     async def stars(self, ctx):
         """This commands allow the user to see how many stars they have, or the person they pinged has"""
