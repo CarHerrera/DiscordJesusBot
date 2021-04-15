@@ -383,25 +383,30 @@ class Stars(commands.Cog):
         guild = member.guild
         spam = discord.utils.get(guild.text_channels, name='bot-spam')
         stars = 0
-        if guild.name in voice_state["Guilds"]:
-            if member.name not in voice_state['Guilds'][guild.name]["Members"].keys() and after.channel is not None:
-                voice_state['Guilds'][guild.name]["Members"][member.name] = datetime.now()
-        if after.channel is None:
-            delta_obj = datetime.now() -voice_state['Guilds'][guild.name]["Members"][member.name]
-            difference_in_secs = delta_obj.total_seconds()
-            if difference_in_secs < 300:
-                return
-            stars = difference_in_secs * 0.001
-            if stars < 5:
-                stars = 5
-            elif stars > 70:
-                stars = 70
-            if before.afk:
-                stars *= -1
-                await spam.send(self.remove_stars(member, stars, reason = " being in afk channel"))
-            else:
-                await spam.send(self.add_stars(member, stars))
-            voice_state['Guilds'][guild.name]["Members"].pop(member.name)
+        try:
+            if guild.name in voice_state["Guilds"]:
+                if member.name not in voice_state['Guilds'][guild.name]["Members"].keys() and after.channel is not None:
+                    voice_state['Guilds'][guild.name]["Members"][member.name] = datetime.now()
+            if after.channel is None:
+                delta_obj = datetime.now() -voice_state['Guilds'][guild.name]["Members"][member.name]
+                difference_in_secs = delta_obj.total_seconds()
+                if difference_in_secs < 300:
+                    return
+                stars = difference_in_secs * 0.001
+                if stars < 5:
+                    stars = 5
+                elif stars > 70:
+                    stars = 70
+                if before.afk:
+                    stars *= -1
+                    await spam.send(self.remove_stars(member, stars, reason = " being in afk channel"))
+                    self.data_gatherer(member, "Was in afk channel", False, stars)
+                else:
+                    await spam.send(self.add_stars(member, stars))
+                    self.data_gatherer(member, "Being in a VC", False, stars)
+                voice_state['Guilds'][guild.name]["Members"].pop(member.name)
+        except:
+            print('Was in a voice channel and was not added to dict')
     @commands.command()
     async def stars(self, ctx):
         """This commands allow the user to see how many stars they have, or the person they pinged has"""
