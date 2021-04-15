@@ -362,14 +362,14 @@ class Stars(commands.Cog):
                             rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
                     return
     @commands.Cog.listener()
-    async def on_member_join(member):
+    async def on_member_join(self, member):
         stars["Guilds"][member.guild.name]["Members"][member.name] = {"Stars":0}
         file = open('./settings/stars.txt', "w+")
         file.write(json.dumps(stars, indent = 4))
         file.close()
         # print(member.name, sep = " ")
     @commands.Cog.listener()
-    async def on_member_remove(member):
+    async def on_member_remove(self, member):
         stars["Guilds"][member.guild.name]["Members"].pop(member.name)
         file = open('./settings/stars.txt', "w+")
         file.write(json.dumps(stars, indent = 4))
