@@ -264,7 +264,7 @@ class Stars(commands.Cog):
             await spam.send(self.add_stars(msg.author, rand_num))
             rules_followed["Guilds"][guild.name]["Members"][msg.author.name] += 1
             self.data_gatherer(msg, "Complimented Bot", True, rand_num)
-        elif rules_followed_counter > 14:
+        elif rules_followed_counter > 19:
             no_trigger = randint(40, 90)
             await spam.send(self.add_stars(msg.author, no_trigger))
             rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
@@ -287,13 +287,13 @@ class Stars(commands.Cog):
 
     @commands.Cog.listener('on_raw_reaction_add')
     async def check_reaction(self, payload):
-        global stars
+        global stars, rules_followed_counter
         channel = await self.client.fetch_channel(payload.channel_id)
         msg = await channel.fetch_message(payload.message_id)
         guild = self.client.get_guild(payload.guild_id)
         spam = discord.utils.get(guild.text_channels, name='bot-spam')
-        bonked = randint(20, 50)
-        emote = randint(1,15)
+        bonked = randint(30, 80)
+        emote = randint(5,20)
         if payload.member == self.client.user:
             return
         # Bonk Emoji
@@ -328,17 +328,29 @@ class Stars(commands.Cog):
             if payload.member.name in timer.keys():
                 dif = timeChecker(datetime.now(), timer[payload.member.name], 20)
                 if dif:
+                    if rules_followed_counter > 19:
+                        no_trigger = randint(40, 90)
+                        await spam.send(self.add_stars(msg.author, no_trigger))
+                        rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
+                        self.data_gatherer(msg, "Didn't trigger an if statement", True, no_trigger)
+                    else:
+                        await spam.send(self.add_stars(payload.member, emote, reason = " for emoting"))
+                        timer.update({payload.member.name:datetime.now()})
+                        self.data_gatherer(payload.member, "Reacted to a message", True, emote)
+                        rules_followed["Guilds"][guild.name]["Members"][payload.member.name] += 1
+                        return
+            else:
+                if rules_followed_counter > 19:
+                    no_trigger = randint(40, 90)
+                    await spam.send(self.add_stars(msg.author, no_trigger))
+                    rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
+                    self.data_gatherer(msg, "Didn't trigger an if statement", True, no_trigger)
+                else:
                     await spam.send(self.add_stars(payload.member, emote, reason = " for emoting"))
                     timer.update({payload.member.name:datetime.now()})
                     self.data_gatherer(payload.member, "Reacted to a message", True, emote)
                     rules_followed["Guilds"][guild.name]["Members"][payload.member.name] += 1
                     return
-            else:
-                await spam.send(self.add_stars(payload.member, emote, reason = " for emoting"))
-                timer.update({payload.member.name:datetime.now()})
-                self.data_gatherer(payload.member, "Reacted to a message", True, emote)
-                rules_followed["Guilds"][guild.name]["Members"][payload.member.name] += 1
-                return
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         guild = self.client.get_guild(member.guild.id)
@@ -408,8 +420,8 @@ class Stars(commands.Cog):
                 stars = int(difference_in_secs * 0.01)
                 if stars < 5:
                     stars = 5
-                elif stars > 70:
-                    stars = 70
+                elif stars > 180:
+                    stars = 180
                 if before.afk:
                     stars *= -1
                     await spam.send(self.remove_stars(member, stars, reason = " being in afk channel"))
