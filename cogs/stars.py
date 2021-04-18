@@ -214,8 +214,10 @@ class Stars(commands.Cog):
             pass
         else:
             async for message in msg.channel.history(limit = 10):
-                if message.author == msg.author:
-                    count+= 1
+                time_dif = datetime.utcnow() - message.created_at
+                if time_dif.total_seconds() < 600:
+                    if message.author == msg.author:
+                        count+= 1
         if any(word in msg.content.casefold() for word in bad_words):
             bad_rand = randint(1, 30)
             if msg.author.name in timer.keys():
@@ -287,7 +289,7 @@ class Stars(commands.Cog):
 
     @commands.Cog.listener('on_raw_reaction_add')
     async def check_reaction(self, payload):
-        global stars, rules_followed_counter
+        global stars, rules_followed
         channel = await self.client.fetch_channel(payload.channel_id)
         msg = await channel.fetch_message(payload.message_id)
         guild = self.client.get_guild(payload.guild_id)
@@ -353,6 +355,7 @@ class Stars(commands.Cog):
                     return
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
+        global rules_followed
         guild = self.client.get_guild(member.guild.id)
         spam = discord.utils.get(guild.text_channels, name='bot-spam')
         channel = guild.system_channel
