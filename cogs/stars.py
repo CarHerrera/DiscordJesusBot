@@ -37,7 +37,6 @@ class Stars(commands.Cog):
         global last_reset, stars, stars_data
         day = datetime.now().strftime("%A")
         time = datetime.now()
-        count = 0
         for guild in self.client.guilds:
             sent = stars["Guilds"][guild.name]["Sent"]
             if (day == "Monday" and time.hour == 12) and sent is False:
@@ -47,9 +46,6 @@ class Stars(commands.Cog):
                     if member.bot is True:
                         continue
                     # Checks if the member has weekly stars then resets it
-                    if member.name not in stars["Guilds"][guild.name]["Members"]:
-                       stars["Guilds"][guild.name]["Members"][member.name] = {"Stars":0}
-                       print(member.name)
                     if "Weekly Stars" in stars["Guilds"][guild.name]["Members"][member.name]:
                         number_of_stars.append(stars["Guilds"][guild.name]["Members"][member.name]["Weekly Stars"])
                         members_list.append(member.name)
@@ -67,24 +63,24 @@ class Stars(commands.Cog):
                     await channel.send(f"{member.mention} got this weeks highest stars at {highest_stars} and unsurprisngly {lowest_member.mention} got the lowest amount of stars at {lowest_stars}")
                     stars["Guilds"][guild.name]["Sent"] = True
                     count+=1
-                    if stars["Guilds"][guild.name]["Sent"] is True and count == 1:
-                        try:
-                            file_trasnfer = db_uploader.TransferData(os.getenv('ACCESS_TOKEN'))
-                            file_from = "./private/good_noodle_data.csv"
-                            today = datetime.now().strftime("%m-%d-%y")
-                            file_to = f"/code/Python/Discord/StarsData/{today} stars.csv"
-                            file_trasnfer.upload_file(file_from, file_to)
-                            if stars_data.closed:
-                                stars_data = open("./private/good_noodle_data.csv", "w")
-                                stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel\n")
-                                stars_data.close()
-                            else:
-                                stars_data.close()
-                                stars_data = open("./private/good_noodle_data.csv", "w")
-                                stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel\n")
-                                stars_data.close()
-                        except Exception:
-                            print(str(Exception))
+            elif stars["Guilds"][guild.name]["Sent"] is True and time.minute == 2:
+                try:
+                    file_trasnfer = db_uploader.TransferData(os.getenv('ACCESS_TOKEN'))
+                    file_from = "./private/good_noodle_data.csv"
+                    today = datetime.now().strftime("%m-%d-%y")
+                    file_to = f"/code/Python/Discord/StarsData/{today} stars.csv"
+                    file_trasnfer.upload_file(file_from, file_to)
+                    if stars_data.closed:
+                        stars_data = open("./private/good_noodle_data.csv", "w")
+                        stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel\n")
+                        stars_data.close()
+                    else:
+                        stars_data.close()
+                        stars_data = open("./private/good_noodle_data.csv", "w")
+                        stars_data.write("Guild,Member,Reason,Added,Stars,Day,MSGID,Channel\n")
+                        stars_data.close()
+                except Exception:
+                    print(str(Exception))
             elif day != "Monday":
                 stars["Guilds"][guild.name]["Sent"] = False
         file = open('./settings/stars.txt', "w")
@@ -304,6 +300,8 @@ class Stars(commands.Cog):
                 # Checks if the user that sent a message is in the dictionary, if not will add it to it
                 if msg.author.name not in rules_followed["Guilds"][guild.name]["Members"].keys():
                     rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
+                else:
+                    rules_followed_counter = rules_followed["Guilds"][guild.name]["Members"][msg.author.name]
             # Checks if person who reacted has reacted before
             if payload.member.name in timer.keys():
                 dif = timeChecker(datetime.now(), timer[payload.member.name], 5)
@@ -327,6 +325,8 @@ class Stars(commands.Cog):
                 # Checks if the user that sent a message is in the dictionary, if not will add it to it
                 if payload.member.name not in rules_followed["Guilds"][guild.name]["Members"].keys():
                     rules_followed["Guilds"][guild.name]["Members"][payload.member.name] = 0
+                else:
+                    rules_followed_counter = rules_followed["Guilds"][guild.name]["Members"][msg.author.name]
             if payload.member.name in timer.keys():
                 dif = timeChecker(datetime.now(), timer[payload.member.name], 20)
                 if dif:
