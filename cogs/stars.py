@@ -413,7 +413,7 @@ class Stars(commands.Cog):
         stars = 0
         try:
             if guild.name in voice_state["Guilds"]:
-                if after.channel is not None:
+                if after.channel is not None and member.name not in voice_state['Guilds'][guild.name]["Members"]:
                     voice_state['Guilds'][guild.name]["Members"][member.name] = datetime.now()
             if after.channel is None:
                 delta_obj = datetime.now() -voice_state['Guilds'][guild.name]["Members"][member.name]
