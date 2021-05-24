@@ -39,17 +39,20 @@ class Stars(commands.Cog):
         time = datetime.now()
         for guild in self.client.guilds:
             sent = stars["Guilds"][guild.name]["Sent"]
-            if (day == "Monday" and time.hour == 12) and sent is False:
+            if (day == "Monday" and time.hour == 15) and sent is False:
                 number_of_stars = []
                 members_list = []
                 for member in guild.members:
                     if member.bot is True:
                         continue
                     # Checks if the member has weekly stars then resets it
-                    if "Weekly Stars" in stars["Guilds"][guild.name]["Members"][member.name]:
-                        number_of_stars.append(stars["Guilds"][guild.name]["Members"][member.name]["Weekly Stars"])
-                        members_list.append(member.name)
-                        stars["Guilds"][guild.name]["Members"][member.name]["Weekly Stars"] = 0
+                    try:
+                        if "Weekly Stars" in stars["Guilds"][guild.name]["Members"][member.name]:
+                            number_of_stars.append(stars["Guilds"][guild.name]["Members"][member.name]["Weekly Stars"])
+                            members_list.append(member.name)
+                            stars["Guilds"][guild.name]["Members"][member.name]["Weekly Stars"] = 0
+                    except:
+                        stars["Guilds"][guild.name]["Members"][member.name] = {"Stars": 0}
                 if len(number_of_stars) > 0:
                     channel = discord.utils.get(guild.text_channels, name='bot-spam')
                     highest_stars = max(number_of_stars)
@@ -62,8 +65,6 @@ class Stars(commands.Cog):
                     print(f'Sent out {guild.name} star information')
                     await channel.send(f"{member.mention} got this weeks highest stars at {highest_stars} and unsurprisngly {lowest_member.mention} got the lowest amount of stars at {lowest_stars}")
                     stars["Guilds"][guild.name]["Sent"] = True
-                    count+=1
-            elif stars["Guilds"][guild.name]["Sent"] is True and time.minute == 2:
                 try:
                     file_trasnfer = db_uploader.TransferData(os.getenv('ACCESS_TOKEN'))
                     file_from = "./private/good_noodle_data.csv"
@@ -404,6 +405,7 @@ class Stars(commands.Cog):
             file.close()
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
+        global voice_state
         if member.bot is True:
             return
         guild = member.guild
@@ -411,7 +413,7 @@ class Stars(commands.Cog):
         stars = 0
         try:
             if guild.name in voice_state["Guilds"]:
-                if member.name not in voice_state['Guilds'][guild.name]["Members"].keys() and after.channel is not None:
+                if after.channel is not None:
                     voice_state['Guilds'][guild.name]["Members"][member.name] = datetime.now()
             if after.channel is None:
                 delta_obj = datetime.now() -voice_state['Guilds'][guild.name]["Members"][member.name]
