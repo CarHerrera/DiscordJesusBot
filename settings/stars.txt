@@ -33,8 +33,8 @@
                     "Stars": 0
                 },
                 "Antennie": {
-                    "Stars": 1614,
-                    "Weekly Stars": 0
+                    "Stars": 3210,
+                    "Weekly Stars": 912
                 },
                 "Clara": {
                     "Stars": 0
@@ -43,8 +43,8 @@
                     "Stars": 0
                 },
                 "Shlumperd": {
-                    "Stars": 556,
-                    "Weekly Stars": 0
+                    "Stars": 1389,
+                    "Weekly Stars": 833
                 },
                 "fangtx": {
                     "Stars": 0
@@ -53,12 +53,12 @@
                     "Stars": 0
                 },
                 "Deltaninja36": {
-                    "Stars": 19,
-                    "Weekly Stars": 0
+                    "Stars": 50,
+                    "Weekly Stars": 31
                 },
                 "Big Jello": {
-                    "Stars": 690,
-                    "Weekly Stars": 0
+                    "Stars": 1126,
+                    "Weekly Stars": 436
                 },
                 "Xander": {
                     "Stars": 0
@@ -67,12 +67,12 @@
                     "Stars": 0
                 },
                 "Iceberg Lettuce": {
-                    "Stars": 1723,
-                    "Weekly Stars": 0
+                    "Stars": 4432,
+                    "Weekly Stars": 2709
                 },
                 "McBloom": {
-                    "Stars": 352,
-                    "Weekly Stars": 0
+                    "Stars": 792,
+                    "Weekly Stars": 440
                 },
                 "ruh roh shaggy": {
                     "Stars": 0
@@ -84,22 +84,23 @@
                     "Stars": 0
                 },
                 "thespeedturtle": {
-                    "Stars": 53,
-                    "Weekly Stars": 0
+                    "Stars": 249,
+                    "Weekly Stars": 159
                 },
                 "sashka.draws": {
                     "Stars": 0
                 },
                 "usedstarfighter": {
-                    "Stars": 3780,
-                    "Weekly Stars": 0
+                    "Stars": 19805,
+                    "Weekly Stars": 11328
                 },
                 "Rylan": {
-                    "Stars": 154,
-                    "Weekly Stars": 0
+                    "Stars": 415,
+                    "Weekly Stars": 150
                 },
                 "Yuskea": {
-                    "Stars": 0
+                    "Stars": 5,
+                    "Weekly Stars": 5
                 },
                 "HeyItsMatt": {
                     "Stars": 0
@@ -111,8 +112,8 @@
                     "Stars": 0
                 },
                 "monpress": {
-                    "Stars": 190,
-                    "Weekly Stars": 0
+                    "Stars": 660,
+                    "Weekly Stars": 470
                 },
                 "Malcon": {
                     "Stars": 0
@@ -124,29 +125,31 @@
                     "Stars": 0
                 },
                 "Arsenate": {
-                    "Stars": 6252,
-                    "Weekly Stars": 0
+                    "Stars": 11667,
+                    "Weekly Stars": 1515
                 },
                 "Elliptic": {
-                    "Stars": 0
+                    "Stars": 5,
+                    "Weekly Stars": 5
                 },
                 "spagh3tt0": {
-                    "Stars": 967,
-                    "Weekly Stars": 0
+                    "Stars": 9273,
+                    "Weekly Stars": 8306
                 },
                 "ALin": {
-                    "Stars": 91,
-                    "Weekly Stars": 0
+                    "Stars": 547,
+                    "Weekly Stars": 456
                 },
                 "Mr Shifter": {
-                    "Stars": 0
+                    "Stars": 342,
+                    "Weekly Stars": 209
                 },
                 "bearfan444": {
                     "Stars": 0
                 },
                 "Bandit": {
-                    "Stars": 1496,
-                    "Weekly Stars": 0
+                    "Stars": 5330,
+                    "Weekly Stars": 2420
                 },
                 "Darren Chui": {
                     "Stars": 0
@@ -158,19 +161,19 @@
                     "Stars": 0
                 },
                 "Kou Tokachi": {
-                    "Stars": 15,
-                    "Weekly Stars": 0
+                    "Stars": -99,
+                    "Weekly Stars": -114
                 },
                 "Toby5001": {
-                    "Stars": 6,
-                    "Weekly Stars": 0
+                    "Stars": 724,
+                    "Weekly Stars": 340
                 },
                 "Bubsquat is me.": {
                     "Stars": 0
                 },
                 "Rampant Potato": {
-                    "Stars": 851,
-                    "Weekly Stars": 0
+                    "Stars": 4504,
+                    "Weekly Stars": 2325
                 },
                 "glizzy demon": {
                     "Stars": 0
@@ -191,13 +194,25 @@
                     "Stars": 0
                 },
                 "Levi Comets": {
-                    "Stars": 0
+                    "Stars": 44,
+                    "Weekly Stars": 44
                 },
                 "13 is the new 18": {
                     "Stars": 0
+                },
+                "jakeduffles": {
+                    "Stars": 0
+                },
+                "Kermit the Frog": {
+                    "Stars": 899,
+                    "Weekly Stars": 899
+                },
+                "ToastyRocket": {
+                    "Stars": 25,
+                    "Weekly Stars": 25
                 }
             },
-            "Sent": true
+            "Sent": false
         }
     }
 }
