@@ -232,13 +232,8 @@ class Stars(commands.Cog):
             return
         elif message_count % 999 == 0:
             rand_chance_stars = randint(1000, 6000)
-            chance = randint(1,2)
-            if chance == 1:
-                spam.send(self.add_stars(msg.author,rand_chance_stars, reason =" bc I am feeling generous"))
-                self.data_gatherer(msg, "Good RNG", True,rand_chance_stars)
-            else:
-                spam.send(self.remove(msg.author,-rand_chance_stars, reason =" bc fuck you thats why"))
-                self.data_gatherer(msg, "Bad RNG", True ,-rand_chance_stars)
+            spam.send(self.remove(msg.author,-rand_chance_stars, reason =" bc fuck you thats why"))
+            self.data_gatherer(msg, "Bad RNG", True ,-rand_chance_stars)
         elif count > 8:
             spam_rand = randint(10, 40)
             await spam.send(self.remove_stars(msg.author, spam_rand, reason = " for being a dick head"))
@@ -435,6 +430,14 @@ class Stars(commands.Cog):
                 voice_state['Guilds'][guild.name]["Members"].pop(member.name)
         except:
             print('Was in a voice channel and was not added to dict')
+    @commands.Cog.listener()
+    async def on_guild_update(self, before, after):
+        if before.name != after.name:
+            stars["Guilds"][after.name] = stars["Guilds"][before.name]
+            del stars["Guilds"][before.name]
+            file = open('./settings/stars.txt', "w+")
+            file.write(json.dumps(stars, indent = 4))
+            file.close()
     @commands.command()
     async def stars(self, ctx):
         """This commands allow the user to see how many stars they have, or the person they pinged has"""
