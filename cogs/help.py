@@ -24,6 +24,7 @@ class Help(commands.Cog):
         commands.add_field(name = '$rps', value = 'Plays rock paper scissors with me')
         commands.add_field(name = '$uwuify', value = 'Uwuifys the message that was sent to it')
         commands.add_field(name = '$meme', value = "Sends a random meme from these 4 subreddits, okbuddyretard, dankmemes, HolUp, SuddenlyGay")
+        commands.add_field(name = '$change', value = "Brings up the different settings that the bot currently supports")
         await ctx.send(embed = commands)
     @help.command(name = 'trigger')
     async def triggerCommands(self, ctx):
@@ -53,6 +54,9 @@ class Help(commands.Cog):
     async def workInProgress(self, ctx):
         progress = discord.Embed(title = 'Things that are currently a work in progress',inline = False)
         progress.add_field(name = 'Ball itch', value = "If the 'Repost is ball itch' image is sent in the server, the bot will send the image as well", inline = False)
+        progress.add_field(name = 'Dip', value = "When this command is invoked, it will make it so that the person @'d can no longer be in the same vc as you", inline = False)
+        progress.add_field(name = 'Message Settings', value = "Similar to the stars except for the messages that the bot sends", inline = False)
+        progress.add_field(name = 'Game deals', value = "Go through a reddit called game deals and find any deals/free games", inline = False)
         await ctx.send(embed = progress)
 def setup(client):
     client.add_cog(Help(client))
