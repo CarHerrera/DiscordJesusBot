@@ -106,16 +106,16 @@ class Stars(commands.Cog):
             file = open('./settings/stars.txt', "r")
             stars = json.loads(file.read())
             file.close()
-            # async for guild in self.client.fetch_guilds():
-            #     async for member in guild.fetch_members():
-            #         if member.bot is True:
-            #             continue
-            #         if 'Weekly Stars' not in stars['Guilds'][guild.name]['Members'][member.name].keys():
-            #             stars["Guilds"][guild.name]["Members"][member.name]['Weekly Stars'] = 0
-            #         stars["Guilds"][guild.name]["Members"][member.name]['Daily'] = 0
-            # file = open('./settings/stars.txt', "w+")
-            # file.write(json.dumps(stars, indent = 4))
-            # file.close()
+            async for guild in self.client.fetch_guilds():
+                async for member in guild.fetch_members():
+                    if member.bot is True:
+                        continue
+                    if 'Weekly Stars' not in stars['Guilds'][guild.name]['Members'][member.name].keys():
+                        stars["Guilds"][guild.name]["Members"][member.name]['Weekly Stars'] = 0
+                    stars["Guilds"][guild.name]["Members"][member.name]['Daily'] = 0
+            file = open('./settings/stars.txt', "w+")
+            file.write(json.dumps(stars, indent = 4))
+            file.close()
             print("Opened existing file")
         except FileNotFoundError:
             stars = {"Guilds":{}}
@@ -224,7 +224,7 @@ class Stars(commands.Cog):
         elif settings['Guilds'][guild.name]['Settings']['Stars']['MSG Stars'] is False:
             return
         count = 0
-        file = open('./settings/sample.txt')
+        file = open('./settings/counter.txt')
         message_count = int(file.read().split('=')[1]) % 1000
         file.close()
         # print(message_count)
