@@ -321,8 +321,8 @@ class Stars(commands.Cog):
                 self.data_gatherer(msg, "Said nice word", True, nice_rand)
         else:
             rules_followed["Guilds"][guild.name]["Members"][msg.author.name] += 1
-        print()
         if settings['Guilds'][guild.name]['Settings']['Stars']['Star Updates'] and star_update is not None:
+            print(star_update)
             await spam.send(star_update)
         else:
             return
@@ -341,14 +341,17 @@ class Stars(commands.Cog):
         bonked = randint(30, 80)
         emote = randint(5,20)
         star_update = None
+        print('Before General Checks')
         if payload.member == self.client.user:
+            return
+        elif msg.author.bot:
             return
         elif settings['Guilds'][guild.name]['Settings']['Stars']['All Stars'] is False:
             return
         elif settings['Guilds'][guild.name]['Settings']['Stars']['Emote Stars'] is False:
             return
         # Bonk Emoji
-        if payload.emoji.id == 797305732063297536 and msg.author.bot is False:
+        if payload.emoji.id == 797305732063297536:
             if guild.name in rules_followed["Guilds"]:
                 # Checks if the user that sent a message is in the dictionary, if not will add it to it
                 if msg.author.name not in rules_followed["Guilds"][guild.name]["Members"].keys():
@@ -359,19 +362,21 @@ class Stars(commands.Cog):
                 dif = timeChecker(datetime.now(), timer[payload.member.name], 5)
                 if dif is True:
                     # Removes stars from the person who sent the message
-                    # await spam.send()a
                     star_update = self.remove_stars(msg.author, bonked, reason = f" for being bonked by {payload.member.name}")
                     timer.update({payload.member.name:datetime.now()})
                     self.data_gatherer(msg, "got bonked", False, -bonked)
                     rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
+                    if settings['Guilds'][guild.name]['Settings']['Stars']['Star Updates'] and star_update is not None:
+                        await spam.send(star_update)
                     return
             else:
                 star_update = self.remove_stars(msg.author, bonked, reason = f" for being bonked by {payload.member.name}")
-                # await spam.send(self.remove_stars(msg.author, bonked, reason = f" for being bonked by {payload.member.name}"))
                 # Adds person to the timer dictionary
                 timer.update({payload.member.name:datetime.now()})
                 rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
                 self.data_gatherer(msg, "got bonked", False, -bonked)
+                if settings['Guilds'][guild.name]['Settings']['Stars']['Star Updates'] and star_update is not None:
+                    await spam.send(star_update)
                 return
         # Any other emoji
         else:
@@ -395,6 +400,8 @@ class Stars(commands.Cog):
                         timer.update({payload.member.name:datetime.now()})
                         self.data_gatherer(payload.member, "Reacted to a message", True, emote)
                         rules_followed["Guilds"][guild.name]["Members"][payload.member.name] += 1
+                        if settings['Guilds'][guild.name]['Settings']['Stars']['Star Updates'] and star_update is not None:
+                            await spam.send(star_update)
                         return
             else:
                 if rules_followed_counter > 19:
@@ -409,11 +416,11 @@ class Stars(commands.Cog):
                     timer.update({payload.member.name:datetime.now()})
                     self.data_gatherer(payload.member, "Reacted to a message", True, emote)
                     rules_followed["Guilds"][guild.name]["Members"][payload.member.name] += 1
+                    if settings['Guilds'][guild.name]['Settings']['Stars']['Star Updates'] and star_update is not None:
+                        await spam.send(star_update)
                     return
         if settings['Guilds'][guild.name]['Settings']['Stars']['Star Updates'] and star_update is not None:
             await spam.send(star_update)
-        else:
-            return
     # @commands.Cog.listener()
     # async def on_voice_state_update(self, member, before, after):
     #     global rules_followed
