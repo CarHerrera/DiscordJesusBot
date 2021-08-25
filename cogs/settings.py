@@ -89,6 +89,9 @@ class Settings(commands.Cog):
                     file = open("./private/server_settings.txt", "w+")
                     file.write(json.dumps(self.settings, indent = 4))
                     file.close()
+                    print(f'{datetime.now()}: Pref Channel Changed to pref_chanel. Changed by {ctx.author}')
+                else:
+                    await ctx.send('Channel unknown, make sure to include hyphens and spell them correctly')
         else:
             await ctx.send('You do not have the permissions to use this command')
 
@@ -100,9 +103,11 @@ class Settings(commands.Cog):
                 if "on" in args[1] :
                     self.settings["Guilds"][guild.name]['Settings']['Stars']['Weekly Stars'] = True
                     await ctx.send('Weekly Stars are now enabled')
+                    print(f'{datetime.now()}: Weekly msg turned on. Changed by {ctx.author}')
                 elif "off" in args[1]:
                     self.settings["Guilds"][guild.name]['Settings']['Stars']['Weekly Stars'] = False
                     await ctx.send('Weekly Stars are no longer enabled')
+                    print(f'{datetime.now()}: Weekly msg turned off. Changed by {ctx.author}')
                 else:
                     await ctx.send('Input not recognized, settings remain unchanged')
             file = open("./private/server_settings.txt", "w+")
@@ -120,7 +125,7 @@ class Settings(commands.Cog):
                 if limit == 0:
                     await ctx.send('There is currently no limit on how many stars one can get in one day')
                 else:
-                    await ctx.send(f'One can only get {limit} numbers of stars daily')
+                    await ctx.send(f'You can only get {limit} numbers of stars daily')
             else:
                 if len(args) == 1:
                     try:
@@ -131,9 +136,11 @@ class Settings(commands.Cog):
                         elif cap == 0:
                             self.settings['Guilds'][guild.name]['Settings']["Stars"]['Daily Cap'] = None
                             await ctx.send(f'Daily limit is now unlimited')
+                            print(f'{datetime.now()}: Daily limit capped to unlimited. Changed by {ctx.author}')
                         else:
                             self.settings['Guilds'][guild.name]['Settings']["Stars"]['Daily Cap'] = cap
                             await ctx.send(f'Daily limit is now set at {cap}')
+                            print(f'{datetime.now()}: Daily limit capped to {limit}. Changed by {ctx.author}')
                         file = open("./private/server_settings.txt", "w+")
                         file.write(json.dumps(self.settings, indent = 4))
                         file.close()
@@ -151,9 +158,11 @@ class Settings(commands.Cog):
                 if 'on' == args[0]:
                     self.settings['Guilds'][guild.name]['Settings']["Stars"]['Emote Stars'] = True
                     await ctx.send('Stars from reactions are now enabled')
+                    print(f'{datetime.now()}: Reaction stars turned on. Changed by {ctx.author}')
                 elif 'off' == args[0]:
                     self.settings['Guilds'][guild.name]['Settings']["Stars"]['Emote Stars'] = False
                     await ctx.send('Stars from reactions are no longer enabled')
+                    print(f'{datetime.now()}: Reaction stars turned off. Changed by {ctx.author}')
                 else:
                     await ctx.send('Neither on or off was entered')
                 file = open("./private/server_settings.txt", "w+")
@@ -172,9 +181,11 @@ class Settings(commands.Cog):
                 if 'on' == args[0]:
                     self.settings['Guilds'][guild.name]['Settings']["Stars"]['MSG Stars'] = True
                     await ctx.send('Stars from messaging are now enabled')
+                    print(f'{datetime.now()}: MSG stars turned on. Changed by {ctx.author}')
                 elif 'off' == args[0]:
                     self.settings['Guilds'][guild.name]['Settings']["Stars"]['MSG Stars'] = False
                     await ctx.send('Stars from messaging are no longer enabled')
+                    print(f'{datetime.now()}: MSG stars turned off. Changed by {ctx.author}')
                 else:
                     await ctx.send('Neither on or off was entered')
                 file = open("./private/server_settings.txt", "w+")
@@ -193,9 +204,11 @@ class Settings(commands.Cog):
                 if 'on' == args[0]:
                     self.settings['Guilds'][guild.name]['Settings']["Stars"]['Star Updates'] = True
                     await ctx.send('Stars from messaging are now enabled')
+                    print(f'{datetime.now()}: star updates turned on. Changed by {ctx.author}')
                 elif 'off' == args[0]:
                     self.settings['Guilds'][guild.name]['Settings']["Stars"]['Star Updates'] = False
                     await ctx.send('Stars from messaging are no longer enabled')
+                    print(f'{datetime.now()}: star updates turned off. Changed by {ctx.author}')
                 else:
                     await ctx.send('Neither on or off was entered')
                 file = open("./private/server_settings.txt", "w+")
