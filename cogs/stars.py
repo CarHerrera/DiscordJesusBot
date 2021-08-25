@@ -384,7 +384,7 @@ class Stars(commands.Cog):
                 # Checks if the user that sent a message is in the dictionary, if not will add it to it
                 if payload.member.name not in rules_followed["Guilds"][guild.name]["Members"].keys():
                     rules_followed["Guilds"][guild.name]["Members"][payload.member.name] = 0
-                rules_followed_counter = rules_followed["Guilds"][guild.name]["Members"][msg.author.name]
+                rules_followed_counter = rules_followed["Guilds"][guild.name]["Members"][payload.member.name]
             if payload.member.name in timer.keys():
                 dif = timeChecker(datetime.now(), timer[payload.member.name], 20)
                 if dif:
