@@ -357,12 +357,10 @@ class Stars(commands.Cog):
                     star_update = self.remove_stars(msg.author, bonked, reason = f" for being bonked by {payload.member.name}")
                     timer.update({payload.member.name:datetime.now()})
                     self.data_gatherer(msg, "got bonked", False, -bonked)
-                    rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
                 else:
                     star_update = self.remove_stars(msg.author, bonked, reason = f" for being bonked by {payload.member.name}")
                     # Adds person to the timer dictionary
                     timer.update({payload.member.name:datetime.now()})
-                    rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
                     self.data_gatherer(msg, "got bonked", False, -bonked)
         # Any other emoji
         else:
@@ -373,7 +371,6 @@ class Stars(commands.Cog):
                     # await spam.send(self.add_stars(payload.member, emote, reason = " for emoting"))
                     timer.update({payload.member.name:datetime.now()})
                     self.data_gatherer(payload.member, "Reacted to a message", True, emote)
-                    rules_followed["Guilds"][guild.name]["Members"][payload.member.name] += 1
             else:
                 star_update = self.add_stars(payload.member, emote, reason = " for emoting")
                 timer.update({payload.member.name:datetime.now()})
