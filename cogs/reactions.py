@@ -52,10 +52,10 @@ class Reactions(commands.Cog):
         channel = reaction.message.channel
         lastMessage = await channel.fetch_message(channel.last_message_id)
         print(user)
-        e = e * randint(3,10)
-        m = m * randint(2,12)
-        o = o * randint(4,12)
-        t = t * randint(1,3)
+        e = 'e' * randint(3,10)
+        m = 'm' * randint(2,12)
+        o = 'o' * randint(4,12)
+        t = 't' * randint(1,3)
         emote = e+m+o+t+e
         currentTime = datetime.utcnow()
         messageTime = lastMessage.created_at
