@@ -45,7 +45,7 @@ class Reactions(commands.Cog):
     #             emoteTimer = datetime.utcnow()
     @commands.Cog.listener()
     async def on_reaction_add(self,reaction,user):
-        if reaction.message.user == self.client.user:
+        if reaction.message.author == self.client.user:
             return
         elif reaction.me:
             return
