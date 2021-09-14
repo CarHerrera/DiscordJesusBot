@@ -250,8 +250,8 @@ class Settings(commands.Cog):
         """In case the Administrators of the guilds update the name, settings will change as well"""
         if before.name != after.name:
             print(f'Guild updated at {datetime.now()}')
-            print('Before': before)
-            print('after': after)
+            print('Before: ' + before)
+            print('after: '+ after)
             print(settings)
             self.settings["Guilds"][after.name] = self.settings['Guilds'][before.name]
             del self.settings['Guilds'][before.name]
