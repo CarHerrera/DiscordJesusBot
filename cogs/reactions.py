@@ -2,6 +2,7 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 from main import timeChecker
+from random import randint
 emoteTimer = datetime.utcnow()
 booingTimer = datetime.utcnow()
 class Reactions(commands.Cog):
