@@ -3,8 +3,8 @@ import discord
 from discord.ext import commands
 from main import timeChecker
 from random import randint
-emoteTimer = datetime.utcnow()
-booingTimer = datetime.utcnow()
+emoteTimer = None
+# booingTimer = datetime.utcnow()
 class Reactions(commands.Cog):
     def __init__(self, client):
         self.client = client
@@ -46,7 +46,7 @@ class Reactions(commands.Cog):
     #             emoteTimer = datetime.utcnow()
     @commands.Cog.listener()
     async def on_reaction_add(self,reaction,user):
-        global emoteTimer,booingTimer
+        global emoteTimer
         if reaction.message.author == self.client.user:
             return
         elif reaction.me:
@@ -56,7 +56,7 @@ class Reactions(commands.Cog):
         print(user)
         e = 'e' * randint(3,10)
         m = 'm' * randint(2,12)
-        o = 'o' * randint(4,12)
+        o = 'o' * randint(4,18)
         t = 't' * randint(1,3)
         emote = e+m+o+t+e
         currentTime = datetime.utcnow()
@@ -71,8 +71,15 @@ class Reactions(commands.Cog):
             # if payload.emoji.id == 797305732063297536 and timeChecker(datetime.utcnow(),booingTimer, 10) and message.author == self.client.user:
             #     await channel.send('Why are you booing me? I\'m right')
             #     booingTimer = datetime.utcnow()
-            if timeChecker(datetime.utcnow(),emoteTimer, 10) is True:
+            if emoteTimer is None:
                 await channel.send(emote_list[randint(0,len(emote_list)-1)])
                 emoteTimer = datetime.utcnow()
+            else:
+                diff = emoteTimer - datetime.utcnow()
+                if diff.seconds >= 60:
+                    await channel.send(emote_list[randint(0,len(emote_list)-1)])
+            # if timeChecker(datetime.utcnow(),emoteTimer, 10) is True:
+            #     await channel.send(emote_list[randint(0,len(emote_list)-1)])
+
 def setup(client):
     client.add_cog(Reactions(client))
