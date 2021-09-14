@@ -10,7 +10,7 @@ import requests
 import requests.auth
 import asyncpraw
 import json
-import betamax
+# import betamax
 import pprint
 import uwuify
 import re
@@ -41,8 +41,8 @@ amogus ='<:amogus:810676422981058620>'
 drip ='<:DripMoment:800232915028017202>'
 PepeThink = '<:PepeThink:762416066570747904>'
 HolyPepe = '<:HolyPepe:797304202573119529>'
-excitement_words = ['YOOOOOOOOOOOOOOOOOOO', 'nice', 'sick','poggers', 'owa owa', '+1 good meme', 'nice lmao', 'pog pog pog pog', 'W','mood', 'epic', 'epic sauce', amogus, drip, PepeThink]
-disgusted_words = ['wtf', 'die', 'stinky', 'just fuck off already','no', 'gay','cringe','nope','why','I really hate you','sus','shut up','pain',bonk, HolyPepe, bonk*6]
+excitement_words = ['YOOOOOOOOOOOOOOOOOOO', 'nice', 'sick','poggers', 'owa owa', '+1 good meme', 'nice lmao', 'pog pog pog pog', 'W','mood', 'epic', 'epic sauce', amogus, drip, PepeThink, 'this is the best thing since the invention of cheese', 'thats so based']
+disgusted_words = ['wtf', 'die', 'just fuck off already','no', 'gay','cringe','nope','why','I really hate you','sus','shut up','pain',bonk, HolyPepe, bonk*6, 'pretending like I didn\'t see that one', 'you anger me',]
 buy_me = ['can you buy me this', 'buy me this', 'purchase this for me', 'will you buy me this']
 cmd_in_process = False
 fuckOffTimer = datetime.utcnow()
@@ -89,6 +89,8 @@ class Commands(commands.Cog):
                     if mentions == self.client.user and timeChecker(datetime.utcnow(), fuckOffTimer, 10):
                         if 'i agree with' in message.content.casefold():
                             await message.channel.send('Thanks bb')
+                        elif 'thoughts on cheese' in message.content.casefold():
+                            await message.channel.send('cheese is my life')
                         else:
                             await message.channel.send('wtf do you want')
             if divider % agreementIndicator == 0:
@@ -107,9 +109,6 @@ class Commands(commands.Cog):
                 elif momChecker(message.content.casefold()) is True:
                     print('{0} is where I found mom'.format(message.content))
                     await message.channel.send('Just die already')
-                elif fry_role in message.author.roles:
-                    if counter % 12 == 0:
-                        await message.channel.send('Yoooooooooo ' + user + ', I hear your fries are a national delight and I am willing to pay top dollar for them. May I put up this formal request for said fries?')
         print('Messages sent: ', counter)
         print('Current random Int: ', agreementIndicator)
         print('Current random Int: ', disgustIndicator)

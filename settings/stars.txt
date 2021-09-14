@@ -170,9 +170,9 @@
                     "Daily": 0
                 },
                 "Arsenate": {
-                    "Stars": 18300,
-                    "Weekly Stars": 239,
-                    "Daily": 278
+                    "Stars": 18314,
+                    "Weekly Stars": 253,
+                    "Daily": 292
                 },
                 "Elliptic": {
                     "Stars": 80,
