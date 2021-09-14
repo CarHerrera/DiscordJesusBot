@@ -17,9 +17,9 @@
                     "Daily": 0
                 },
                 "Pickles": {
-                    "Stars": 121,
+                    "Stars": 129,
                     "Weekly Stars": 0,
-                    "Daily": 0
+                    "Daily": 8
                 },
                 "pissbaby": {
                     "Stars": 0,
@@ -46,9 +46,9 @@
                     "Daily": 0
                 },
                 "Antennie": {
-                    "Stars": 4522,
-                    "Weekly Stars": 63,
-                    "Daily": 76
+                    "Stars": 5749,
+                    "Weekly Stars": 951,
+                    "Daily": 582
                 },
                 "Clara": {
                     "Stars": 0,
@@ -61,9 +61,9 @@
                     "Daily": 0
                 },
                 "Shlumperd": {
-                    "Stars": 2078,
-                    "Weekly Stars": 0,
-                    "Daily": 0
+                    "Stars": 2527,
+                    "Weekly Stars": 428,
+                    "Daily": 195
                 },
                 "fangtx": {
                     "Stars": 0
@@ -79,9 +79,9 @@
                     "Daily": 0
                 },
                 "Big Jello": {
-                    "Stars": 3105,
-                    "Weekly Stars": 8,
-                    "Daily": 224
+                    "Stars": 3338,
+                    "Weekly Stars": 211,
+                    "Daily": 213
                 },
                 "Xander": {
                     "Stars": 0,
@@ -89,14 +89,14 @@
                     "Daily": 0
                 },
                 "agce63": {
-                    "Stars": 588,
-                    "Weekly Stars": 0,
-                    "Daily": 89
+                    "Stars": 606,
+                    "Weekly Stars": 18,
+                    "Daily": 18
                 },
                 "McBloom": {
-                    "Stars": 2635,
-                    "Weekly Stars": 62,
-                    "Daily": 62
+                    "Stars": 2885,
+                    "Weekly Stars": 0,
+                    "Daily": 217
                 },
                 "ruh roh shaggy": {
                     "Stars": 0,
@@ -112,9 +112,9 @@
                     "Daily": 0
                 },
                 "thespeedturtle": {
-                    "Stars": 1161,
-                    "Weekly Stars": 0,
-                    "Daily": 46
+                    "Stars": 1323,
+                    "Weekly Stars": 148,
+                    "Daily": 162
                 },
                 "sashka.draws": {
                     "Stars": 0,
@@ -122,14 +122,14 @@
                     "Daily": 0
                 },
                 "usedstarfighter": {
-                    "Stars": 33760,
-                    "Weekly Stars": 67,
-                    "Daily": -4
+                    "Stars": 35280,
+                    "Weekly Stars": 1119,
+                    "Daily": 740
                 },
                 "Rylan": {
-                    "Stars": 2084,
-                    "Weekly Stars": 0,
-                    "Daily": 135
+                    "Stars": 2417,
+                    "Weekly Stars": 241,
+                    "Daily": 216
                 },
                 "Yuskea": {
                     "Stars": 5,
@@ -152,9 +152,9 @@
                     "Daily": 0
                 },
                 "monpress": {
-                    "Stars": 982,
-                    "Weekly Stars": 0,
-                    "Daily": 65
+                    "Stars": 1361,
+                    "Weekly Stars": 361,
+                    "Daily": 379
                 },
                 "Malcon": {
                     "Stars": 0,
@@ -170,9 +170,9 @@
                     "Daily": 0
                 },
                 "Arsenate": {
-                    "Stars": 18300,
-                    "Weekly Stars": 239,
-                    "Daily": 278
+                    "Stars": 19953,
+                    "Weekly Stars": 1009,
+                    "Daily": 271
                 },
                 "Elliptic": {
                     "Stars": 80,
@@ -180,14 +180,14 @@
                     "Daily": 0
                 },
                 "spagh3tt0": {
-                    "Stars": 10379,
-                    "Weekly Stars": 11,
-                    "Daily": 300
+                    "Stars": 11872,
+                    "Weekly Stars": 1359,
+                    "Daily": 346
                 },
                 "ALin": {
-                    "Stars": 3627,
-                    "Weekly Stars": 62,
-                    "Daily": 62
+                    "Stars": 3799,
+                    "Weekly Stars": 64,
+                    "Daily": 64
                 },
                 "Mr Shifter": {
                     "Stars": 342,
@@ -232,9 +232,9 @@
                     "Daily": 0
                 },
                 "Rampant Potato": {
-                    "Stars": 10181,
-                    "Weekly Stars": 128,
-                    "Daily": 381
+                    "Stars": 11319,
+                    "Weekly Stars": 950,
+                    "Daily": 105
                 },
                 "glizzy demon": {
                     "Stars": 0
@@ -281,9 +281,9 @@
                     "Daily": 0
                 },
                 "Ulm Nation": {
-                    "Stars": 9001,
-                    "Weekly Stars": 100,
-                    "Daily": 53
+                    "Stars": 10809,
+                    "Weekly Stars": 1346,
+                    "Daily": 262
                 },
                 "amogus": {
                     "Stars": 0
@@ -297,9 +297,9 @@
                     "Daily": 0
                 },
                 "Iceberg Lettuce": {
-                    "Stars": 2865,
-                    "Weekly Stars": 94,
-                    "Daily": 83
+                    "Stars": 4264,
+                    "Weekly Stars": 1311,
+                    "Daily": 189
                 },
                 "\u0622\u0631\u06cc\u0627\u0646": {
                     "Stars": 0
@@ -328,6 +328,16 @@
                     "Daily": 0
                 },
                 "CardboardTG": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0
+                },
+                "dukeyjukesta": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0
+                },
+                "india": {
                     "Stars": 0,
                     "Weekly Stars": 0,
                     "Daily": 0
