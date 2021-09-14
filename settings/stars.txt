@@ -122,9 +122,9 @@
                     "Daily": 0
                 },
                 "usedstarfighter": {
-                    "Stars": 33622,
-                    "Weekly Stars": -71,
-                    "Daily": 0
+                    "Stars": 33734,
+                    "Weekly Stars": 41,
+                    "Daily": 112
                 },
                 "Rylan": {
                     "Stars": 2097,
@@ -170,9 +170,9 @@
                     "Daily": 0
                 },
                 "Arsenate": {
-                    "Stars": 18424,
-                    "Weekly Stars": 363,
-                    "Daily": 0
+                    "Stars": 18464,
+                    "Weekly Stars": 403,
+                    "Daily": 40
                 },
                 "Elliptic": {
                     "Stars": 80,

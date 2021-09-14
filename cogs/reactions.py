@@ -61,7 +61,7 @@ class Reactions(commands.Cog):
         emote = e+m+o+t+e
         currentTime = datetime.utcnow()
         messageTime = lastMessage.created_at
-        emote_list = ['Yo, how do I emote','this shit got me boolin',reaction.emoji,'this emote shit be bussin', 'Your emotes make me so proud'
+        emote_list = ['Y'+'o' * randint(8,25) + ' how do I emote','this shit got me boolin',reaction.emoji,'this emote shit be bussin', 'Your emotes make me so proud'
                     ,emote, 'lessssgetit']
         if lastMessage.author == self.client.user:
             return
