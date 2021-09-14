@@ -46,14 +46,6 @@ class Settings(commands.Cog):
             file.write(json.dumps(self.settings, indent = 4))
             file.close()
             print('Created bot settings file')
-    @commands.Cog.listener()
-    async def on_guild_update(self, before, after):
-        if before.name != after.name:
-            stars["Guilds"][after.name] = stars["Guilds"][before.name]
-            del stars["Guilds"][before.name]
-            file = open('./settings/stars.txt', "w+")
-            file.write(json.dumps(stars, indent = 4))
-            file.close()
 
     @commands.group(invoke_without_command = True)
     async def change(self, ctx, *args):
@@ -257,6 +249,10 @@ class Settings(commands.Cog):
     async def on_guild_update(self, before, after):
         """In case the Administrators of the guilds update the name, settings will change as well"""
         if before.name != after.name:
+            print(f'Guild updated at {datetime.now()}')
+            print('Before': before)
+            print('after': after)
+            print(settings)
             self.settings["Guilds"][after.name] = self.settings['Guilds'][before.name]
             del self.settings['Guilds'][before.name]
             file = open("./private/server_settings.txt", "w+")
@@ -293,7 +289,7 @@ class Settings(commands.Cog):
 
     @commands.Cog.listener()
     async def on_guild_channel_delete(self,channel):
-        print('In listner')
+        print(f'In lisetner at {datetime.now()}')
         print(channel.name)
         guild = channel.guild
         if self.settings['Guilds'][guild.name]['Settings']['Pref Channel'] == channel.name:
@@ -307,7 +303,7 @@ class Settings(commands.Cog):
     @commands.Cog.listener()
     async def on_guild_channel_update(self, before, after):
         if type(before) == discord.TextChannel:
-            print(f'Before {before.name}, after: {after.name}')
+            print(f'{datetime.now()}: Before {before.name}, after: {after.name}')
             self.settings['Guilds'][before.guild.name]['Settings']['Pref Channel'] = after.name
             file = open("./private/server_settings.txt", "w+")
             file.write(json.dumps(self.settings, indent = 4))
