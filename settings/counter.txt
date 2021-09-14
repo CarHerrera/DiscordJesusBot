@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-counter=42298
-=======
-counter=40274
->>>>>>> ac23658c99d734924389d2e3e22b26ff8cda749f
+counter=42301
