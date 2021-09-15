@@ -302,11 +302,16 @@ class Settings(commands.Cog):
 
     @commands.Cog.listener()
     async def on_guild_channel_update(self, before, after):
-        if type(before) == discord.TextChannel:
+        if before.position != after.position:
+            return
+        elif type(before) == discord.TextChannel:
             print(f'{datetime.now()}: Before {before.name}, after: {after.name}')
-            self.settings['Guilds'][before.guild.name]['Settings']['Pref Channel'] = after.name
-            file = open("./private/server_settings.txt", "w+")
-            file.write(json.dumps(self.settings, indent = 4))
-            file.close()
+            pref_channel = self.settings['Guilds'][guild.name]['Settings']['Pref Channel']
+            if before.name == pref_channel:
+                if before.name != after.name:
+                    self.settings['Guilds'][guild.name]['Settings']['Pref Channel'] = after.name
+                    file = open("./private/server_settings.txt", "w+")
+                    file.write(json.dumps(self.settings, indent = 4))
+                    file.close()
 def setup(client):
     client.add_cog(Settings(client))
