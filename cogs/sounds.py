@@ -12,19 +12,7 @@ vc = None
 class Sounds(commands.Cog):
     def __init__(self,client):
         self.client = client
-        self.checkMidnight.start()
-    @tasks.loop(hours = 1)
-    async def checkMidnight(self):
-        channel = self.client.get_channel(814346019806117898)
-        if datetime.datetime.now().hour == 0:
-            rand = randint(0, len(names)-1)
-            name = names[rand]
-            channelName = name + "'s Fallopian Tubes"
-            await channel.edit(name = channelName)
-            print(f"Changed name to {name}")
-    @checkMidnight.before_loop
-    async def before_check(self):
-        await self.client.wait_until_ready()
+
     @commands.command()
     async def join(self, ctx):
         global vc, ffmpegExec

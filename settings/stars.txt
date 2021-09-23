@@ -46,24 +46,19 @@
                     "Daily": 0
                 },
                 "Antennie": {
-                    "Stars": 4514,
-                    "Weekly Stars": 55,
-                    "Daily": 0
+                    "Stars": 5143,
+                    "Weekly Stars": 684,
+                    "Daily": 406
                 },
                 "Clara": {
                     "Stars": 0,
                     "Weekly Stars": 0,
                     "Daily": 0
                 },
-                "okiguess": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
                 "Shlumperd": {
-                    "Stars": 2092,
-                    "Weekly Stars": 14,
-                    "Daily": 0
+                    "Stars": 2185,
+                    "Weekly Stars": 107,
+                    "Daily": 93
                 },
                 "fangtx": {
                     "Stars": 0
@@ -79,9 +74,9 @@
                     "Daily": 0
                 },
                 "Big Jello": {
-                    "Stars": 3125,
-                    "Weekly Stars": 28,
-                    "Daily": 0
+                    "Stars": 3331,
+                    "Weekly Stars": 234,
+                    "Daily": 93
                 },
                 "Xander": {
                     "Stars": 0,
@@ -94,9 +89,9 @@
                     "Daily": 0
                 },
                 "McBloom": {
-                    "Stars": 2635,
-                    "Weekly Stars": 62,
-                    "Daily": 0
+                    "Stars": 2751,
+                    "Weekly Stars": 178,
+                    "Daily": 21
                 },
                 "ruh roh shaggy": {
                     "Stars": 0,
@@ -112,9 +107,9 @@
                     "Daily": 0
                 },
                 "thespeedturtle": {
-                    "Stars": 1161,
-                    "Weekly Stars": 0,
-                    "Daily": 0
+                    "Stars": 1463,
+                    "Weekly Stars": 302,
+                    "Daily": 73
                 },
                 "sashka.draws": {
                     "Stars": 0,
@@ -122,14 +117,14 @@
                     "Daily": 0
                 },
                 "usedstarfighter": {
-                    "Stars": 33734,
-                    "Weekly Stars": 41,
-                    "Daily": 112
+                    "Stars": 34543,
+                    "Weekly Stars": 850,
+                    "Daily": 296
                 },
                 "Rylan": {
-                    "Stars": 2097,
-                    "Weekly Stars": 13,
-                    "Daily": 0
+                    "Stars": 2168,
+                    "Weekly Stars": 84,
+                    "Daily": 52
                 },
                 "Yuskea": {
                     "Stars": 5,
@@ -142,9 +137,9 @@
                     "Daily": 0
                 },
                 "Justwannaplay277": {
-                    "Stars": 85,
-                    "Weekly Stars": 0,
-                    "Daily": 0
+                    "Stars": 111,
+                    "Weekly Stars": 26,
+                    "Daily": 26
                 },
                 "Arbo": {
                     "Stars": 0,
@@ -152,9 +147,9 @@
                     "Daily": 0
                 },
                 "monpress": {
-                    "Stars": 982,
-                    "Weekly Stars": 0,
-                    "Daily": 0
+                    "Stars": 1414,
+                    "Weekly Stars": 432,
+                    "Daily": 17
                 },
                 "Malcon": {
                     "Stars": 0,
@@ -170,9 +165,9 @@
                     "Daily": 0
                 },
                 "Arsenate": {
-                    "Stars": 18464,
-                    "Weekly Stars": 403,
-                    "Daily": 40
+                    "Stars": 19489,
+                    "Weekly Stars": 1428,
+                    "Daily": 1065
                 },
                 "Elliptic": {
                     "Stars": 80,
@@ -180,9 +175,9 @@
                     "Daily": 0
                 },
                 "spagh3tt0": {
-                    "Stars": 10449,
-                    "Weekly Stars": 81,
-                    "Daily": 0
+                    "Stars": 10911,
+                    "Weekly Stars": 543,
+                    "Daily": 330
                 },
                 "ALin": {
                     "Stars": 3627,
@@ -232,9 +227,9 @@
                     "Daily": 0
                 },
                 "Rampant Potato": {
-                    "Stars": 10155,
-                    "Weekly Stars": 102,
-                    "Daily": 0
+                    "Stars": 11092,
+                    "Weekly Stars": 1039,
+                    "Daily": 93
                 },
                 "glizzy demon": {
                     "Stars": 0
@@ -281,9 +276,9 @@
                     "Daily": 0
                 },
                 "Ulm Nation": {
-                    "Stars": 9032,
-                    "Weekly Stars": 131,
-                    "Daily": 0
+                    "Stars": 10167,
+                    "Weekly Stars": 1266,
+                    "Daily": 463
                 },
                 "amogus": {
                     "Stars": 0
@@ -297,9 +292,9 @@
                     "Daily": 0
                 },
                 "Iceberg Lettuce": {
-                    "Stars": 2901,
-                    "Weekly Stars": 130,
-                    "Daily": 0
+                    "Stars": 3480,
+                    "Weekly Stars": 709,
+                    "Daily": 34
                 },
                 "\u0622\u0631\u06cc\u0627\u0646": {
                     "Stars": 0
@@ -331,6 +326,11 @@
                     "Stars": 0,
                     "Weekly Stars": 0,
                     "Daily": 0
+                },
+                "sheepshoop": {
+                    "Stars": 48,
+                    "Weekly Stars": 48,
+                    "Daily": 48
                 }
             },
             "Sent": false
