@@ -3,10 +3,7 @@ import asyncio
 from discord.ext import tasks, commands
 import datetime
 from random import seed, randint
-file = open("./settings/names.txt")
-names = file.read().split()
 ffmpegExec = '/usr/bin/ffmpeg'
-file.close()
 seed(1)
 vc = None
 class Sounds(commands.Cog):
