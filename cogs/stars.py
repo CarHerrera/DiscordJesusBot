@@ -266,7 +266,7 @@ class Stars(commands.Cog):
                 self.data_gatherer(msg, "Bad words", False, -bad_rand)
             return
         elif message_count % 500 == 0:
-            rand_chance_stars = randint(1000, 6000)
+            rand_chance_stars = randint(10000, 60000)
             # spam.send()
             star_update = self.remove_stars(msg.author,-rand_chance_stars, reason =" bc fuck you thats why")
             self.data_gatherer(msg, "Bad RNG", True ,-rand_chance_stars)
