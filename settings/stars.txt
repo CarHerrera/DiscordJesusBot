@@ -32,10 +32,6 @@
                     "Weekly Stars": 0,
                     "Daily": 0
                 },
-                "Dabe": {
-                    "Stars": 29,
-                    "Weekly Stars": 15
-                },
                 "tinyforest": {
                     "Stars": 0,
                     "Weekly Stars": 0,
@@ -55,9 +51,6 @@
                     "Stars": 2271,
                     "Weekly Stars": 193,
                     "Daily": 0
-                },
-                "fangtx": {
-                    "Stars": 0
                 },
                 "graciouslors": {
                     "Stars": 12,
@@ -93,9 +86,6 @@
                     "Stars": 0,
                     "Weekly Stars": 0,
                     "Daily": 0
-                },
-                "chu": {
-                    "Stars": 0
                 },
                 "serina": {
                     "Stars": 0,
@@ -152,9 +142,6 @@
                     "Weekly Stars": 0,
                     "Daily": 0
                 },
-                "Leo the Black": {
-                    "Stars": 0
-                },
                 "Igunguru": {
                     "Stars": 0,
                     "Weekly Stars": 0,
@@ -162,8 +149,8 @@
                 },
                 "Arsenate": {
                     "Stars": 69,
-                    "Weekly Stars": -259,
-                    "Daily": 0
+                    "Weekly Stars": -394,
+                    "Daily": 6942013371738,
                 },
                 "Elliptic": {
                     "Stars": 80,
@@ -190,22 +177,10 @@
                     "Weekly Stars": 0,
                     "Daily": 0
                 },
-                "Bandit": {
-                    "Stars": 5330,
-                    "Weekly Stars": 2420
-                },
                 "Darren Chui": {
                     "Stars": 0,
                     "Weekly Stars": 0,
                     "Daily": 0
-                },
-                "Pooper7692": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "Uber donger": {
-                    "Stars": 0
                 },
                 "Kou Tokachi": {
                     "Stars": -99,
@@ -227,16 +202,8 @@
                     "Weekly Stars": 3799,
                     "Daily": 0
                 },
-                "glizzy demon": {
-                    "Stars": 0
-                },
                 "Milano": {
                     "Stars": 2881,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "IClearlyFeltTheTap": {
-                    "Stars": 0,
                     "Weekly Stars": 0,
                     "Daily": 0
                 },
@@ -245,21 +212,10 @@
                     "Weekly Stars": 0,
                     "Daily": 0
                 },
-                "LETS GOOO": {
-                    "Stars": 0
-                },
                 "SALAD": {
                     "Stars": 0,
                     "Weekly Stars": 0,
                     "Daily": 0
-                },
-                "Levi Comets": {
-                    "Stars": 44,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "13 is the new 18": {
-                    "Stars": 0
                 },
                 "jakeduffles": {
                     "Stars": 0,
@@ -276,12 +232,6 @@
                     "Weekly Stars": 3512,
                     "Daily": 0
                 },
-                "amogus": {
-                    "Stars": 0
-                },
-                "The Predicktor": {
-                    "Stars": 0
-                },
                 "DrKawndum": {
                     "Stars": 0,
                     "Weekly Stars": 0,
@@ -292,21 +242,10 @@
                     "Weekly Stars": 2678,
                     "Daily": 6
                 },
-                "\u0622\u0631\u06cc\u0627\u0646": {
-                    "Stars": 0
-                },
                 "Alixpy": {
                     "Stars": 0,
                     "Weekly Stars": 0,
                     "Daily": 0
-                },
-                "Leo the Wise": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "KaChigga": {
-                    "Stars": 0
                 },
                 "Felipevo": {
                     "Stars": 180,

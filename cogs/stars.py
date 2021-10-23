@@ -591,6 +591,7 @@ class Stars(commands.Cog):
                 # print(y)
                 if(guild.get_member_named(x) is None):
                     people_not_in.append(x)
+            print(people_not_in)
             for x in people_not_in:
                 stars["Guilds"][member.guild.name]["Members"].pop(x)
 
@@ -631,7 +632,13 @@ class Stars(commands.Cog):
                     if member.bot is False and member.name not in newStars['Guilds'][guild.name]["Members"].keys():
                         member_stars = local_stars['Guilds'][guild.name]["Members"][member.name]
                         # print(member_stars)
-                        newStars['Guilds'][guild.name]["Members"].update({member.name:member_stars, "ID": member.id})
+                        newStars['Guilds'][guild.name]["Members"][member.id] = member_stars
+                        newStars['Guilds'][guild.name]["Members"][member.id]["Name"] = member.name
+                        # newStars['Guilds'][guild.name]["Members"]["ID"]["Name"] =
+            print(newStars)
+            # file = open('./settings/stars.txt', "w+")
+            # file.write(json.dumps(newStars, indent = 4))
+            # file.close()
             # print(newStars['Guilds'][guild.name]["Members"]["ID"])
             # print(newStars['Guilds'][guild.name]["Members"][name])
         else:
