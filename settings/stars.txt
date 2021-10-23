@@ -2,10 +2,6 @@
     "Guilds": {
         "Wendys Squad": {
             "Members": {
-                "PPmaster27": {
-                    "Stars": 10,
-                    "Weekly Stars": 0
-                },
                 "t-rin": {
                     "Stars": 0,
                     "Weekly Stars": 0,
@@ -48,7 +44,7 @@
                 "Antennie": {
                     "Stars": -9020,
                     "Weekly Stars": -13479,
-                    "Daily": -15839
+                    "Daily": 0
                 },
                 "Clara": {
                     "Stars": 0,
@@ -58,7 +54,7 @@
                 "Shlumperd": {
                     "Stars": 2271,
                     "Weekly Stars": 193,
-                    "Daily": 179
+                    "Daily": 0
                 },
                 "fangtx": {
                     "Stars": 0
@@ -76,7 +72,7 @@
                 "Big Jello": {
                     "Stars": 3623,
                     "Weekly Stars": 526,
-                    "Daily": 52
+                    "Daily": 0
                 },
                 "Xander": {
                     "Stars": 0,
@@ -91,7 +87,7 @@
                 "McBloom": {
                     "Stars": 2751,
                     "Weekly Stars": 178,
-                    "Daily": 21
+                    "Daily": 0
                 },
                 "ruh roh shaggy": {
                     "Stars": 0,
@@ -109,7 +105,7 @@
                 "thespeedturtle": {
                     "Stars": 2498,
                     "Weekly Stars": 1337,
-                    "Daily": 124
+                    "Daily": 0
                 },
                 "sashka.draws": {
                     "Stars": 0,
@@ -119,12 +115,12 @@
                 "usedstarfighter": {
                     "Stars": 5313,
                     "Weekly Stars": -28380,
-                    "Daily": -35968
+                    "Daily": 0
                 },
                 "Rylan": {
                     "Stars": 2203,
                     "Weekly Stars": 119,
-                    "Daily": 87
+                    "Daily": 0
                 },
                 "Yuskea": {
                     "Stars": 5,
@@ -139,7 +135,7 @@
                 "Justwannaplay277": {
                     "Stars": 111,
                     "Weekly Stars": 26,
-                    "Daily": 26
+                    "Daily": 0
                 },
                 "Arbo": {
                     "Stars": 0,
@@ -149,7 +145,7 @@
                 "monpress": {
                     "Stars": 1845,
                     "Weekly Stars": 863,
-                    "Daily": 87
+                    "Daily": 0
                 },
                 "Malcon": {
                     "Stars": 0,
@@ -165,9 +161,9 @@
                     "Daily": 0
                 },
                 "Arsenate": {
-                    "Stars": -19419,
-                    "Weekly Stars": -37480,
-                    "Daily": -40670
+                    "Stars": 69,
+                    "Weekly Stars": -259,
+                    "Daily": 0
                 },
                 "Elliptic": {
                     "Stars": 80,
@@ -177,7 +173,7 @@
                 "spagh3tt0": {
                     "Stars": -39199,
                     "Weekly Stars": -49567,
-                    "Daily": 318
+                    "Daily": 0
                 },
                 "ALin": {
                     "Stars": 3627,
@@ -229,7 +225,7 @@
                 "Rampant Potato": {
                     "Stars": 13852,
                     "Weekly Stars": 3799,
-                    "Daily": 420
+                    "Daily": 0
                 },
                 "glizzy demon": {
                     "Stars": 0
@@ -278,7 +274,7 @@
                 "Ulm Nation": {
                     "Stars": 12413,
                     "Weekly Stars": 3512,
-                    "Daily": 721
+                    "Daily": 0
                 },
                 "amogus": {
                     "Stars": 0
@@ -294,7 +290,7 @@
                 "Iceberg Lettuce": {
                     "Stars": 5443,
                     "Weekly Stars": 2672,
-                    "Daily": 600
+                    "Daily": 0
                 },
                 "\u0622\u0631\u06cc\u0627\u0646": {
                     "Stars": 0
@@ -335,7 +331,37 @@
                 "Monkeybsns": {
                     "Stars": 170,
                     "Weekly Stars": 170,
-                    "Daily": 170
+                    "Daily": 0
+                },
+                "india": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0
+                },
+                "HoboLord09": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0
+                },
+                "l3vics": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0
+                },
+                "dukeyjukesta": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0
+                },
+                "Leo the Almighty": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0
+                },
+                "Hecker": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0
                 }
             },
             "Sent": false

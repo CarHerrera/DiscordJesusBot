@@ -75,7 +75,7 @@ for filename in os.listdir('./cogs'):
 async def on_ready():
     global guild
     game = discord.Game('with my pee pee')
-    Stream = discord.Streaming(name = 'The overloads stream :pleading_face:',url = 'https://www.twitch.tv/ulm_nation')
+    Stream = discord.Streaming(name = 'The overloads stream 🥺',url = 'https://www.twitch.tv/ulm_nation')
     await client.change_presence(status = discord.Status.online, activity = Stream)
     print('We have logged in as {0.user}'.format(client))
     # emoji_file = open('./settings/emojis.txt', 'w')
