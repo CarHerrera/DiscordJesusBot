@@ -33,7 +33,12 @@ class Stars(commands.Cog):
         self.time = datetime.now()
         if self.time.hour != 0:
             self.time = datetime(self.time.year, self.time.month, self.time.day, hour=0)
-
+    def weekFunc(dict, tup):
+        # print("IN Func")
+        key,d = tup
+        # print(dict)
+        # print(tup)
+        return d['Weekly Stars']
     @tasks.loop(minutes = 1)
     # This loops every 24 hours and resets the servers weekly stars and send a message with who had the highest and lowest stars
     async def reset_weekly_stars(self):
