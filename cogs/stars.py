@@ -514,10 +514,11 @@ class Stars(commands.Cog):
         global stars
         author = ctx.author
         name = author.name
+        id = str(author.id)
         guild = ctx.message.guild
         if self.time.day != datetime.now().day:
             self.time = datetime.now()
-            stars['Guilds'][guild.name]['Members'][name]['Daily'] = 0
+            stars['Guilds'][guild.name]['Members'][id]['Daily'] = 0
             file = open('./settings/stars.txt', "w+")
             file.write(json.dumps(stars, indent = 4))
             file.close()
@@ -526,18 +527,19 @@ class Stars(commands.Cog):
             if member.bot is True:
                 return
             member_name = member.name
-            if member_name in stars["Guilds"][guild.name]["Members"]:
-                user_stars = stars["Guilds"][guild.name]["Members"][member.name]["Stars"]
-                daily = stars["Guilds"][guild.name]["Members"][member.name]["Daily"]
+            member_id = str(member.id)
+            if member_id in stars["Guilds"][guild.name]["Members"]:
+                user_stars = stars["Guilds"][guild.name]["Members"][member_id]["Stars"]
+                daily = stars["Guilds"][guild.name]["Members"][member_id]["Daily"]
                 await ctx.send(f'{member_name} has {user_stars} and also got {daily} today')
             else:
                 await ctx.send(f'Something went wrong, could not find {member_name} on the good noodle board, maybe they are not on the board?')
         elif len(ctx.message.mentions) > 1:
             await ctx.send("Too many members in the command")
         elif len(ctx.message.mentions) == 0:
-            if name in stars["Guilds"][guild.name]["Members"]:
-                user_stars = stars["Guilds"][guild.name]["Members"][name]["Stars"]
-                daily = stars["Guilds"][guild.name]["Members"][name]["Daily"]
+            if id in stars["Guilds"][guild.name]["Members"]:
+                user_stars = stars["Guilds"][guild.name]["Members"][id]["Stars"]
+                daily = stars["Guilds"][guild.name]["Members"][id]["Daily"]
                 await ctx.send(f'{name} has {user_stars} and also got {daily} today')
             else:
                 await ctx.send(f'Something went wrong, could not find you on the good noodle board, maybe you are not on the board?')
