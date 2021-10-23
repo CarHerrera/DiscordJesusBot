@@ -113,9 +113,9 @@
                     "Daily": 0
                 },
                 "usedstarfighter": {
-                    "Stars": 5313,
-                    "Weekly Stars": -28380,
-                    "Daily": 0
+                    "Stars": 5367,
+                    "Weekly Stars": -28326,
+                    "Daily": 54
                 },
                 "Rylan": {
                     "Stars": 2203,
@@ -288,9 +288,9 @@
                     "Daily": 0
                 },
                 "Iceberg Lettuce": {
-                    "Stars": 5443,
-                    "Weekly Stars": 2672,
-                    "Daily": 0
+                    "Stars": 5449,
+                    "Weekly Stars": 2678,
+                    "Daily": 6
                 },
                 "\u0622\u0631\u06cc\u0627\u0646": {
                     "Stars": 0
