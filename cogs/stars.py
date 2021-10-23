@@ -31,6 +31,9 @@ class Stars(commands.Cog):
     def __init__(self,client):
         self.client = client
         self.reset_weekly_stars.start()
+        self.time = datetime.now()
+        if self.time.hour != 0:
+            self.time = datetime(self.time.year, self.time.month, self.time.day, hour=0)
 
     @tasks.loop(minutes = 1)
     # This loops every 24 hours and resets the servers weekly stars and send a message with who had the highest and lowest stars
@@ -145,7 +148,8 @@ class Stars(commands.Cog):
         member = user
         name = member.name
         guild = member.guild
-        if datetime.now().hour == 0:
+        time_dif = datetime.now() - self.time
+        if time_dif.days > 0:
             stars['Guilds'][guild.name]['Members'][name]['Daily'] = 0
         if name in stars["Guilds"][guild.name]["Members"]:
             stars['Guilds'][guild.name]['Members'][name]['Daily'] -= rand_num
@@ -168,8 +172,8 @@ class Stars(commands.Cog):
         member = user
         name = member.name
         guild = member.guild
-        time = datetime.now()
-        if datetime.now().hour == 0:
+        time_dif = datetime.now() - self.time
+        if time_dif.days > 0:
             stars['Guilds'][guild.name]['Members'][name]['Daily'] = 0
         daily_cap = settings['Guilds'][guild.name]['Settings']['Stars']['Daily Cap']
         if name in stars["Guilds"][guild.name]["Members"]:
@@ -523,7 +527,13 @@ class Stars(commands.Cog):
             else:
                 await ctx.send(f'Something went wrong, could not find you on the good noodle board, maybe you are not on the board?')
 
-
+    @commands.command()
+    async def leaderboard(self, ctx):
+        global stars
+        guild = ctx.message.guild
+        print(stars["Guilds"][guild.name]["Members"])
+        members = stars["Guilds"][guild.name]["Members"]
+        print(sorted(members.items()))
 
 
 def setup(client):
