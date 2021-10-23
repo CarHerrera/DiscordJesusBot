@@ -506,6 +506,9 @@ class Stars(commands.Cog):
         author = ctx.author
         name = author.name
         guild = ctx.message.guild
+        if self.time.day != datetime.now().day:
+            self.time = datetime.now()
+            stars['Guilds'][guild.name]['Members'][name]['Daily'] = 0
         if len(ctx.message.mentions) == 1:
             member = ctx.message.mentions[0]
             if member.bot is True:
@@ -527,13 +530,42 @@ class Stars(commands.Cog):
             else:
                 await ctx.send(f'Something went wrong, could not find you on the good noodle board, maybe you are not on the board?')
 
+    def keyFunc(dict, tup):
+        # print("IN Func")
+        key,d = tup
+        # print(dict)
+        # print(tup)
+        return d['Stars']
+
     @commands.command()
-    async def leaderboard(self, ctx):
+    async def leaderboard(self, ctx, *args):
         global stars
         guild = ctx.message.guild
-        print(stars["Guilds"][guild.name]["Members"])
         members = stars["Guilds"][guild.name]["Members"]
-        print(sorted(members.items()))
+        ordered_stars = sorted(members.items(), key = self.keyFunc, reverse = True)
+        x = 5
+        if(len(args) == 1):
+            try:
+                print(type(args[0]))
+                x = int(args[0])
+            except:
+                await ctx.send("Hmu when you learn how the command works ✌️")
+                return
+        topX = ordered_stars[:x]
+        print(topX[0][1])
+        leaderboard = discord.Embed(title = f"🏆Top {x} Users on {guild.name}🏆")
+        for i in range(len(topX)):
+            if( i == 0):
+                leaderboard.add_field(name =f"🥇Number {i+1}🥇", value = f"{topX[i][0]} with {topX[i][1]['Stars']} 🌟🌟🌟")
+            elif i == 1:
+                leaderboard.add_field(name =f"🥈Number {i+1}🥈", value = f"{topX[i][0]} with {topX[i][1]['Stars']} 🌟🌟")
+            elif i==2:
+                leaderboard.add_field(name =f"🥉Number {i+1}🥉", value = f"{topX[i][0]} with {topX[i][1]['Stars']} 🌟")
+            else:
+                leaderboard.add_field(name =f"Number {i+1}", value = f"{topX[i][0]} with {topX[i][1]['Stars']} ⭐")
+        await ctx.send(embed =leaderboard)
+
+        # print(ordered_stars[:5])
 
 
 def setup(client):
