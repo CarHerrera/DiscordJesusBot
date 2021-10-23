@@ -14,7 +14,6 @@ file = open("./private/positive-words.txt")
 good_words = file.read().split()
 file.close()
 timer = {}
-last_reset = datetime.now()
 stars = None
 rules_followed = {"Guilds":{}}
 load_dotenv(dotenv_path = "./private/.env")
@@ -38,44 +37,52 @@ class Stars(commands.Cog):
     @tasks.loop(minutes = 1)
     # This loops every 24 hours and resets the servers weekly stars and send a message with who had the highest and lowest stars
     async def reset_weekly_stars(self):
-        global last_reset, stars, stars_data
-        day = datetime.now().strftime("%A")
-        time = datetime.now()
+        global stars, stars_data
         file = open('./private/server_settings.txt', "r")
         settings = json.loads(file.read())
         file.close()
+        day = datetime.now().strftime("%A")
+        time = datetime.now()
         for guild in self.client.guilds:
-            if settings['Guilds'][guild.name]['Settings']['Stars']['All Stars'] is False or settings['Guilds'][guild.name]['Settings']['Stars']['Weekly Stars'] is False:
-                continue
-            else:
-                sent = stars["Guilds"][guild.name]["Sent"]
-            if (day == "Monday" and time.hour == 15) and sent is False:
-                number_of_stars = []
-                members_list = []
-                for member in guild.members:
-                    if member.bot is True:
-                        continue
-                    # Checks if the member has weekly stars then resets it
-                    week_stars = stars["Guilds"][guild.name]["Members"][member.name]
-                    if week_stars == 0:
-                        continue
-                    else:
-                        number_of_stars.append(stars["Guilds"][guild.name]["Members"][member.name]["Weekly Stars"])
-                        members_list.append(member.name)
-                        stars["Guilds"][guild.name]["Members"][member.name]["Weekly Stars"] = 0
-                if len(number_of_stars) > 0:
-                    pref_channel = settings['Guilds'][guild.name]['Settings']['Pref Channel']
-                    channel = discord.utils.get(guild.text_channels, name= pref_channel)
-                    highest_stars = max(number_of_stars)
-                    hs_index = number_of_stars.index(highest_stars)
-                    user = members_list[hs_index]
-                    member = discord.utils.find(lambda m: m.name == user, guild.members)
-                    lowest_stars = min(number_of_stars)
-                    user_low = members_list[number_of_stars.index(lowest_stars)]
-                    lowest_member = discord.utils.find(lambda m: m.name == user_low, guild.members)
-                    print(f'Sent out {guild.name} star information')
-                    await channel.send(f"{member.mention} got this weeks highest stars at {highest_stars} and unsurprisngly {lowest_member.mention} got the lowest amount of stars at {lowest_stars}")
-                    stars["Guilds"][guild.name]["Sent"] = True
+            sent = stars["Guilds"][guild.name]["Sent"]
+            if settings['Guilds'][guild.name]['Settings']['Stars']['All Stars'] is False:
+                return
+            elif settings['Guilds'][guild.name]['Settings']['Stars']['Weekly Stars'] is False:
+                return
+            elif day != "Monday":
+                stars["Guilds"][guild.name]["Sent"] = False
+            elif day == "Monday" and time.hour == 15 and sent is False:
+                members = stars["Guilds"][guild.name]["Members"]
+                ordered_stars = sorted(members.items(), key = self.weekFunc, reverse = True)
+                top3 = ordered_stars[:3]
+                bot3 = ordered_stars[-3:]
+                channel_name = settings['Guilds'][guild.name]['Settings']['Pref Channel']
+                channel = discord.utils.get(guild.text_channels, name= channel_name)
+                print(channel)
+                weekly_leaderboard = discord.Embed(title = f"🏆Top 3 Users of the week on {guild.name}🏆")
+                for x in range(len(top3)):
+                    member = await guild.fetch_member(int(top3[x][0]))
+                    if x == 0:
+                        weekly_leaderboard.add_field(name =f"🥇Number 1🥇", value = f"{member.name} with {top3[0][1]['Stars']} 🌟🌟🌟")
+                    elif x == 1:
+                        weekly_leaderboard.add_field(name =f"🥈Number 2🥈", value = f"{member.name} with {top3[1][1]['Stars']} 🌟🌟")
+                    elif x == 2:
+                        weekly_leaderboard.add_field(name =f"🥉Number 3🥉", value = f"{member.name} with {top3[2][1]['Stars']} 🌟")
+                bot_3_board = discord.Embed(title = f"Bottom 3 Users of the week on {guild.name}")
+                for x in range(len(bot3)):
+                    member = await guild.fetch_member(int(bot3[x][0]))
+                    if x == 0:
+                        weekly_leaderboard.add_field(name =f"🥇Number 1🥇", value = f"{member.name} with {bot3[0][1]['Stars']} 🌟🌟🌟")
+                    elif x == 1:
+                        weekly_leaderboard.add_field(name =f"🥈Number 2🥈", value = f"{member.name} with {bot3[1][1]['Stars']} 🌟🌟")
+                    elif x == 2:
+                        weekly_leaderboard.add_field(name =f"🥉Number 3🥉", value = f"{member.name} with {bot3[2][1]['Stars']} 🌟")
+                await channel.send(embed = weekly_leaderboard)
+                await channel.send(embed = bot_3_board)
+                stars["Guilds"][guild.name]["Sent"] = True
+                for members in guild.members:
+                    id = str(member.id)
+                    stars["Guilds"][guild.name]["Members"][id]["Weekly Stars"] = 0
                 try:
                     file_trasnfer = db_uploader.TransferData(os.getenv('ACCESS_TOKEN'))
                     file_from = "./private/good_noodle_data.csv"
@@ -93,11 +100,10 @@ class Stars(commands.Cog):
                         stars_data.close()
                 except Exception:
                     print(str(Exception))
-            elif day != "Monday":
-                stars["Guilds"][guild.name]["Sent"] = False
         file = open('./settings/stars.txt', "w")
         file.write(json.dumps(stars, indent = 4))
         file.close()
+
     @reset_weekly_stars.before_loop
     async def before_check(self):
         await self.client.wait_until_ready()
@@ -148,13 +154,14 @@ class Stars(commands.Cog):
         member = user
         name = member.name
         guild = member.guild
+        id = str(member.id)
         time_dif = datetime.now() - self.time
         if time_dif.days > 0:
-            stars['Guilds'][guild.name]['Members'][name]['Daily'] = 0
-        if name in stars["Guilds"][guild.name]["Members"]:
-            stars['Guilds'][guild.name]['Members'][name]['Daily'] -= rand_num
-            stars['Guilds'][guild.name]['Members'][name]['Weekly Stars'] -= rand_num
-            stars['Guilds'][guild.name]['Members'][name]['Stars'] -= rand_num
+            stars['Guilds'][guild.name]['Members'][id]['Daily'] = 0
+        if id in stars["Guilds"][guild.name]["Members"]:
+            stars['Guilds'][guild.name]['Members'][id]['Daily'] -= rand_num
+            stars['Guilds'][guild.name]['Members'][id]['Weekly Stars'] -= rand_num
+            stars['Guilds'][guild.name]['Members'][id]['Stars'] -= rand_num
         file = open('./settings/stars.txt', "w+")
         file.write(json.dumps(stars, indent = 4))
         file.close()
@@ -172,18 +179,19 @@ class Stars(commands.Cog):
         member = user
         name = member.name
         guild = member.guild
+        id = str(member.id)
         time_dif = datetime.now() - self.time
         if time_dif.days > 0:
-            stars['Guilds'][guild.name]['Members'][name]['Daily'] = 0
+            stars['Guilds'][guild.name]['Members'][id]['Daily'] = 0
         daily_cap = settings['Guilds'][guild.name]['Settings']['Stars']['Daily Cap']
-        if name in stars["Guilds"][guild.name]["Members"]:
+        if id in stars["Guilds"][guild.name]["Members"]:
             if daily_cap == None:
-                stars['Guilds'][guild.name]['Members'][name]['Daily'] += rand_num
-                stars['Guilds'][guild.name]['Members'][name]['Weekly Stars'] += rand_num
-                stars['Guilds'][guild.name]['Members'][name]['Stars'] += rand_num
+                stars['Guilds'][guild.name]['Members'][id]['Daily'] += rand_num
+                stars['Guilds'][guild.name]['Members'][id]['Weekly Stars'] += rand_num
+                stars['Guilds'][guild.name]['Members'][id]['Stars'] += rand_num
             else:
-                if stars['Guilds'][guild.name]['Members'][name]['Daily'] >= daily_cap:
-                    stars['Guilds'][guild.name]['Members'][name]['Daily'] = daily_cap
+                if stars['Guilds'][guild.name]['Members'][id]['Daily'] >= daily_cap:
+                    stars['Guilds'][guild.name]['Members'][id]['Daily'] = daily_cap
                     return
         file = open('./settings/stars.txt', "w+")
         file.write(json.dumps(stars, indent = 4))
@@ -269,7 +277,7 @@ class Stars(commands.Cog):
                 timer.update({msg.author.name:datetime.now()})
                 self.data_gatherer(msg, "Bad words", False, -bad_rand)
             return
-        elif message_count % 500 == 0:
+        elif message_count % 997 == 0:
             rand_chance_stars = randint(10000, 60000)
             # spam.send()
             star_update = self.remove_stars(msg.author, rand_chance_stars, reason =" bc fuck you thats why")
@@ -414,10 +422,11 @@ class Stars(commands.Cog):
     #                 return
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        stars["Guilds"][member.guild.name]["Members"][member.name] = {
+        stars["Guilds"][member.guild.name]["Members"][member.id] = {
         "Stars":0,
         'Weekly Stars' : 0,
         'Daily' : 0,
+        "Name":member.name,
         }
         file = open('./settings/stars.txt', "w+")
         file.write(json.dumps(stars, indent = 4))
@@ -425,25 +434,25 @@ class Stars(commands.Cog):
         # print(member.name, sep = " ")
     @commands.Cog.listener()
     async def on_member_remove(self, member):
-        stars["Guilds"][member.guild.name]["Members"].pop(member.name)
+        stars["Guilds"][member.guild.name]["Members"].pop(member.id)
         file = open('./settings/stars.txt', "w+")
         file.write(json.dumps(stars, indent = 4))
         file.close()
 
-    @commands.Cog.listener()
-    async def on_user_update(self, before, after):
-        if before.bot or after.bot:
-            return
-        if before.name != after.name:
-            async for guild in self.client.fetch_guilds():
-                # async for member in guild.fetch_members():
-                if before.name in stars['Guilds'][guild.name]["Members"].keys():
-                    temp_stars = stars['Guilds'][guild.name]["Members"][before.name]
-                    stars["Guilds"][member.guild.name]["Members"].pop(before.name)
-                    stars["Guilds"][member.guild.name]["Members"][after.name] = temp_stars
-            file = open('./settings/stars.txt', "w+")
-            file.write(json.dumps(stars, indent = 4))
-            file.close()
+    # @commands.Cog.listener()
+    # async def on_user_update(self, before, after):
+    #     if before.bot or after.bot:
+    #         return
+    #     if before.name != after.name:
+    #         async for guild in self.client.fetch_guilds():
+    #             # async for member in guild.fetch_members():
+    #             if before.name in stars['Guilds'][guild.name]["Members"].keys():
+    #                 temp_stars = stars['Guilds'][guild.name]["Members"][before.name]
+    #                 stars["Guilds"][member.guild.name]["Members"].pop(before.name)
+    #                 stars["Guilds"][member.guild.name]["Members"][after.name] = temp_stars
+    #         file = open('./settings/stars.txt', "w+")
+    #         file.write(json.dumps(stars, indent = 4))
+    #         file.close()
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         global voice_state
@@ -557,14 +566,15 @@ class Stars(commands.Cog):
         topX = ordered_stars[:x]
         leaderboard = discord.Embed(title = f"🏆Top {x} Users on {guild.name}🏆")
         for i in range(len(topX)):
+            member = await guild.fetch_member(int(topX[i][0]))
             if( i == 0):
-                leaderboard.add_field(name =f"🥇Number {i+1}🥇", value = f"{topX[i][0]} with {topX[i][1]['Stars']} 🌟🌟🌟")
+                leaderboard.add_field(name =f"🥇Number {i+1}🥇", value = f"{member.name} with {topX[i][1]['Stars']} 🌟🌟🌟")
             elif i == 1:
-                leaderboard.add_field(name =f"🥈Number {i+1}🥈", value = f"{topX[i][0]} with {topX[i][1]['Stars']} 🌟🌟")
+                leaderboard.add_field(name =f"🥈Number {i+1}🥈", value = f"{member.name} with {topX[i][1]['Stars']} 🌟🌟")
             elif i==2:
-                leaderboard.add_field(name =f"🥉Number {i+1}🥉", value = f"{topX[i][0]} with {topX[i][1]['Stars']} 🌟")
+                leaderboard.add_field(name =f"🥉Number {i+1}🥉", value = f"{member.name} with {topX[i][1]['Stars']} 🌟")
             else:
-                leaderboard.add_field(name =f"Number {i+1}", value = f"{topX[i][0]} with {topX[i][1]['Stars']} ⭐")
+                leaderboard.add_field(name =f"Number {i+1}", value = f"{member.name} with {topX[i][1]['Stars']} ⭐")
         await ctx.send(embed =leaderboard)
 
     def check_for_owner_of_bot(self, ctx):
@@ -611,20 +621,7 @@ class Stars(commands.Cog):
             # member_list = stars["Guilds"][guild.name]["Members"]
             # print(member_list[name])
             print(local_stars)
-            # print(stars)
             newStars = {"Guilds": {}}
-            # async for guild in self.client.fetch_guilds():
-            #     if guild.name not in stars["Guilds"].keys():
-            #         stars["Guilds"][guild.name] = {"Members":{}}
-            #         stars["Guilds"][guild.name]["Sent"] = False
-            #     async for member in guild.fetch_members():
-            #         if member.name not in stars["Guilds"][guild.name]["Members"].keys() and member.bot is False:
-            #             stars["Guilds"][guild.name]["Members"][member.name] = {
-            #             "Stars": 0,
-            #             'Weekly Stars': 0,
-            #             'Daily': 0
-            #                         }
-            # print(local_stars['Guilds'][guild.name]["Members"][name])
             async for guild in self.client.fetch_guilds():
                 newStars["Guilds"][guild.name] = {"Members":{}}
                 newStars["Guilds"][guild.name]["Sent"] = False
@@ -636,9 +633,9 @@ class Stars(commands.Cog):
                         newStars['Guilds'][guild.name]["Members"][member.id]["Name"] = member.name
                         # newStars['Guilds'][guild.name]["Members"]["ID"]["Name"] =
             print(newStars)
-            # file = open('./settings/stars.txt', "w+")
-            # file.write(json.dumps(newStars, indent = 4))
-            # file.close()
+            file = open('./settings/stars.txt', "w+")
+            file.write(json.dumps(newStars, indent = 4))
+            file.close()
             # print(newStars['Guilds'][guild.name]["Members"]["ID"])
             # print(newStars['Guilds'][guild.name]["Members"][name])
         else:

@@ -2,305 +2,365 @@
     "Guilds": {
         "Wendys Squad": {
             "Members": {
-                "t-rin": {
+                "822919689466282006": {
                     "Stars": 0,
                     "Weekly Stars": 0,
-                    "Daily": 0
+                    "Daily": 0,
+                    "Name": "DrKawndum"
                 },
-                "urfavvlogger": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "Pickles": {
-                    "Stars": 121,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "pissbaby": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "LuizSanchez": {
-                    "Stars": 27,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "belen": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "tinyforest": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "Antennie": {
-                    "Stars": -9020,
-                    "Weekly Stars": -13479,
-                    "Daily": 0
-                },
-                "Clara": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "Shlumperd": {
-                    "Stars": 2271,
-                    "Weekly Stars": 193,
-                    "Daily": 0
-                },
-                "graciouslors": {
-                    "Stars": 12,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "Deltaninja36": {
-                    "Stars": 236,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "Big Jello": {
-                    "Stars": 3623,
-                    "Weekly Stars": 526,
-                    "Daily": 0
-                },
-                "Xander": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "agce63": {
-                    "Stars": 588,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "McBloom": {
-                    "Stars": 2751,
-                    "Weekly Stars": 178,
-                    "Daily": 0
-                },
-                "ruh roh shaggy": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "serina": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "thespeedturtle": {
-                    "Stars": 2498,
-                    "Weekly Stars": 1337,
-                    "Daily": 0
-                },
-                "sashka.draws": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "usedstarfighter": {
-                    "Stars": 5375,
-                    "Weekly Stars": -28318,
-                    "Daily": 62
-                },
-                "Rylan": {
-                    "Stars": 2203,
-                    "Weekly Stars": 119,
-                    "Daily": 0
-                },
-                "Yuskea": {
-                    "Stars": 5,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "HeyItsMatt": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "Justwannaplay277": {
-                    "Stars": 111,
-                    "Weekly Stars": 26,
-                    "Daily": 0
-                },
-                "Arbo": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "monpress": {
-                    "Stars": 1845,
-                    "Weekly Stars": 863,
-                    "Daily": 0
-                },
-                "Malcon": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "Igunguru": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "Arsenate": {
-                    "Stars": 69,
-                    "Weekly Stars": -394,
-                    "Daily": 6942013371738
-                },
-                "Elliptic": {
-                    "Stars": 80,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "spagh3tt0": {
-                    "Stars": -39199,
-                    "Weekly Stars": -49567,
-                    "Daily": 0
-                },
-                "ALin": {
-                    "Stars": 3627,
-                    "Weekly Stars": 62,
-                    "Daily": 0
-                },
-                "Mr Shifter": {
-                    "Stars": 342,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "bearfan444": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "Darren Chui": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "Kou Tokachi": {
-                    "Stars": -99,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "Toby5001": {
-                    "Stars": 902,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "Bubsquat is me.": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "Rampant Potato": {
-                    "Stars": 13852,
-                    "Weekly Stars": 3799,
-                    "Daily": 0
-                },
-                "Milano": {
-                    "Stars": 2881,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "Thanatoasty": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "SALAD": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "jakeduffles": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "fang fang": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "Ulm Nation": {
-                    "Stars": 12413,
-                    "Weekly Stars": 3512,
-                    "Daily": 0
-                },
-                "DrKawndum": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "Iceberg Lettuce": {
-                    "Stars": 5449,
-                    "Weekly Stars": 2678,
-                    "Daily": 6
-                },
-                "Alixpy": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "Felipevo": {
-                    "Stars": 180,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "(s)hoe (s)hopping": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "CardboardTG": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "sheepshoop": {
+                "815060059859189841": {
                     "Stars": 48,
                     "Weekly Stars": 48,
-                    "Daily": 0
+                    "Daily": 0,
+                    "Name": "sheepshoop"
                 },
-                "Monkeybsns": {
+                "757349207463165994": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "t-rin"
+                },
+                "748587196424126545": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "urfavvlogger"
+                },
+                "738786072393285673": {
+                    "Stars": 121,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "Pickles"
+                },
+                "714361864280342549": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "pissbaby"
+                },
+                "700402181869797397": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "india"
+                },
+                "693665439536119848": {
+                    "Stars": 27,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "LuizSanchez"
+                },
+                "689917782107750410": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "belen"
+                },
+                "613816321674706944": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "tinyforest"
+                },
+                "601112466197315594": {
+                    "Stars": -9020,
+                    "Weekly Stars": -13479,
+                    "Daily": 0,
+                    "Name": "Antennie"
+                },
+                "587278793341665301": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "Clara"
+                },
+                "547574072922603530": {
+                    "Stars": 2271,
+                    "Weekly Stars": 193,
+                    "Daily": 0,
+                    "Name": "Shlumperd"
+                },
+                "502709998648819743": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "fang fang"
+                },
+                "485255500712378381": {
+                    "Stars": 12,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "graciouslors"
+                },
+                "478737433484066817": {
+                    "Stars": 236,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "Deltaninja36"
+                },
+                "476466028990169122": {
+                    "Stars": 3623,
+                    "Weekly Stars": 526,
+                    "Daily": 0,
+                    "Name": "Big Jello"
+                },
+                "464833739403427840": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "Xander"
+                },
+                "462267016938651648": {
+                    "Stars": 588,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "agce63"
+                },
+                "433349408734838786": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "HoboLord09"
+                },
+                "424369851453145091": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "jakeduffles"
+                },
+                "421878760107802625": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "SALAD"
+                },
+                "412385688332402689": {
+                    "Stars": 5449,
+                    "Weekly Stars": 2678,
+                    "Daily": 6,
+                    "Name": "Iceberg Lettuce"
+                },
+                "410931567360475136": {
+                    "Stars": 2751,
+                    "Weekly Stars": 178,
+                    "Daily": 0,
+                    "Name": "McBloom"
+                },
+                "391015572584005632": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "ruh roh shaggy"
+                },
+                "391003884832686081": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "Alixpy"
+                },
+                "389917912808554512": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "serina"
+                },
+                "384912287481462784": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "Thanatoasty"
+                },
+                "372140451630678017": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "l3vics"
+                },
+                "366691845348130817": {
+                    "Stars": 2498,
+                    "Weekly Stars": 1337,
+                    "Daily": 0,
+                    "Name": "thespeedturtle"
+                },
+                "362971498539122698": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "sashka.draws"
+                },
+                "352550834103386133": {
+                    "Stars": 5375,
+                    "Weekly Stars": -28318,
+                    "Daily": 62,
+                    "Name": "usedstarfighter"
+                },
+                "340225194259906560": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "dukeyjukesta"
+                },
+                "335789721496059904": {
+                    "Stars": 2203,
+                    "Weekly Stars": 119,
+                    "Daily": 0,
+                    "Name": "Rylan"
+                },
+                "330208800080527371": {
+                    "Stars": 5,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "Yuskea"
+                },
+                "327640500607647754": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "HeyItsMatt"
+                },
+                "316758507749769228": {
+                    "Stars": 111,
+                    "Weekly Stars": 26,
+                    "Daily": 0,
+                    "Name": "Justwannaplay277"
+                },
+                "315317302411132930": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "Arbo"
+                },
+                "310149886228299776": {
+                    "Stars": 1845,
+                    "Weekly Stars": 863,
+                    "Daily": 0,
+                    "Name": "monpress"
+                },
+                "291021692430712835": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "Malcon"
+                },
+                "286237050028425226": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "Leo the Almighty"
+                },
+                "280369405031088128": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "Igunguru"
+                },
+                "263054069885566977": {
+                    "Stars": 69,
+                    "Weekly Stars": -394,
+                    "Daily": 6942013371738,
+                    "Name": "Arsenate"
+                },
+                "261007745375928321": {
+                    "Stars": 80,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "Elliptic"
+                },
+                "251770515432275968": {
+                    "Stars": -39199,
+                    "Weekly Stars": -49567,
+                    "Daily": 0,
+                    "Name": "spagh3tt0"
+                },
+                "251228021715894282": {
+                    "Stars": 3627,
+                    "Weekly Stars": 62,
+                    "Daily": 0,
+                    "Name": "ALin"
+                },
+                "241104892221980676": {
+                    "Stars": 342,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "Mr Shifter"
+                },
+                "217450433860337664": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "bearfan444"
+                },
+                "213090776001937409": {
+                    "Stars": 12413,
+                    "Weekly Stars": 3512,
+                    "Daily": 0,
+                    "Name": "Ulm Nation"
+                },
+                "201159875366092800": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "Darren Chui"
+                },
+                "194676126113726464": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "Hecker"
+                },
+                "181525013382430722": {
+                    "Stars": -99,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "Kou Tokachi"
+                },
+                "171064050183176193": {
+                    "Stars": 902,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "Toby5001"
+                },
+                "143603980960923648": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "Bubsquat is me."
+                },
+                "137656925339910144": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "CardboardTG"
+                },
+                "113820933013110788": {
+                    "Stars": 13852,
+                    "Weekly Stars": 3799,
+                    "Daily": 0,
+                    "Name": "Rampant Potato"
+                },
+                "92780550913269760": {
+                    "Stars": 0,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "(s)hoe (s)hopping"
+                },
+                "87002785924521984": {
+                    "Stars": 180,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "Felipevo"
+                },
+                "84387300036857856": {
+                    "Stars": 2881,
+                    "Weekly Stars": 0,
+                    "Daily": 0,
+                    "Name": "Milano"
+                },
+                "82522605310971904": {
                     "Stars": 170,
                     "Weekly Stars": 170,
-                    "Daily": 0
-                },
-                "india": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "HoboLord09": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "l3vics": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "dukeyjukesta": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "Leo the Almighty": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
-                },
-                "Hecker": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0
+                    "Daily": 0,
+                    "Name": "Monkeybsns"
                 }
             },
             "Sent": false
