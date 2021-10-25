@@ -33,12 +33,14 @@ class Stars(commands.Cog):
         self.time = datetime.now()
         if self.time.hour != 0:
             self.time = datetime(self.time.year, self.time.month, self.time.day, hour=0)
+
     def weekFunc(dict, tup):
         # print("IN Func")
         key,d = tup
         # print(dict)
         # print(tup)
         return d['Weekly Stars']
+
     @tasks.loop(minutes = 1)
     # This loops every 24 hours and resets the servers weekly stars and send a message with who had the highest and lowest stars
     async def reset_weekly_stars(self):
@@ -63,7 +65,6 @@ class Stars(commands.Cog):
                 bot3 = ordered_stars[-3:]
                 channel_name = settings['Guilds'][guild.name]['Settings']['Pref Channel']
                 channel = discord.utils.get(guild.text_channels, name= channel_name)
-                print(channel)
                 weekly_leaderboard = discord.Embed(title = f"🏆Top 3 Users of the week on {guild.name}🏆")
                 for x in range(len(top3)):
                     member = await guild.fetch_member(int(top3[x][0]))
@@ -77,11 +78,11 @@ class Stars(commands.Cog):
                 for x in range(len(bot3)):
                     member = await guild.fetch_member(int(bot3[x][0]))
                     if x == 0:
-                        weekly_leaderboard.add_field(name =f"🥇Number 1🥇", value = f"{member.name} with {bot3[0][1]['Stars']} 🌟🌟🌟")
+                        bot3.add_field(name =f"Number 1", value = f"{member.name} with {bot3[0][1]['Stars']}")
                     elif x == 1:
-                        weekly_leaderboard.add_field(name =f"🥈Number 2🥈", value = f"{member.name} with {bot3[1][1]['Stars']} 🌟🌟")
+                        bot3.add_field(name =f"Number 2", value = f"{member.name} with {bot3[1][1]['Stars']}")
                     elif x == 2:
-                        weekly_leaderboard.add_field(name =f"🥉Number 3🥉", value = f"{member.name} with {bot3[2][1]['Stars']} 🌟")
+                        bot3.add_field(name =f"Number 3", value = f"{member.name} with {bot3[2][1]['Stars']}")
                 await channel.send(embed = weekly_leaderboard)
                 await channel.send(embed = bot_3_board)
                 stars["Guilds"][guild.name]["Sent"] = True
