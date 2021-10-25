@@ -63,9 +63,9 @@
                     "Name": "tinyforest"
                 },
                 "601112466197315594": {
-                    "Stars": -9020,
-                    "Weekly Stars": -13479,
-                    "Daily": 0,
+                    "Stars": -22063,
+                    "Weekly Stars": -26522,
+                    "Daily": 21,
                     "Name": "Antennie"
                 },
                 "587278793341665301": {
@@ -99,9 +99,9 @@
                     "Name": "Deltaninja36"
                 },
                 "476466028990169122": {
-                    "Stars": 3623,
-                    "Weekly Stars": 526,
-                    "Daily": 0,
+                    "Stars": 3633,
+                    "Weekly Stars": 536,
+                    "Daily": 10,
                     "Name": "Big Jello"
                 },
                 "464833739403427840": {
@@ -135,9 +135,9 @@
                     "Name": "SALAD"
                 },
                 "412385688332402689": {
-                    "Stars": 5449,
-                    "Weekly Stars": 2678,
-                    "Daily": 6,
+                    "Stars": -24871,
+                    "Weekly Stars": -27642,
+                    "Daily": 26,
                     "Name": "Iceberg Lettuce"
                 },
                 "410931567360475136": {
@@ -177,9 +177,9 @@
                     "Name": "l3vics"
                 },
                 "366691845348130817": {
-                    "Stars": 2498,
-                    "Weekly Stars": 1337,
-                    "Daily": 0,
+                    "Stars": 2503,
+                    "Weekly Stars": 1342,
+                    "Daily": 5,
                     "Name": "thespeedturtle"
                 },
                 "362971498539122698": {
@@ -189,9 +189,9 @@
                     "Name": "sashka.draws"
                 },
                 "352550834103386133": {
-                    "Stars": 5375,
-                    "Weekly Stars": -28318,
-                    "Daily": 62,
+                    "Stars": 5515,
+                    "Weekly Stars": -28178,
+                    "Daily": 95,
                     "Name": "usedstarfighter"
                 },
                 "340225194259906560": {
@@ -255,9 +255,9 @@
                     "Name": "Igunguru"
                 },
                 "263054069885566977": {
-                    "Stars": 69,
-                    "Weekly Stars": -394,
-                    "Daily": 6942013371738,
+                    "Stars": 94,
+                    "Weekly Stars": -369,
+                    "Daily": 18,
                     "Name": "Arsenate"
                 },
                 "261007745375928321": {
@@ -267,9 +267,9 @@
                     "Name": "Elliptic"
                 },
                 "251770515432275968": {
-                    "Stars": -39199,
-                    "Weekly Stars": -49567,
-                    "Daily": 0,
+                    "Stars": -38862,
+                    "Weekly Stars": 0,
+                    "Daily": 312,
                     "Name": "spagh3tt0"
                 },
                 "251228021715894282": {
@@ -291,9 +291,9 @@
                     "Name": "bearfan444"
                 },
                 "213090776001937409": {
-                    "Stars": 12413,
-                    "Weekly Stars": 3512,
-                    "Daily": 0,
+                    "Stars": 12647,
+                    "Weekly Stars": 3746,
+                    "Daily": 17,
                     "Name": "Ulm Nation"
                 },
                 "201159875366092800": {
@@ -333,9 +333,9 @@
                     "Name": "CardboardTG"
                 },
                 "113820933013110788": {
-                    "Stars": 13852,
-                    "Weekly Stars": 3799,
-                    "Daily": 0,
+                    "Stars": 14189,
+                    "Weekly Stars": 4136,
+                    "Daily": 337,
                     "Name": "Rampant Potato"
                 },
                 "92780550913269760": {
@@ -363,7 +363,7 @@
                     "Name": "Monkeybsns"
                 }
             },
-            "Sent": false
+            "Sent": true
         }
     }
 }
