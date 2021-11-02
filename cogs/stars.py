@@ -78,11 +78,11 @@ class Stars(commands.Cog):
                 for x in range(len(bot3)):
                     member = await guild.fetch_member(int(bot3[x][0]))
                     if x == 0:
-                        bot3.add_field(name =f"Number 1", value = f"{member.name} with {bot3[0][1]['Stars']}")
+                        bot_3_board.add_field(name =f"Number 1", value = f"{member.name} with {bot3[0][1]['Stars']}")
                     elif x == 1:
-                        bot3.add_field(name =f"Number 2", value = f"{member.name} with {bot3[1][1]['Stars']}")
+                        bot_3_board.add_field(name =f"Number 2", value = f"{member.name} with {bot3[1][1]['Stars']}")
                     elif x == 2:
-                        bot3.add_field(name =f"Number 3", value = f"{member.name} with {bot3[2][1]['Stars']}")
+                        bot_3_board.add_field(name =f"Number 3", value = f"{member.name} with {bot3[2][1]['Stars']}")
                 await channel.send(embed = weekly_leaderboard)
                 await channel.send(embed = bot_3_board)
                 stars["Guilds"][guild.name]["Sent"] = True
@@ -163,6 +163,7 @@ class Stars(commands.Cog):
         id = str(member.id)
         time_dif = datetime.now() - self.time
         if time_dif.days > 0:
+            self.time = datetime.now()
             stars['Guilds'][guild.name]['Members'][id]['Daily'] = 0
         if id in stars["Guilds"][guild.name]["Members"]:
             stars['Guilds'][guild.name]['Members'][id]['Daily'] -= rand_num
@@ -188,6 +189,7 @@ class Stars(commands.Cog):
         id = str(member.id)
         time_dif = datetime.now() - self.time
         if time_dif.days > 0:
+            self.time = datetime.now()
             stars['Guilds'][guild.name]['Members'][id]['Daily'] = 0
         daily_cap = settings['Guilds'][guild.name]['Settings']['Stars']['Daily Cap']
         if id in stars["Guilds"][guild.name]["Members"]:
@@ -227,7 +229,7 @@ class Stars(commands.Cog):
     @commands.Cog.listener('on_message')
     async def star_message(self, msg):
         global rules_followed
-        rand_num = randint(1, 30)
+        rand_num = randint(10, 90)
         guild = msg.guild
         local_change = os.path.getmtime('./private/server_settings.txt')
         file = open('./private/server_settings.txt', "r")
@@ -267,7 +269,7 @@ class Stars(commands.Cog):
                     if message.author == msg.author:
                         count+= 1
         if any(word in msg.content.casefold() for word in bad_words):
-            bad_rand = randint(1, 30)
+            bad_rand = randint(1, 69)
             if msg.author.name in timer.keys():
                 dif = timeChecker(datetime.now(), timer[msg.author.name], 10)
                 if dif is True:
@@ -283,13 +285,17 @@ class Stars(commands.Cog):
                 timer.update({msg.author.name:datetime.now()})
                 self.data_gatherer(msg, "Bad words", False, -bad_rand)
             return
+        elif rand_num == 69:
+            good_stars = randint(1000, 2000)
+            star_update = self.add_stars(msg.author, good_stars, reason =" bc u haven't pissed me off yet")
+            self.data_gatherer(msg, "Bad RNG", True ,good_stars)
         elif message_count % 997 == 0:
-            rand_chance_stars = randint(10000, 60000)
+            rand_chance_stars = randint(1000, 70000)
             # spam.send()
             star_update = self.remove_stars(msg.author, rand_chance_stars, reason =" bc fuck you thats why")
             self.data_gatherer(msg, "Bad RNG", True ,-rand_chance_stars)
         elif count > 8:
-            spam_rand = randint(10, 40)
+            spam_rand = randint(10, 70)
             # await spam.send()
             star_update = self.remove_stars(msg.author, spam_rand, reason = " for being a dick head")
             rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
@@ -317,13 +323,13 @@ class Stars(commands.Cog):
             rules_followed["Guilds"][guild.name]["Members"][msg.author.name] += 1
             self.data_gatherer(msg, "Complimented Bot", True, rand_num)
         elif rules_followed_counter > 19:
-            no_trigger = randint(40, 90)
+            no_trigger = randint(40, 180)
             star_update = self.add_stars(msg.author, no_trigger)
             # await spam.send()
             rules_followed["Guilds"][guild.name]["Members"][msg.author.name] = 0
             self.data_gatherer(msg, "Didn't trigger an if statement", True, no_trigger)
         elif any(word in msg.content.casefold() for word in good_words):
-            nice_rand = randint(5,15)
+            nice_rand = randint(10, 50)
             if msg.author.name in timer.keys():
                 dif = timeChecker(datetime.now(), timer[msg.author.name], 10)
                 if dif is True:

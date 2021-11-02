@@ -41,8 +41,8 @@ amogus ='<:amogus:810676422981058620>'
 drip ='<:DripMoment:800232915028017202>'
 PepeThink = '<:PepeThink:762416066570747904>'
 HolyPepe = '<:HolyPepe:797304202573119529>'
-excitement_words = ['YOOOOOOOOOOOOOOOOOOO', 'nice', 'sick','poggers', 'owa owa', '+1 good meme', 'nice lmao', 'pog pog pog pog', 'W','mood', 'epic', 'epic sauce', amogus, drip, PepeThink, 'this is the best thing since the invention of cheese', 'thats so based','🥴','🤯','💀','☠️','👀','💅',]
-disgusted_words = ['wtf', 'die', 'just fuck off already','no', 'gay','cringe','nope','why','I really hate you','sus','shut up','pain',bonk, HolyPepe, bonk*6, 'pretending like I didn\'t see that one', 'you anger me','🤢','🤮','🤨','🙄','🤡',]
+excitement_words = ['YOOOOOOOOOOOOOOOOOOO', 'nice', 'sick','poggers', 'owa owa', '+1 good meme', 'nice lmao', 'pog pog pog pog', 'W','mood', 'epic', 'epic sauce', amogus, drip, PepeThink, 'this is the best thing since the invention of cheese', 'thats so based','🥴','🤯','💀','☠️','👀',]
+disgusted_words = ['wtf', 'die', 'just fuck off already','no', 'gay','cringe','nope','why','I really hate you','sus','shut up','pain',bonk, HolyPepe, bonk*6, 'pretending like I didn\'t see that one', 'you anger me','🤢','🤮','🤨','🙄','🤡',"I've never been more dissapointed in you", ]
 buy_me = ['can you buy me this', 'buy me this', 'purchase this for me', 'will you buy me this']
 cmd_in_process = False
 fuckOffTimer = datetime.utcnow()
@@ -110,8 +110,6 @@ class Commands(commands.Cog):
                     print('{0} is where I found mom'.format(message.content))
                     await message.channel.send('Just die already')
         print('Messages sent: ', counter)
-        print('Current random Int: ', agreementIndicator)
-        print('Current random Int: ', disgustIndicator)
     # @commands.Cog.listener('on_message')
     # async def test_message(self, message):
     #     if message.author.id == 263054069885566977:
