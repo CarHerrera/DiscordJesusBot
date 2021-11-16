@@ -69,20 +69,20 @@ class Stars(commands.Cog):
                 for x in range(len(top3)):
                     member = await guild.fetch_member(int(top3[x][0]))
                     if x == 0:
-                        weekly_leaderboard.add_field(name =f"🥇Number 1🥇", value = f"{member.name} with {top3[0][1]['Stars']} 🌟🌟🌟")
+                        weekly_leaderboard.add_field(name =f"🥇Number 1🥇", value = f"{member.name} with {top3[0][1]['Weekly Stars']} 🌟🌟🌟")
                     elif x == 1:
-                        weekly_leaderboard.add_field(name =f"🥈Number 2🥈", value = f"{member.name} with {top3[1][1]['Stars']} 🌟🌟")
+                        weekly_leaderboard.add_field(name =f"🥈Number 2🥈", value = f"{member.name} with {top3[1][1]['Weekly Stars']} 🌟🌟")
                     elif x == 2:
-                        weekly_leaderboard.add_field(name =f"🥉Number 3🥉", value = f"{member.name} with {top3[2][1]['Stars']} 🌟")
+                        weekly_leaderboard.add_field(name =f"🥉Number 3🥉", value = f"{member.name} with {top3[2][1]['Weekly Stars']} 🌟")
                 bot_3_board = discord.Embed(title = f"Bottom 3 Users of the week on {guild.name}")
                 for x in range(len(bot3)):
                     member = await guild.fetch_member(int(bot3[x][0]))
                     if x == 0:
-                        bot_3_board.add_field(name =f"Number 1", value = f"{member.name} with {bot3[0][1]['Stars']}")
+                        bot_3_board.add_field(name =f"Number 1", value = f"{member.name} with {bot3[0][2]['Weekly Stars']}")
                     elif x == 1:
-                        bot_3_board.add_field(name =f"Number 2", value = f"{member.name} with {bot3[1][1]['Stars']}")
+                        bot_3_board.add_field(name =f"Number 2", value = f"{member.name} with {bot3[1][1]['Weekly Stars']}")
                     elif x == 2:
-                        bot_3_board.add_field(name =f"Number 3", value = f"{member.name} with {bot3[2][1]['Stars']}")
+                        bot_3_board.add_field(name =f"Number 3", value = f"{member.name} with {bot3[2][0]['Weekly Stars']}")
                 await channel.send(embed = weekly_leaderboard)
                 await channel.send(embed = bot_3_board)
                 stars["Guilds"][guild.name]["Sent"] = True
@@ -365,6 +365,7 @@ class Stars(commands.Cog):
         bonked = randint(30, 80)
         emote = randint(5,20)
         star_update = None
+        member = payload.member.name
         if payload.member == self.client.user:
             return
         elif settings['Guilds'][guild.name]['Settings']['Stars']['All Stars'] is False:
@@ -374,9 +375,9 @@ class Stars(commands.Cog):
         # Bonk Emoji
         if payload.emoji.id == 797305732063297536 and msg.author.bot is False:
             # Checks if person who reacted has reacted before
-            if payload.member.name in timer.keys():
-                dif = timeChecker(datetime.now(), timer[payload.member.name], 5)
-                if dif is True:
+            if member in timer.keys():
+                dif = datetime.now() - timer[member]
+                if dif.total_seconds() >= 300:
                     # Removes stars from the person who sent the message
                     star_update = self.remove_stars(msg.author, bonked, reason = f" for being bonked by {payload.member.name}")
                     timer.update({payload.member.name:datetime.now()})
@@ -386,11 +387,14 @@ class Stars(commands.Cog):
                     # Adds person to the timer dictionary
                     timer.update({payload.member.name:datetime.now()})
                     self.data_gatherer(msg, "got bonked", False, -bonked)
+        elif payload.emoji.id == 815051855859023872 and msg.author.bot is False:
+            hunter = await guild.fetch_member(352550834103386133)
+            star_update = self.add_stars(hunter, randint(1,10), reason = f" hunter tax")
         # Any other emoji
         else:
-            if payload.member.name in timer.keys():
-                dif = timeChecker(datetime.now(), timer[payload.member.name], 20)
-                if dif:
+            if  member in timer.keys():
+                dif = datetime.now() - timer[member]
+                if dif.total_seconds() >= 300:
                     star_update = self.add_stars(payload.member, emote, reason = " for emoting")
                     # await spam.send(self.add_stars(payload.member, emote, reason = " for emoting"))
                     timer.update({payload.member.name:datetime.now()})

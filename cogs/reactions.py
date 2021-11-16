@@ -3,12 +3,13 @@ import discord
 from discord.ext import commands
 from main import timeChecker
 from random import randint
+import json
 emoteTimer = None
 # booingTimer = datetime.utcnow()
 class Reactions(commands.Cog):
     def __init__(self, client):
         self.client = client
-
+        self.lastMoment = datetime.now()
     @commands.Cog.listener()
     async def on_guild_emojis_update(self, guild, before, after):
         emoji_file = open('./settings/emojis.txt', 'w').close()
@@ -53,7 +54,6 @@ class Reactions(commands.Cog):
             return
         channel = reaction.message.channel
         lastMessage = await channel.fetch_message(channel.last_message_id)
-        print(user)
         e = 'e' * randint(3,10)
         m = 'm' * randint(2,12)
         o = 'o' * randint(4,18)
@@ -61,10 +61,23 @@ class Reactions(commands.Cog):
         emote = e+m+o+t+e
         currentTime = datetime.utcnow()
         messageTime = lastMessage.created_at
-        emote_list = ['Y'+'o' * randint(8,50) + ' how do I emote','this shit got me boolin',reaction.emoji,'this emote shit be bussin', 'Your emotes make me so proud',emote, 'lessssgetit', "meow", "bark"*randint(1,9), "FINALLY A GOOD EMOTE"]
+        guild = reaction.message.guild
+        dif = (currentTime - messageTime).total_seconds()/ 60
+        emote_list = ['Y'+'o' * randint(8,50) + ' how do I emote','this shit got me boolin',reaction.emoji,'this emote shit be bussin', 'Your emotes make me so proud',emote, 'lessssgetit', "meow", "bark"*randint(1,9), "FINALLY A GOOD EMOTE", ""]
+        if reaction.emoji.id == 815051855859023872:
+            time_between_emotes = datetime.now() - self.lastMoment
+            diff =":".join(str(time_between_emotes).split(":")[:2])
+            seconds = int(float(str(time_between_emotes).split(":")[2]))
+            file = open('./private/server_settings.txt', "r")
+            settings = json.loads(file.read())
+            file.close()
+            pref_channel = settings["Guilds"][guild.name]["Settings"]["Pref Channel"]
+            spam = discord.utils.get(guild.text_channels, name= pref_channel)
+            self.lastMoment = datetime.now()
+            await spam.send(f'It\'s been {diff}:{seconds} since last {reaction.emoji}')
         if lastMessage.author == self.client.user:
             return
-        elif timeChecker(currentTime, messageTime, 30) is True:
+        elif dif > 20:
             return
         else:
             # if payload.emoji.id == 797305732063297536 and timeChecker(datetime.utcnow(),booingTimer, 10) and message.author == self.client.user:
@@ -79,6 +92,15 @@ class Reactions(commands.Cog):
                     await channel.send(emote_list[randint(0,len(emote_list)-1)])
             # if timeChecker(datetime.utcnow(),emoteTimer, 10) is True:
             #     await channel.send(emote_list[randint(0,len(emote_list)-1)])
-
+    def check_guild(self, ctx):
+        return ctx.guild.id == 751678259657441339
+    @commands.command()
+    async def last_hunter_moment(self, ctx):
+        if(self.check_guild(ctx)):
+            time_between_emotes = datetime.now() - self.lastMoment
+            diff =":".join(str(time_between_emotes).split(":")[:2])
+            seconds = int(float(str(time_between_emotes).split(":")[2]))
+            hunterMoment = await ctx.guild.fetch_emoji(815051855859023872)
+            await ctx.send(f"it's been {diff}:{seconds} since last hunterMoment {hunterMoment}")
 def setup(client):
     client.add_cog(Reactions(client))

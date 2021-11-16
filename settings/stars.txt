@@ -135,9 +135,9 @@
                     "Name": "SALAD"
                 },
                 "412385688332402689": {
-                    "Stars": -18009,
-                    "Weekly Stars": -20780,
-                    "Daily": 5088,
+                    "Stars": -17971,
+                    "Weekly Stars": -20742,
+                    "Daily": 5126,
                     "Name": "Iceberg Lettuce"
                 },
                 "410931567360475136": {
@@ -189,9 +189,9 @@
                     "Name": "sashka.draws"
                 },
                 "352550834103386133": {
-                    "Stars": -2676,
-                    "Weekly Stars": -36369,
-                    "Daily": 9346,
+                    "Stars": -2600,
+                    "Weekly Stars": -36293,
+                    "Daily": 9422,
                     "Name": "usedstarfighter"
                 },
                 "340225194259906560": {
@@ -291,9 +291,9 @@
                     "Name": "bearfan444"
                 },
                 "213090776001937409": {
-                    "Stars": 16716,
-                    "Weekly Stars": 7815,
-                    "Daily": 2987,
+                    "Stars": 16725,
+                    "Weekly Stars": 7824,
+                    "Daily": 2996,
                     "Name": "Ulm Nation"
                 },
                 "201159875366092800": {
