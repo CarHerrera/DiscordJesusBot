@@ -1,5 +1,5 @@
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 from datetime import datetime
 from random import seed
 from random import randint
@@ -54,6 +54,29 @@ memeTimer = datetime.utcnow()
 class Commands(commands.Cog):
     def __init__(self, client):
         self.client = client
+        self.mutedList = {"Guilds":{}}
+        self.muteChecks.start()
+
+    @tasks.loop(minutes = 1)
+    async def muteChecks(self):
+        async for guild in self.client.fetch_guilds():
+            if len(self.mutedList["Guilds"][guild.id]["Members"]) < 1:
+                continue
+            else:
+                for id in self.mutedList["Guilds"][guild.id]["Members"].keys():
+                    member = await guild.fetch_member(id)
+                    mutedTime = self.mutedList["Guilds"][guild.id]["Members"][id]
+                    diff = datetime.now() - mutedTime
+                    in_mins = diff.total_seconds() / 60
+                    if in_mins > 30:
+                        muted_role = discord.utils.get(guild.roles, name='Muted')
+                        await member.remove_roles(muted_role)
+
+    @muteChecks.before_loop
+    async def before_check(self):
+        await self.client.wait_until_ready()
+        async for guild in self.client.fetch_guilds():
+            self.mutedList["Guilds"][guild.id] = {"Members": {}}
     @commands.Cog.listener()
     async def on_message(self, message):
         global counter, cmd_in_process
@@ -86,13 +109,25 @@ class Commands(commands.Cog):
         if cmd_in_process == False:
             if len(message.mentions)>0:
                 for mentions in message.mentions:
-                    if mentions == self.client.user and timeChecker(datetime.utcnow(), fuckOffTimer, 10):
+                    if mentions == self.client.user:
                         if 'i agree with' in message.content.casefold():
                             await message.channel.send('Thanks bb')
                         elif 'thoughts on cheese' in message.content.casefold():
                             await message.channel.send('cheese is my life')
                         else:
                             await message.channel.send('wtf do you want')
+                            await message.channel.send('You know what Get muted')
+                            mutedRole = discord.utils.get(message.guild.roles, name='Muted')
+                            if mutedRole is not None:
+                                await message.author.add_roles(mutedRole)
+                            else:
+                                mutedRole = await message.guild.create_role(name="Muted")
+                                for tc in message.guild.text_channels:
+                                    await tc.set_permissions(mutedRole,read_messages = True, send_messages = False,add_reactions=False,attach_files= False,embed_links = False, external_emojis = False, read_message_history = True, send_tts_messages = False)
+                            self.mutedList["Guilds"][message.guild.id]["Members"][message.author.id] = datetime.now()
+                            await message.channel.send('See you in 30 minutes 👋')
+
+
             if divider % agreementIndicator == 0:
                 excited = excitement_words[randint(0, len(excitement_words)-1)]
                 await message.channel.send('{0}'.format(excited))
@@ -109,7 +144,6 @@ class Commands(commands.Cog):
                 elif momChecker(message.content.casefold()) is True:
                     print('{0} is where I found mom'.format(message.content))
                     await message.channel.send('Just die already')
-        print('Messages sent: ', counter)
     # @commands.Cog.listener('on_message')
     # async def test_message(self, message):
     #     if message.author.id == 263054069885566977:

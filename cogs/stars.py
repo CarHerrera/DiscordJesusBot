@@ -78,11 +78,11 @@ class Stars(commands.Cog):
                 for x in range(len(bot3)):
                     member = await guild.fetch_member(int(bot3[x][0]))
                     if x == 0:
-                        bot_3_board.add_field(name =f"Number 1", value = f"{member.name} with {bot3[0][2]['Weekly Stars']}")
+                        bot_3_board.add_field(name =f"Number 1", value = f"{member.name} with {bot3[2][1]['Weekly Stars']}")
                     elif x == 1:
                         bot_3_board.add_field(name =f"Number 2", value = f"{member.name} with {bot3[1][1]['Weekly Stars']}")
                     elif x == 2:
-                        bot_3_board.add_field(name =f"Number 3", value = f"{member.name} with {bot3[2][0]['Weekly Stars']}")
+                        bot_3_board.add_field(name =f"Number 3", value = f"{member.name} with {bot3[0][1]['Weekly Stars']}")
                 await channel.send(embed = weekly_leaderboard)
                 await channel.send(embed = bot_3_board)
                 stars["Guilds"][guild.name]["Sent"] = True
@@ -140,10 +140,11 @@ class Stars(commands.Cog):
                     stars["Guilds"][guild.name]["Sent"] = False
                 async for member in guild.fetch_members():
                     if member.name not in stars["Guilds"][guild.name]["Members"].keys() and member.bot is False:
-                        stars["Guilds"][guild.name]["Members"][member.name] = {
+                        stars["Guilds"][guild.name]["Members"][member.id] = {
                         "Stars": 0,
                         'Weekly Stars': 0,
-                        'Daily': 0
+                        'Daily': 0,
+                        "Name":member.name
                         }
             print("Created a stars file")
             file = open('./settings/stars.txt', "w+")
@@ -450,7 +451,10 @@ class Stars(commands.Cog):
         # print(member.name, sep = " ")
     @commands.Cog.listener()
     async def on_member_remove(self, member):
-        stars["Guilds"][member.guild.name]["Members"].pop(member.id)
+        if(member.bot is True):
+            return
+        id = str(member.id)
+        stars["Guilds"][member.guild.name]["Members"].pop(str)
         file = open('./settings/stars.txt', "w+")
         file.write(json.dumps(stars, indent = 4))
         file.close()
@@ -576,15 +580,23 @@ class Stars(commands.Cog):
         x = 5
         if(len(args) == 1):
             try:
-                print(type(args[0]))
+                # print(type(args[0]))
                 x = int(args[0])
             except:
                 await ctx.send("Hmu when you learn how the command works ✌️")
                 return
+        if(x>len(members)):
+            x = len(members)
+        elif (x> 100):
+            await ctx.send("ugh too much work, heres top 100 instead")
         topX = ordered_stars[:x]
+        # print(topX)
         leaderboard = discord.Embed(title = f"🏆Top {x} Users on {guild.name}🏆")
         for i in range(len(topX)):
             member = await guild.fetch_member(int(topX[i][0]))
+            if(len(leaderboard.fields) == 25):
+                await ctx.send(embed =leaderboard)
+                leaderboard.clear_fields()
             if( i == 0):
                 leaderboard.add_field(name =f"🥇Number {i+1}🥇", value = f"{member.name} with {topX[i][1]['Stars']} 🌟🌟🌟")
             elif i == 1:
@@ -593,6 +605,7 @@ class Stars(commands.Cog):
                 leaderboard.add_field(name =f"🥉Number {i+1}🥉", value = f"{member.name} with {topX[i][1]['Stars']} 🌟")
             else:
                 leaderboard.add_field(name =f"Number {i+1}", value = f"{member.name} with {topX[i][1]['Stars']} ⭐")
+            # print(len(leaderboard.fields))
         await ctx.send(embed =leaderboard)
 
     def check_for_owner_of_bot(self, ctx):
@@ -636,24 +649,18 @@ class Stars(commands.Cog):
             file.close()
             guild = ctx.message.guild
             name = ctx.message.author.name
+            file = open('./private/server_settings.txt', "r")
+            settings = json.loads(file.read())
+            file.close()
+            # for members in guild.members:
+            #     id = str(members.id)
+            #     if(members.bot is False):
+            #         local_stars["Guilds"][guild.name]["Members"].pop(id)
+            file = open('./settings/stars.txt', "w+")
+            file.write(json.dumps(local_stars, indent = 4))
+            file.close()
             # member_list = stars["Guilds"][guild.name]["Members"]
             # print(member_list[name])
-            print(local_stars)
-            newStars = {"Guilds": {}}
-            async for guild in self.client.fetch_guilds():
-                newStars["Guilds"][guild.name] = {"Members":{}}
-                newStars["Guilds"][guild.name]["Sent"] = False
-                async for member in guild.fetch_members():
-                    if member.bot is False and member.name not in newStars['Guilds'][guild.name]["Members"].keys():
-                        member_stars = local_stars['Guilds'][guild.name]["Members"][member.name]
-                        # print(member_stars)
-                        newStars['Guilds'][guild.name]["Members"][member.id] = member_stars
-                        newStars['Guilds'][guild.name]["Members"][member.id]["Name"] = member.name
-                        # newStars['Guilds'][guild.name]["Members"]["ID"]["Name"] =
-            print(newStars)
-            file = open('./settings/stars.txt', "w+")
-            file.write(json.dumps(newStars, indent = 4))
-            file.close()
             # print(newStars['Guilds'][guild.name]["Members"]["ID"])
             # print(newStars['Guilds'][guild.name]["Members"][name])
         else:

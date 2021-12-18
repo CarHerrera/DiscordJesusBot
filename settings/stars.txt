@@ -189,9 +189,9 @@
                     "Name": "sashka.draws"
                 },
                 "352550834103386133": {
-                    "Stars": -15543,
-                    "Weekly Stars": -18543,
-                    "Daily": 1180,
+                    "Stars": -15539,
+                    "Weekly Stars": -18539,
+                    "Daily": 1184,
                     "Name": "usedstarfighter"
                 },
                 "340225194259906560": {
@@ -255,9 +255,9 @@
                     "Name": "Igunguru"
                 },
                 "263054069885566977": {
-                    "Stars": 8866,
-                    "Weekly Stars": 10225,
-                    "Daily": 7577,
+                    "Stars": 12800,
+                    "Weekly Stars": 14159,
+                    "Daily": 11511,
                     "Name": "Arsenate"
                 },
                 "261007745375928321": {
@@ -291,9 +291,9 @@
                     "Name": "bearfan444"
                 },
                 "213090776001937409": {
-                    "Stars": 29979,
-                    "Weekly Stars": 21078,
-                    "Daily": 944,
+                    "Stars": 29855,
+                    "Weekly Stars": 1337,
+                    "Daily": 69,
                     "Name": "Ulm Nation"
                 },
                 "201159875366092800": {
@@ -385,12 +385,6 @@
                     "Weekly Stars": 0,
                     "Daily": 0,
                     "Name": "edubebeto"
-                },
-                "213090776001937409": {
-                    "Stars": 0,
-                    "Weekly Stars": 0,
-                    "Daily": 0,
-                    "Name": "Ulm Nation"
                 },
                 "376726574361214990": {
                     "Stars": 0,

@@ -64,17 +64,18 @@ class Reactions(commands.Cog):
         guild = reaction.message.guild
         dif = (currentTime - messageTime).total_seconds()/ 60
         emote_list = ['Y'+'o' * randint(8,50) + ' how do I emote','this shit got me boolin',reaction.emoji,'this emote shit be bussin', 'Your emotes make me so proud',emote, 'lessssgetit', "meow", "bark"*randint(1,9), "FINALLY A GOOD EMOTE", ""]
-        if reaction.emoji.id == 815051855859023872:
-            time_between_emotes = datetime.now() - self.lastMoment
-            diff =":".join(str(time_between_emotes).split(":")[:2])
-            seconds = int(float(str(time_between_emotes).split(":")[2]))
-            file = open('./private/server_settings.txt', "r")
-            settings = json.loads(file.read())
-            file.close()
-            pref_channel = settings["Guilds"][guild.name]["Settings"]["Pref Channel"]
-            spam = discord.utils.get(guild.text_channels, name= pref_channel)
-            self.lastMoment = datetime.now()
-            await spam.send(f'It\'s been {diff}:{seconds} since last {reaction.emoji}')
+        if reaction.custom_emoji is True:
+            if reaction.emoji.id == 815051855859023872:
+                time_between_emotes = datetime.now() - self.lastMoment
+                diff =":".join(str(time_between_emotes).split(":")[:2])
+                seconds = int(float(str(time_between_emotes).split(":")[2]))
+                file = open('./private/server_settings.txt', "r")
+                settings = json.loads(file.read())
+                file.close()
+                pref_channel = settings["Guilds"][guild.name]["Settings"]["Pref Channel"]
+                spam = discord.utils.get(guild.text_channels, name= pref_channel)
+                self.lastMoment = datetime.now()
+                await spam.send(f'It\'s been {diff}:{seconds} since last {reaction.emoji}')
         if lastMessage.author == self.client.user:
             return
         elif dif > 20:
