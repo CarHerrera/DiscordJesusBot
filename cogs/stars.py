@@ -454,7 +454,7 @@ class Stars(commands.Cog):
         if(member.bot is True):
             return
         id = str(member.id)
-        stars["Guilds"][member.guild.name]["Members"].pop(str)
+        stars["Guilds"][member.guild.name]["Members"].pop(id)
         file = open('./settings/stars.txt', "w+")
         file.write(json.dumps(stars, indent = 4))
         file.close()

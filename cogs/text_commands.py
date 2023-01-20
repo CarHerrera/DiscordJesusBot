@@ -142,6 +142,8 @@ class Commands(commands.Cog):
                 # elif any(ele in message.content.casefold() for ele in buy_me):
                 #     await message.channel.send('Sure.')
                 elif momChecker(message.content.casefold()) is True:
+                    if ("<:JesusMoment:935759770139377714>" in message.content):
+                        return
                     print('{0} is where I found mom'.format(message.content))
                     await message.channel.send('Just die already')
     # @commands.Cog.listener('on_message')
